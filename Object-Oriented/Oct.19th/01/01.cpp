@@ -32,3 +32,6 @@ void Time::set_time(void){
 void Time::show_time(void){
     cout<<t.hour<<":"<<t.minute<<":"<<t.sec<<endl;
 }
+
+
+//test
