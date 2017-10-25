@@ -41,5 +41,3 @@
 |测试输入文件      |test_input.c                         |
 |测试输出文件      |test_output.c                        |
 |风格样例文件      |style.c                              |
-|其他文件          |学术诚信承诺书.jpg 设计说明书.docx 自我评价 |
-
