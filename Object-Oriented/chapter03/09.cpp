@@ -13,9 +13,6 @@ public:
 	static int n;
 	saleman(int a, int b, double c):num(a),quantity(b),price(c){}
 	void getsum();
-	void show(){
-		cout << sum << endl;
-	}
 	static double average();
 	static void display();
 };
