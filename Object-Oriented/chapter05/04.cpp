@@ -11,7 +11,7 @@ protected:
 	char sex;
 };
 
-class Student1:protected Student
+class Student1:public Student
 {
 public:
 	void get_value1();
