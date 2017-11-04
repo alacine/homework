@@ -40,5 +40,4 @@ int main()
 	stud1.get_value1();
 	stud1.display1();
 	return 0;
-	return 0;
 }
