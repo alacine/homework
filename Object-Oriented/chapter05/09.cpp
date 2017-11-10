@@ -50,7 +50,7 @@ Teacher_Cadre::Teacher_Cadre(string na,int a,char s,string ad,string tel,string 
 Teacher(na,a,s,ad,tel,tit),Cadre(na,a,s,ad,tel,po),wages(wa){}
 
 void Teacher_Cadre::show(){
-	Teacher::display();
+	display();
 	cout << "post:" << Cadre::post << endl;
 	cout << "wages:" << wages << endl;
 }
