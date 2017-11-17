@@ -8,6 +8,6 @@ public:
 	float getRadius() const;
 	float area() const;
 	friend ostream &operator << (ostream &, const Circle &);
-private:
+protected://此处原来为private:
 	float radius;
 };
