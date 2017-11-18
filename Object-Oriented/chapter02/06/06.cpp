@@ -1,6 +1,3 @@
-/*习题6
- *求一个长方体的体积
- */
 #include <iostream>
 using namespace std;
 

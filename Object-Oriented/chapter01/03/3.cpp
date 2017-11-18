@@ -1,6 +1,3 @@
-/*习题2
- *计算三个数中的最小数
- */
 #include <iostream>
 using namespace std;
 

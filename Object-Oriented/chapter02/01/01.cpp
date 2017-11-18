@@ -1,7 +1,3 @@
-/*习题1
- *修改错误的程序
- *使之能从键盘输入时分秒，输出正确的时间格式
- */
 #include <iostream>
 using namespace std;
 

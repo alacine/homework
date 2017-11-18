@@ -1,6 +1,3 @@
-/*Ï°Ìâ11
- *ÄæĞòÊä³ö×Ö·û´®
- */
 #include <iostream>
 #include <cstring>
 using namespace std;

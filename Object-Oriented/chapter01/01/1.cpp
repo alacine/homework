@@ -1,6 +1,3 @@
-/*习题1
- *输出
- */
 #include <iostream>
 using namespace std;
 

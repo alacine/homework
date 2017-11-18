@@ -1,6 +1,3 @@
-/*Ï°Ìâ12
- *×Ö·û´®ÅÅĞò
- */
 #include <iostream>
 #include <algorithm>
 #include <cstring>

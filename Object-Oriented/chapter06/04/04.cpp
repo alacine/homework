@@ -4,54 +4,58 @@ using namespace std;
 
 const double PI = acos(-1);
 
-class shape {
+class Shape
+{
 public:
-    double area;
-    virtual void printArea(){
-        cout << area << endl;
+    virtual double area() const {
+        return 0.0;
     }
 };
 
-class Circle: public shape {
+class Circle: public Shape 
+{
     double radius;
 public:
-    Circle(double r):radius(r) {
-        area = radius * radius * PI;
-    };
-    virtual void shapeName()  {
-        cout << "Circle" << endl;
+    Circle(double r):radius(r) {};
+    double area() const {
+        return radius * radius * PI;
     }
 };
 
-class Rectangle: public shape {
+class Rectangle: public Shape
+{
     double height,width;
 public:
-    Rectangle(double h, double w):height(h), width(w) {
-        area = height * width;
-    }
-    virtual void shapeName()  {
-        cout << "Rectangle" << endl;
+    Rectangle(double h, double w):height(h), width(w) {}
+    double area() const {
+        return height * width;
     }
 };
 
-class Triangle: public shape {
+class Triangle: public Shape
+{
     double a,b,c;
 public:
-    Triangle(double x, double y, double z):a(x), b(y), c(z) {
+    Triangle(double x, double y, double z):a(x), b(y), c(z) {}
+    double area() const {
         double p = (a + b + c)/2.0;
-        area = sqrt(p * (p-a) * (p-b) * (p-c));
-    }
-    virtual void shapeName() {
-        cout << "Triangle" << endl;
+        return sqrt(p * (p-a) * (p-b) * (p-c));
     }
 };
+
+void printArea(const Shape &s) {
+    cout << s.area() << endl;
+}
 
 int main() {
     Circle c(5.0);
-    c.printArea();
+    cout << "Circle:" << endl;
+    printArea(c);
     Rectangle r(12.2, 20.3);
-    r.printArea();
+    cout << "\nRectangle:" << endl;
+    printArea(r);
     Triangle t(5.0,12.0,13.0);
-    t.printArea();
+    cout << "\nTriangle:" << endl;
+    printArea(t);
     return 0;
 }

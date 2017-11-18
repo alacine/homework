@@ -1,6 +1,3 @@
-/*习题2
- *计算两个已知数的和
- */
 #include <iostream>
 using namespace std;
 

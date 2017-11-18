@@ -1,6 +1,3 @@
-/*习题2
- *按要求改写章例2.1程序
- */
 #include <iostream>
 using namespace std;
 
