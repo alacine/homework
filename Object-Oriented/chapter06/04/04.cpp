@@ -10,8 +10,6 @@ public:
     virtual void printArea(){
         cout << area << endl;
     }
-
-
 };
 
 class Circle: public shape {

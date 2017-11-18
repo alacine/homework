@@ -6,38 +6,38 @@ class Student
 {
 public:
 protected:
-	int num;
-	string name;
-	char sex;
+    int num;
+    string name;
+    char sex;
 };
 
 class Student1:public Student
 {
 public:
-	void get_value1();
-	void display1();
+    void get_value1();
+    void display1();
 private:
-	int age;
-	string addr;
+    int age;
+    string addr;
 };
 
 void Student1::get_value1(){
-	cin >> num >> name >> sex;
-	cin >> age >> addr;
+    cin >> num >> name >> sex;
+    cin >> age >> addr;
 }
 
 void Student1::display1(){
-	cout << "num: " << num << endl;
-	cout << "name: " << name << endl;
-	cout << "sex: " << sex << endl;
-	cout << "age: " << age << endl;
-	cout << "address: " << addr << endl;
+    cout << "num: " << num << endl;
+    cout << "name: " << name << endl;
+    cout << "sex: " << sex << endl;
+    cout << "age: " << age << endl;
+    cout << "address: " << addr << endl;
 }
 
 int main()
 {
-	Student1 stud1;
-	stud1.get_value1();
-	stud1.display1();
-	return 0;
+    Student1 stud1;
+    stud1.get_value1();
+    stud1.display1();
+    return 0;
 }
