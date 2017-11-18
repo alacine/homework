@@ -55,17 +55,12 @@ class Triangle: public Shape
     double a,b,c;
 public:
     Triangle(double x, double y, double z):a(x), b(y), c(z) {}
-    virtual double area() const {
+   virtual double area() const {
         double p = (a + b + c)/2.0;
         return sqrt(p * (p-a) * (p-b) * (p-c));
     }
 };
 
-
-
-void printArea(const Shape &s) {
-    cout << s.area() << endl;
-}
 
 int main() {
     Circle c(5.0);
