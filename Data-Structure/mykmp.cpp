@@ -33,13 +33,14 @@ void Kmp(int ls, int lp) {
         else {
             j = nex[j];
         }
+        printf("%d\n",j);
+        if(j == lp+1) {
+            printf("%d\n", i-j);
+        }
     }
-    if(j == lp) {
-        printf("%d\n", i-j);
-    }
-    else {
+    /*else {
         printf("%d\n", -1);
-    }
+    }*/
 }
 
 int main()
