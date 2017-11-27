@@ -20,13 +20,11 @@ int main(int argc, char const *argv[])
                 b++;
             }
             else  if(!s.empty() && s.top() == target[b]) {
-                printf("out:%d\n", s.top());
                 s.pop();
                 b++;
             }
             else if(a <= n) {
                 s.push(a++);
-                printf("in:%d\n", s.top());
             }
             else {
                 ok = 0;
