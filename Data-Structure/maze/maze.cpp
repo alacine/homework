@@ -16,7 +16,7 @@ node op, ed;
 stack <node> sk;
 stack <node> tmp;
 
-bool check(const node& next) { //判断改点是否可走
+bool check(const node& next) { //鍒ゆ柇璇ョ偣鏄惁鍙蛋
     if(next.x < w && next.x >= 0 &&
        next.y < h && next.y >= 0 &&
        maze[next.y][next.x] == 0) {
@@ -25,17 +25,17 @@ bool check(const node& next) { //判断改点是否可走
     return false;
 }
 
-bool path() { //判断是否有通路
+bool path() { //鍒ゆ柇鏄惁鏈夐�氳矾
     node cur; cur.x = op.x; cur.y = op.y;
     node next;
-    sk.push(cur); //起点入栈
+    sk.push(cur); //璧风偣鍏ユ爤
     while(!sk.empty()) {
         cur = sk.top();
-        if(cur.x == ed.x && cur.y == ed.y) { //判断是否到了终点
+        if(cur.x == ed.x && cur.y == ed.y) { //鍒ゆ柇鏄惁鍒颁簡缁堢偣
             return true;
         }
-        maze[cur.y][cur.x] = 6; //将该点标记为已经访问
-        //向下运动
+        maze[cur.y][cur.x] = 6; //灏嗚鐐规爣璁颁负宸茬粡璁块棶
+        //鍚戜笅杩愬姩
         next = cur;
         next.y++;
         if(check(next)) {
@@ -43,7 +43,7 @@ bool path() { //判断是否有通路
             sk.push(cur);
             continue;
         }
-        //向左运动
+        //鍚戝乏杩愬姩
         next = cur;
         next.x--;
         if(check(next)) {
@@ -51,7 +51,7 @@ bool path() { //判断是否有通路
             sk.push(cur);
             continue;
         }
-        //向上运动
+        //鍚戜笂杩愬姩
         next = cur;
         next.y--;
         if(check(next)) {
@@ -59,7 +59,7 @@ bool path() { //判断是否有通路
             sk.push(cur);
             continue;
         }
-        //向右运动
+        //鍚戝彸杩愬姩
         next = cur;
         next.x++;
         if(check(next)) {
