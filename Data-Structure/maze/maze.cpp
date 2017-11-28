@@ -2,23 +2,21 @@
 #include <cstring>
 #include <stack>
 #include <cstdio>
-
 using namespace std;
-int w, h;
 
 const int maxn = 1000;
-
+int w, h;
 int maze[maxn][maxn];
 
 struct node {
-    int x,y;//1,2,3,4 ä¸‹ å·¦ ä¸Š å³
+    int x,y;
 };
 node op, ed;
 
 stack <node> sk;
 stack <node> tmp;
 
-bool check(const node& next) {
+bool check(const node& next) { //ÅĞ¶Ï¸ÄµãÊÇ·ñ¿É×ß
     if(next.x < w && next.x >= 0 &&
        next.y < h && next.y >= 0 &&
        maze[next.y][next.x] == 0) {
@@ -27,18 +25,17 @@ bool check(const node& next) {
     return false;
 }
 
-bool path() {
+bool path() { //ÅĞ¶ÏÊÇ·ñÓĞÍ¨Â·
     node cur; cur.x = op.x; cur.y = op.y;
     node next;
-    //å°†èµ·ç‚¹å…¥æ ˆ
-    sk.push(cur);
+    sk.push(cur); //ÆğµãÈëÕ»
     while(!sk.empty()) {
         cur = sk.top();
-        //åˆ¤æ–­æ˜¯å¦åˆ°äº†ç»ˆç‚¹
-        if(cur.x == ed.x && cur.y == ed.y)return true;
-        //å°†è¯¥ç‚¹æ ‡è®°ä¸ºå·²ç»è®¿é—®
-        maze[cur.y][cur.x] = -1;
-        //å‘ä¸‹è¿åŠ¨
+        if(cur.x == ed.x && cur.y == ed.y) { //ÅĞ¶ÏÊÇ·ñµ½ÁËÖÕµã
+            return true;
+        }
+        maze[cur.y][cur.x] = 6; //½«¸Ãµã±ê¼ÇÎªÒÑ¾­·ÃÎÊ
+        //ÏòÏÂÔË¶¯
         next = cur;
         next.y++;
         if(check(next)) {
@@ -46,7 +43,7 @@ bool path() {
             sk.push(cur);
             continue;
         }
-        //å‘å·¦è¿åŠ¨
+        //Ïò×óÔË¶¯
         next = cur;
         next.x--;
         if(check(next)) {
@@ -54,7 +51,7 @@ bool path() {
             sk.push(cur);
             continue;
         }
-        //å‘ä¸Šè¿åŠ¨
+        //ÏòÉÏÔË¶¯
         next = cur;
         next.y--;
         if(check(next)) {
@@ -62,7 +59,7 @@ bool path() {
             sk.push(cur);
             continue;
         }
-        //å‘å³è¿åŠ¨
+        //ÏòÓÒÔË¶¯
         next = cur;
         next.x++;
         if(check(next)) {
@@ -77,7 +74,7 @@ bool path() {
     return false;
 }
 
-void print() {
+void PrintMap() {
     for(int i = 0; i < h ; i++) {
         for(int j = 0 ; j < w ; j++) {
             cout << maze[i][j] << " ";
@@ -89,28 +86,24 @@ void print() {
 int main() {
     freopen("in.txt","r",stdin);
     cin >> w >> h;
-
     memset(maze,0,sizeof(maze));
-
     for(int i = 0 ; i < h ; i++) {
         for(int j = 0 ; j < w ; j++) {
-            int tt;
-            cin >> tt;
-            if(tt == 3) {
+            int t;
+            cin >> t;
+            if(t == 3) {
                 op.y = i;
                 op.x = j;
                 maze[i][j] = 0;
-//                cout << op.x << " " << op.y << endl;
                 continue;
             }
-            if(tt == 4) {
+            if(t == 4) {
                 ed.y = i;
                 ed.x = j;
                 maze[i][j] = 0;
-//                cout << ed.x << " " << ed.y << endl;
                 continue;
             }
-            maze[i][j] = tt;
+            maze[i][j] = t;
         }
     }
     if(path()) {
@@ -124,10 +117,12 @@ int main() {
             node t = tmp.top();
             tmp.pop();
             cout << t.x << " " << t.y << endl;
+            maze[t.y][t.x] = 7;
         }
+        PrintMap();
     }
     else {
-        cout << "++_++" << endl;
+        cout << "no way out" << endl;
     }
     return 0;
 }

@@ -8,7 +8,7 @@ int main() {
     for (int i = 2; i <= 52; i++) {
         for(int j = i; j <= 52; j += i) {
             card[j] = !card[j];
-            printf("turn %d\n", j);
+            //printf("turn %d\n", j);
         }
     }
     card[53] = 1;
