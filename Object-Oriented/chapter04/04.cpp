@@ -8,7 +8,7 @@ class Matrix {
     Matrix operator+(Matrix &m);
     void display();
   private:
-    double num[3][2];
+    double num[2][3];
 };
 
 Matrix::Matrix(double s[][3]) {
