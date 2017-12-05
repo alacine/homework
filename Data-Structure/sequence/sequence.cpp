@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 #include <cstdlib>
 #include <ctime>
 using namespace std;
@@ -7,9 +8,11 @@ const int maxn = 20000;
 int s[maxn + 10];
 
 void init() {
-    for(int i = 1; i <= 20000 ; i++) {
+    for(int i = 1; i <= maxn ; i++) {
         s[i] = rand();
+        cout << s[i] << " " ;
     }
+    cout << "\n" << endl;
 }
 
 void BubbleSort() {
@@ -41,16 +44,17 @@ void InsertSort() {
 }
 
 void MergeSort() {
-    
+
 }
 
 int main() {
+    freopen("out.txt","w",stdout);
     srand((unsigned)time(NULL));
     init();
     //BubbleSort();
     InsertSort();
     for(int i = 1; i < 15; i++) {
-        cout << s[i] << "\t";
+        cout << s[i] << " ";
     }
     return 0;
 }

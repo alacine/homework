@@ -16,7 +16,7 @@ node op, ed;
 stack <node> sk;
 stack <node> tmp;
 
-bool check(const node& next) { //判断该点是否可走
+bool check(const node& next) { //�жϸõ��Ƿ����
     if(next.x < w && next.x >= 0 &&
        next.y < h && next.y >= 0 &&
        maze[next.y][next.x] == 0) {
@@ -25,17 +25,17 @@ bool check(const node& next) { //判断该点是否可走
     return false;
 }
 
-bool path() { //判断是否有通路
+bool path() { //�ж��Ƿ���ͨ·
     node cur; cur.x = op.x; cur.y = op.y;
     node next;
-    sk.push(cur); //起点入栈
+    sk.push(cur); //�����ջ
     while(!sk.empty()) {
         cur = sk.top();
-        if(cur.x == ed.x && cur.y == ed.y) { //判断是否到了终点
+        if(cur.x == ed.x && cur.y == ed.y) { //�ж��Ƿ����յ�
             return true;
         }
-        maze[cur.y][cur.x] = 6; //将该点标记为已经访问
-        //向下运动
+        maze[cur.y][cur.x] = 6; //���õ���Ϊ�Ѿ�����
+        //�����˶�
         next = cur;
         next.y++;
         if(check(next)) {
@@ -43,7 +43,7 @@ bool path() { //判断是否有通路
             sk.push(cur);
             continue;
         }
-        //向左运动
+        //�����˶�
         next = cur;
         next.x--;
         if(check(next)) {
@@ -51,7 +51,7 @@ bool path() { //判断是否有通路
             sk.push(cur);
             continue;
         }
-        //向上运动
+        //�����˶�
         next = cur;
         next.y--;
         if(check(next)) {
@@ -59,7 +59,7 @@ bool path() { //判断是否有通路
             sk.push(cur);
             continue;
         }
-        //向右运动
+        //�����˶�
         next = cur;
         next.x++;
         if(check(next)) {
@@ -67,16 +67,16 @@ bool path() { //判断是否有通路
             sk.push(cur);
             continue;
         }
-//        cur = sk.top();
         sk.pop();
-//      maze[cur.x][cur.y] = 0;
     }
     return false;
 }
 
 void PrintMap() {
+    cout << "Or you can watch this map:" <<endl;
     for(int i = 0; i < h ; i++) {
         for(int j = 0 ; j < w ; j++) {
+            if(maze[i][j]==6) maze[i][j]=0;
             cout << maze[i][j] << " ";
         }
         cout << endl;
@@ -107,17 +107,17 @@ int main() {
         }
     }
     if(path()) {
+        cout << "See how you can go out:" << endl;
         while(!sk.empty()) {
             node t = sk.top();
             tmp.push(t);
             sk.pop();
-//            cout << t.x << " " << t.y << endl;
         }
         while(!tmp.empty()) {
             node t = tmp.top();
             tmp.pop();
             cout << t.x << " " << t.y << endl;
-            maze[t.y][t.x] = 7;
+            maze[t.y][t.x] = 8;
         }
         PrintMap();
     }
