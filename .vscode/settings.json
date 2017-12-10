@@ -12,5 +12,7 @@
         "streambuf": "cpp",
         "utility": "cpp"
     },
-    "code-runner.runInTerminal": false
+    "code-runner.runInTerminal": false,
+    "powermode.enabled": true,
+    "powermode.enableShake": false
 }
