@@ -4,9 +4,10 @@
 #include <ctime>
 using namespace std;
 
-const int maxn = 20;
+const int maxn = 20000;
 int s[maxn + 10];
 int t[maxn + 10];
+clock_t runtime, op, ed;
 
 void init() {
     for (int i = 1; i <= maxn ; i++) {
@@ -139,33 +140,46 @@ void ShellSort(int arr[], int size) {
     }
 }
 
-void Print() {
-    for (int i = 1; i <= 20; i++) {
-        cout << s[i] << " ";
+// print the array to a new file
+void Print(const char *f) {
+    FILE *fp;
+    fp = fopen(f, "w");
+    cout << "\n" << f << ": " << difftime(ed, op) << " ms" << endl;
+    for (int i = 1; i <= maxn; i++) {
+        fprintf(fp, "%d ", s[i]);
     }
-    cout << "\n" << endl;
+    fprintf(fp, "\n");
 }
 
 int main() {
-    freopen("out.txt","w",stdout);
-    srand((unsigned)time(NULL));  //set random number seed
+    srand((unsigned)time(NULL));  //set time as random number seed
     init();
-    cout << "Origin array:" << endl;
-    Print();
+    Print("origin.txt");
+
+    // use clock to timing
+    op = clock();
     BubbleSort(s, maxn);
-    cout << "after Bubble Sort:" << endl;
-    Print();
+    ed = clock();
+    Print("BubbleSort.txt");
+    
+    op = clock();
     InsertSort(s, maxn);
-    cout << "after Insert Sort:" << endl;
-    Print();
+    ed = clock();
+    Print("InsertSort.txt");
+    
+    op = clock();
     MergeSort(s, 1, maxn);
-    cout << "after Merge Sort:" << endl;
-    Print();
+    ed = clock();
+    Print("MergeSort.txt");
+    
+    op = clock();
     QuickSort(s, 1, maxn);
-    cout << "after Quick Sort:" << endl;
-    Print();
+    ed = clock();
+    Print("QuickSort.txt");
+    
+    op = clock();
     ShellSort(s, maxn);
-    cout << "after Shell Sort:" << endl;
-    Print();
+    ed = clock();
+    Print("ShellSort.txt");
     return 0;
 }
