@@ -2,50 +2,50 @@
 #include <string>
 using namespace std;
 
-class Student {                                 //ÉùÃ÷ Student Àà
+class Student {                                 //å£°æ˜ Student ç±»
 public:
-    Student(int,string,float);                  //ÉùÃ÷¹¹Ôìº¯Êı
-    void display();                             //ÉùÃ÷Êä³öº¯Êı
+    Student(int,string,float);                  //å£°æ˜æ„é€ å‡½æ•°
+    void display();                             //å£°æ˜è¾“å‡ºå‡½æ•°
 private:
     int num;
     string name;
     float score;
 };
 
-Student::Student(int n, string nam, float s){   //¶¨Òå¹¹Ôìº¯Êı
+Student::Student(int n, string nam, float s){   //å®šä¹‰æ„é€ å‡½æ•°
     num=n;
     name=nam;
     score=s;
 }
 
-void Student::display(){                        //¶¨ÒåÊä³öº¯Êı
+void Student::display(){                        //å®šä¹‰è¾“å‡ºå‡½æ•°
     cout << endl << "num:" << num << endl;
     cout << "name:" << name << endl;
     cout << "score:" << score << endl;
 }
 
-class Graduate:public Student {                 //ÉùÃ÷¹«ÓÃÅÉÉúÀà Graduate
+class Graduate:public Student {                 //å£°æ˜å…¬ç”¨æ´¾ç”Ÿç±» Graduate
 public:
-    Graduate(int, string, float, float);        //ÉùÃ÷¹¹Ôìº¯Êı
-    void display();                             //ÉùÃ÷Êä³öº¯Êı
+    Graduate(int, string, float, float);        //å£°æ˜æ„é€ å‡½æ•°
+    void display();                             //å£°æ˜è¾“å‡ºå‡½æ•°
 private:
-    float wage;                                 //½òÌù
+    float wage;                                 //æ´¥è´´
 };
 
 Graduate::Graduate(int n, string nam, float s, float w):Student(n,nam,s),wage(w){}
-                                                //¶¨Òå¹¹Ôìº¯Êı
-void Graduate::display(){                       //¶¨ÒåÊä³öº¯Êı
-    Student::display();                         //µ÷ÓÃ Student ÀàµÄ display º¯Êı
+                                                //å®šä¹‰æ„é€ å‡½æ•°
+void Graduate::display(){                       //å®šä¹‰è¾“å‡ºå‡½æ•°
+    Student::display();                         //è°ƒç”¨ Student ç±»çš„ display å‡½æ•°
     cout << "wage=" << wage << endl;
 }
 
 int main(){
-    Student stud1(1001,"Li",87.5);              //¶¨Òå Student Àà¶ÔÏóstud1
-    Graduate grad1(2001,"Wang",98.5,1000);      //¶¨Òå Graduate Àà¶ÔÏógrad1
-    Student *pt = &stud1;                       //¶¨ÒåÖ¸Ïò Student Àà¶ÔÏóµÄÖ¸Õë²¢Ö¸Ïò stud1
-    pt->display();                              //µ÷ÓÃ stud1.display º¯Êı
-    pt = &grad1;                                //Ö¸ÕëÖ¸Ïò grad1
-    pt->display();                              //µ÷ÓÃ grad1.display º¯Êı
+    Student stud1(1001,"Li",87.5);              //å®šä¹‰ Student ç±»å¯¹è±¡stud1
+    Graduate grad1(2001,"Wang",98.5,1000);      //å®šä¹‰ Graduate ç±»å¯¹è±¡grad1
+    Student *pt = &stud1;                       //å®šä¹‰æŒ‡å‘ Student ç±»å¯¹è±¡çš„æŒ‡é’ˆå¹¶æŒ‡å‘ stud1
+    pt->display();                              //è°ƒç”¨ stud1.display å‡½æ•°
+    pt = &grad1;                                //æŒ‡é’ˆæŒ‡å‘ grad1
+    pt->display();                              //è°ƒç”¨ grad1.display å‡½æ•°
     return 0;
 }
 

@@ -2,42 +2,42 @@
 #include <string>
 using namespace std;
 
-class Person {                          //ÏÂÃæÉùÃ÷¹«¹²»ùÀà Person
+class Person {                          //ä¸‹é¢å£°æ˜å…¬å…±åŸºç±» Person
 public:
-    Person(string nam, char s,int a){   //¹¹Ôìº¯Êı
+    Person(string nam, char s,int a){   //æ„é€ å‡½æ•°
         name=nam;
         sex=s;
         age=a;
     }
-protected:                              //±£»¤³ÉÔ±
+protected:                              //ä¿æŠ¤æˆå‘˜
     string name;
     char sex;
     int age;
 };
 
-class Teacher:virtual public Person {   //ÉùÃ÷ Person Îª¹«ÓÃ¼Ì³ĞµÄĞé»ùÀà
+class Teacher:virtual public Person {   //å£°æ˜ Person ä¸ºå…¬ç”¨ç»§æ‰¿çš„è™šåŸºç±»
 public:
-    Teacher(string nam, char s, int a, string t):Person(nam,s,a){//¹¹Ôìº¯Êı
+    Teacher(string nam, char s, int a, string t):Person(nam,s,a){//æ„é€ å‡½æ•°
         title=t;
     }
-protected:                              //±£»¤³ÉÔ±
-    string title;                       //Ö°³Æ
+protected:                              //ä¿æŠ¤æˆå‘˜
+    string title;                       //èŒç§°
 };
 
-class Student:virtual public Person {   //ÉùÃ÷ Person Îª¹«ÓÃ¼Ì³ĞµÄĞé»ùÀà
+class Student:virtual public Person {   //å£°æ˜ Person ä¸ºå…¬ç”¨ç»§æ‰¿çš„è™šåŸºç±»
 public:
-    Student(string nam, char s, int a, float sco)//¹¹Ôìº¯Êı
-        :Person(nam,s,a),score(sco){}   //³õÊ¼»¯±í
-protected:                              //±£»¤³ÉÔ±
-    float score;                        //³É¼¨
+    Student(string nam, char s, int a, float sco)//æ„é€ å‡½æ•°
+        :Person(nam,s,a),score(sco){}   //åˆå§‹åŒ–è¡¨
+protected:                              //ä¿æŠ¤æˆå‘˜
+    float score;                        //æˆç»©
 };
 
-class Graduate:public Teacher, public Student {//Teacher ºÍ Student ÎªÖ±½Ó»ùÀà
+class Graduate:public Teacher, public Student {//Teacher å’Œ Student ä¸ºç›´æ¥åŸºç±»
 public:
-    Graduate(string nam, char s, int a, string t, float sco, float w)//¹¹Ôìº¯Êı
+    Graduate(string nam, char s, int a, string t, float sco, float w)//æ„é€ å‡½æ•°
         :Person(nam,s,a),Teacher(nam,s,a,t),Student(nam,s,a,sco),wages(w){}
-                                        //³õÊ¼»¯±í
-    void show(){                        //Êä³öÑĞ¾¿ÉúµÄÓĞ¹ØÊı¾İ
+                                        //åˆå§‹åŒ–è¡¨
+    void show(){                        //è¾“å‡ºç ”ç©¶ç”Ÿçš„æœ‰å…³æ•°æ®
         cout << "name:" << name << endl;
         cout << "age:" << age << endl;
         cout << "sex:" << sex << endl;
