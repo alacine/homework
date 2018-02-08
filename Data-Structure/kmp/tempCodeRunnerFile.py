@@ -1,1 +1,0 @@
-j < len(p) and
