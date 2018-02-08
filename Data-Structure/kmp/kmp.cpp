@@ -52,5 +52,4 @@ int main()
     GetNext(lp);
     Kmp(ls, lp);
     return 0;
-
 }
