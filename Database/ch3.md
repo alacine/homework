@@ -1,6 +1,7 @@
 ## 第三章习题
 
-### 3.1 使用大学模式，用 SQL 写出如下查询数据。
+### 3.1
+**使用大学模式，用 SQL 写出如下查询数据。**
 
 a. 找出 Comp.Sci. 系开设的具有3个学分的课程名称。
 ```sql
@@ -62,7 +63,9 @@ where a = (select max(a)
            where semester = 'Fall' and year = 2009
            group by course_id))
 ```
-### 3.2 假设给你一个关系 grade_points(grad_e, points)，它提供从 takes 关系中用字母的成绩等级到数字表示的得分之间的转换。例如，“A”等级可指定为对应于4分，“A-”对应于3.7分，“B+”对应于3.3分，“B”对应于3分，等等。学生在某门课程（课程段）上所获得的等级分值被定义为该课程段的学分乘以该生得到的成绩等级所对应的数字表示的得分。
+### 3.2 
+**假设给你一个关系 grade_points(grad_e, points)，它提供从 takes 关系中用字母的成绩等级到数字表示的得分之间的转换。例如，“A”等级可指定为对应于4分，“A-”对应于3.7分，“B+”对应于3.3分，“B”对应于3分，等等。学生在某门课程（课程段）上所获得的等级分值被定义为该课程段的学分乘以该生得到的成绩等级所对应的数字表示的得分。**
+
 给定上述关系和我们的大学模式，用 SQL 写出下面的每个查询。为简单起见，可以假设没有任何 takes 元组在 grade 上取 null 值。
 
 a. 根据 ID 为12345的学生所选修的所有课程，找出该生所获得的等级分值的总和
@@ -84,7 +87,8 @@ from takes natural join course natural join grade_points
 group by ID;
 ```
 
-### 3.3 使用大学模式，用 SQL 写出如下插入、删除和更新语句
+### 3.3
+**使用大学模式，用 SQL 写出如下插入、删除和更新语句**
 
 a. 给 Comp. Sci. 系的每位教师涨10%工资。
 ```sql
@@ -105,7 +109,8 @@ insert into instructor(ID, name, dept_name, salary)
       from student
       where tot_cred > 100;
 ```
-### 3.4 考虑图3-18中的保险公司数据库，其中加入下划线的是主码。为这个关系数据库构造出如下 SQL 查询：
+### 3.4
+**考虑图3-18中的保险公司数据库，其中加入下划线的是主码。为这个关系数据库构造出如下 SQL 查询：**
 
 a. 找出2009年其中车辆出过交通事故的人员总数。
 ```sql
@@ -118,7 +123,7 @@ b. 向数据库中增加一个新的事故，对每个必须的属性可以设�
 insert into accident
       value(1234, '2018-5-1', 'xtu');
 insert into participated
-      value(1234, 'xt8888', 2016551103);
+      value(1234, 'xt8888', 2016551103, 10000);
 ```
 c. 删除“John Smith”拥有的马自达车（Mazda）
 ```sql
@@ -138,12 +143,20 @@ where driver_id in (select driver_id
 > participated (**report_number**, license, driver_id, damage_amount)\
 > 图3-18  习题3.4和习题3.14的保险公司数据库(使用加粗代替下划线)
 
-### 3.5 假设有关系 marks(ID, score)，我们希望基于如下标准为学生评定等级：如果 score < 40 得 F；如果 40 <= scare < 60 得 C；如果 60 <= score < 80 得 B；如果 80 <= score 得 A。写出 SQL 查询完成下列操作；
+### 3.5
+**假设有关系 marks(ID, score)，我们希望基于如下标准为学生评定等级：如果 score < 40 得 F；如果 40 <= scare < 60 得 C；如果 60 <= score < 80 得 B；如果 80 <= score 得 A。写出 SQL 查询完成下列操作；**
 
 a. 基于 marks 关系显示每个学生得等级。
 ```sql
-
 ```
 b. 找出各等级得学生数。
 ```sql
+```
+
+### 3.6
+**SQL 的 like 运算符是大小写敏感的，但字符串上的 lower() 函数可以用来实现大小写不敏感的匹配。为了说明是怎么用的，写出这样一个查询：找出名称中包含了“sci”子串的系，忽略大小写。**
+```sql
+select dept_name
+from department
+where dept_name like '%sci%';
 ```
