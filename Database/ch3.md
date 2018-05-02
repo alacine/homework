@@ -61,14 +61,14 @@ where a = (select max(a)
            from (select course_id, count(ID) a
            from takes
            where semester = 'Fall' and year = 2009
-           group by course_id))
+           group by course_id));
 ```
 ### 3.2 
 **假设给你一个关系 grade_points(grad_e, points)，它提供从 takes 关系中用字母的成绩等级到数字表示的得分之间的转换。例如，“A”等级可指定为对应于4分，“A-”对应于3.7分，“B+”对应于3.3分，“B”对应于3分，等等。学生在某门课程（课程段）上所获得的等级分值被定义为该课程段的学分乘以该生得到的成绩等级所对应的数字表示的得分。**
 
 给定上述关系和我们的大学模式，用 SQL 写出下面的每个查询。为简单起见，可以假设没有任何 takes 元组在 grade 上取 null 值。
 
-a. 根据 ID 为12345的学生所选修的所有课程，找出该生所获得的等级分值的总和
+a. 根据 ID 为12345的学生所选修的所有课程，找出该生所获得的等级分值的总和。
 ```sql
 select sum(credits * points)
 from takes natural join course natural join grade_points
@@ -80,7 +80,7 @@ select sum(credits * points)/sum(credits) as GPA
 from takes natural join course natural join grade_points
 where ID = 12345;
 ```
-c. 找出每个学生的 ID 和等级分值的平均值
+c. 找出每个学生的 ID 和等级分值的平均值。
 ```sql
 select ID, sum(credits * points)/sum(credits) as GPA
 from takes natural join course natural join grade_points
@@ -96,7 +96,7 @@ update instructor
 set salary = salary * 1.1
 where dept_name = 'Comp. Sci';
 ```
-b. 删除所有未开设过（即没有出现在 section 关系中）的课程
+b. 删除所有未开设过（即没有出现在 section 关系中）的课程。
 ```sql
 delete from course
 where course_id not in (select course_id
@@ -123,7 +123,7 @@ a. 找出2009年其中车辆出过交通事故的人员总数。
 ```sql
 select count(distinct driver_id)
 from accident natural join owns natural join participated
-where date between date'2009-1-1' and date'2009-12-31'
+where date between date'2009-1-1' and date'2009-12-31';
 ```
 b. 向数据库中增加一个新的事故，对每个必须的属性可以设定任意值。
 ```sql
@@ -132,7 +132,7 @@ insert into accident
 insert into participated
       value(1234, 'xt8888', 2016551103, 10000);
 ```
-c. 删除“John Smith”拥有的马自达车（Mazda）
+c. 删除“John Smith”拥有的马自达车（Mazda）。
 ```sql
 delete from owns
 where driver_id in (select driver_id
@@ -144,13 +144,31 @@ where driver_id in (select driver_id
 ```
 
 ### 3.5
-**假设有关系 marks(ID, score)，我们希望基于如下标准为学生评定等级：如果 score < 40 得 F；如果 40 <= scare < 60 得 C；如果 60 <= score < 80 得 B；如果 80 <= score 得 A。写出 SQL 查询完成下列操作；**
+**假设有关系 marks(ID, score)，我们希望基于如下标准为学生评定等级：如果 score < 40 得 F；如果 40 <= scare < 60 得 C；如果 60 <= score < 80 得 B；如果 80 <= score 得 A。写出 SQL 查询完成下列操作：**
 
 a. 基于 marks 关系显示每个学生得等级。
 ```sql
+select  ID,
+    case
+        when score < 40 then 'F'
+        when score < 60 then 'C'
+        when score < 80 then 'B'
+        else 'A'
+    end as grade
+from marks;
 ```
 b. 找出各等级得学生数。
 ```sql
+select count(ID)
+from (select  ID,
+      case
+          when score < 40 then 'F'
+          when score < 60 then 'C'
+          when score < 80 then 'B'
+          else 'A'
+      end as grade
+      from marks)
+group by grade;
 ```
 
 ### 3.6
@@ -251,7 +269,7 @@ from company a, company b
 where b.company_name = 'Small Bank Corporation'
       and a.city = b.city;
 ```
-f. 找出雇员最多的公司
+f. 找出雇员最多的公司。
 ```sql
 select company_name
 from works
@@ -279,20 +297,15 @@ update works
 set city = 'Newton'
 where employee_name = 'Jones'
 ```
-b. 为“First Bank Corporarion”所有工资不超过100000美元的经理增长10%的工资，对工资超过100000美元的只增长3%.
+b. 为“First Bank Corporarion”所有工资不超过100000美元的经理增长10%的工资，对工资超过100000美元的只增长3%。
 ```sql
 update works
-set salary = salary * 1.1
-where salary < 100000
-      and employee_name in (select employee_name
-                            from managers);
-
-update works
-set salary = salary * 1.03
-where salary > 100000
-      and employee_name in (select employee_name
-                            from managers);
-
+set salary = case
+                when salary <= 100000 then salary * 1.1
+                else salary * 1.03
+             end
+where employee_name in (select employee_name
+                        from managers);
 ```
 
 ### 3.11
@@ -377,13 +390,6 @@ where course_id in(select course_id
 
 ### 3.13
 **写出对应于图3-18中模式的 SQL DDL。在数据类型上做合理的假设，，确保声明主码和外码**
-
-> person (**driver_id, name**, address)\
-> car (**license, model**, year)\
-> accident (**report_number**, date, location)\
-> owns (**driver_id**, license)\
-> participated (**report_number**, license, driver_id, damage_amount)\
-> 图3-18  保险公司数据库(使用加粗代替下划线)
 
 ```sql
 create table person(
@@ -503,7 +509,7 @@ with temp as(select company_name, avg(salary) as avg_salary
              group by company_name)
 select employee_name
 from works natural join temp
-where salary > temp.avg_salary
+where salary > temp.avg_salary;
 ```
 e. 找出工资总和最小的公司。
 ```sql
@@ -512,7 +518,7 @@ from works
 group by company_name
 having sum(salary) = (select min(sum(salary))
                       from works
-                      group by company_name)
+                      group by company_name);
 ```
 
 ### 3.17
@@ -531,7 +537,7 @@ update works
 set salary = salary * 1.1
 where company_name = 'First Bank Corporation'
     and employee_name in (select employee_name
-                          from managers)
+                          from managers);
 ```
 c. 删除“Small Bank Corporation”的雇员在 works 关系中的所有元组
 ```sql
@@ -623,9 +629,5 @@ from (select dept_name, sum(salary)
       group by dept_name) as a
 where a.value >= (select avg(sum(value))
                   from instructor
-                  group by dept_name)
+                  group by dept_name);
 ```
-
-
-----------------------------------------
-基本摸完，还有一题3.5
