@@ -295,7 +295,7 @@ a. 修改数据库使“Jones”现在居住在“Newton”市。
 ```sql
 update works
 set city = 'Newton'
-where employee_name = 'Jones'
+where employee_name = 'Jones';
 ```
 b. 为“First Bank Corporarion”所有工资不超过100000美元的经理增长10%的工资，对工资超过100000美元的只增长3%。
 ```sql
