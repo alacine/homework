@@ -168,11 +168,11 @@ void Diy() {
 
 int main() {
     freopen("input.txt", "r", stdin);
-    init();
-    if (IsSafe()) {
+    init(); // 输入各个量的初始值
+    if (IsSafe()) { // 判断是否安全
         cout << "safe" << endl;
         cout << "The safe sequence is <";
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) { // 输出安全序列
             cout << SafeSequence[i] << ",";
         }
         cout << ">" <<endl;
