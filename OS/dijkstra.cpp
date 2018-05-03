@@ -127,12 +127,12 @@ void Diy() {
             }
         }
         if (flag == 1) {
-            for (int i = 0; i < m; i++) {
+            for (int i = 0; i < m; i++) { // 尝试分配资源
                 Available[i] -= Request[k][i];
                 Allocation[k][i] += Request[k][i];
                 Need[k][i] -= Request[k][i];
             }
-            if (IsSafe()) {
+            if (IsSafe()) { // 分配成功
                 cout << "OK, it is done." << endl;
                 cout << "Do you want to see it?(Y/N) ";
                 cin >> answer;
@@ -146,8 +146,8 @@ void Diy() {
                     ;// do nothing
                 }
             }
-            else {
-                for (int i = 0; i < m; i++) {
+            else { //分配失败
+                for (int i = 0; i < m; i++) { //还原
                     Available[i] -= Request[k][i];
                     Allocation[k][i] += Request[k][i];
                     Need[k][i] -= Request[k][i];
