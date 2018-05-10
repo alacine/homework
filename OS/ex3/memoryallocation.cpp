@@ -153,14 +153,13 @@ int main() {
             if (allocate_memory(i, head, end)) {
                 cout << "SUCCESS" << endl;
                 update_table(head, end);  //分配后及时更新空闲分区表
-                print_table(head, end);
             }
             else {
                 cout << "FAILED" << endl;
-                print_table(head, end);
-                show_memory();
             }
         }
+        print_table(head, end);
+        show_memory();
     }
     delete_table(head, end); // 程序结束，回收所有空间
     return 0;
