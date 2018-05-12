@@ -112,7 +112,7 @@ insert into instructor(ID, name, dept_name, salary)
 ### 3.4
 **考虑图3-18中的保险公司数据库，其中加入下划线的是主码。为这个关系数据库构造出如下 SQL 查询：**
 
-> person (**driver_id, name**, address)\
+> person (**driver_id**, name, address)\
 > car (**license, model**, year)\
 > accident (**report_number**, date, location)\
 > owns (**driver_id**, license)\
@@ -128,9 +128,9 @@ where date between date'2009-1-1' and date'2009-12-31';
 b. 向数据库中增加一个新的事故，对每个必须的属性可以设定任意值。
 ```sql
 insert into accident
-      value(1234, '2018-5-1', 'xtu');
+      values(1234, '2018-5-1', 'xtu');
 insert into participated
-      value(1234, 'xt8888', 2016551103, 10000);
+      values(1234, 'xt8888', 2016551103, 10000);
 ```
 c. 删除“John Smith”拥有的马自达车（Mazda）。
 ```sql
@@ -347,16 +347,16 @@ from (select dept_name, max(salary) as max_salary
 a. 创建一门课程“CS - 001”，其名称为“Weekly Seminar”，学分为0。
 ```sql
 insert into course(course_id, title, credits)
-    value('CS - 001', 'Weekly Seminar', 0);
+    values('CS - 001', 'Weekly Seminar', 0);
 ```
 b. 创建该课程在2009年秋季的一个课程段，sec_id 为1。
 ```sql
 insert into secrion(course_id, sec_id, semester, year)
-    value('CS - 001', 1, 'Fall', 2009);
+    values('CS - 001', 1, 'Fall', 2009);
 ```
 c. 让 Comp. Sci. 系的每个学生都选修上述的课程段。
 ```sql
-insert into takes(ID, course_id, sec_id, semester, year, grade)
+insert into takes(ID, course_id, sec_id, semester, year)
     select ID, 'CS - 001', 1, 'Fall', 2009
     from student
     where dept_name = 'Comp. Sci.';
@@ -389,14 +389,15 @@ where course_id in(select course_id
 ```
 
 ### 3.13
-**写出对应于图3-18中模式的 SQL DDL。在数据类型上做合理的假设，，确保声明主码和外码**
+**写出对应于图3-18中模式的 SQL DDL。在数据类型上做合理的假设，确保声明主码和外码**
 
 ```sql
 create table person(
     driver_id numeric(20, 0),
     name varchar(20),
     address varchar(50),
-    primary key (driver_id, name),
+    primary key (driver_id),
+    foreign key (name),
     foreign key (address),
 );
 create table car(
