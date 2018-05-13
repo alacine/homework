@@ -10,7 +10,7 @@ sk = []
 tmp = []
 
 # get the map from input file
-file = open("in.txt","r")
+file = open("in.txt", "r")
 line1 = file.readline()
 size = line1.split()
 w = int(size[0])
