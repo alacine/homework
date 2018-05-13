@@ -99,10 +99,10 @@ int IsSafe() {
         }
 
         if (i == n - 1 && flag == 0) {
-            return unsafe; // 返回当前状态为安全
+            return unsafe; // 返回当前状态为不安全
         }
         if (sum == n) {
-            return safe; // 返回当前状态为不安全
+            return safe; // 返回当前状态为安全
         }
     }
 }
