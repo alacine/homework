@@ -36,7 +36,7 @@ void show_block(int block_num, int page_index, bool itr) {  // 打印物理块
         cout << block[i] << " ";
     }
     if (!itr) {
-        cout << "X ";
+        cout << "X ";  // 如果有缺页中断显示一个叉
     }
     cout << endl;
 }
