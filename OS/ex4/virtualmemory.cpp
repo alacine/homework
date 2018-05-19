@@ -42,7 +42,7 @@ void show_block(int block_num, int page_index, bool itr) {  // 打印物理块
 }
 
 int change_block(int block_num, int old, int fresh) {  // 修改物理块
-    // 有缺页中断返回1，没有终端返回0
+    // 有缺页中断返回1，没有中断返回0
     for (int i = 0; i < block_num; i++) {
         if (block[i] == old) {
             block[i] = fresh;
@@ -59,7 +59,7 @@ void clean_block() {  // 清空物理块
 }
 
 
-int opt(int block_num) {  // 最佳置换算法，返回缺页终端次数
+int opt(int block_num) {  // 最佳置换算法，返回缺页中断次数
     int interruptions_num = 0;
     for (int i = 0; i < maxn; i++) {  // 开始历遍页面走向序列
         bool itr = check(page[i], block_num);  // 检查该页面是否在内存中
@@ -85,13 +85,13 @@ int opt(int block_num) {  // 最佳置换算法，返回缺页终端次数
                 index_j = j;
             }
         }
-        interruptions_num += change_block(block_num, block[index_j], page[i]);  // 缺页终端计数
+        interruptions_num += change_block(block_num, block[index_j], page[i]);  // 缺页中断计数
         show_block(block_num, i, itr);
     }
     return interruptions_num;
 }
 
-int fifo(int block_num) {  // 先进先出算法，返回缺页终端次数
+int fifo(int block_num) {  // 先进先出算法，返回缺页中断次数
     queue<int> block_queue;  // 队列，表示先进先出
     int interruptions_num = 0;
     for (int i = 0; i < block_num; i++) {  // 初始化队列
@@ -103,9 +103,9 @@ int fifo(int block_num) {  // 先进先出算法，返回缺页终端次数
             show_block(block_num, i, itr);
             continue;
         }
-        block_queue.push(page[i]);  // 当前物理块入队
+        block_queue.push(page[i]);  // 当前页面入队
         interruptions_num += change_block(block_num, block_queue.front(), page[i]);
-        if (block_queue.size() > block_num) { // 如果队列长度超过了物理块数，队头物理块出队
+        if (block_queue.size() > block_num) { // 如果队列长度超过了物理块数，队头页面出队
             block_queue.pop();
         }
         show_block(block_num, i, itr);
@@ -113,7 +113,7 @@ int fifo(int block_num) {  // 先进先出算法，返回缺页终端次数
     return interruptions_num;
 }
 
-int lru(int block_num) {  // 最近最久未使用算法，返回缺页终端次数
+int lru(int block_num) {  // 最近最久未使用算法，返回缺页中断次数
     int interruptions_num = 0;
     for (int i = 0; i < maxn; i++) {
         bool itr = check(page[i], block_num);  // 检查该页面是否在内存中
