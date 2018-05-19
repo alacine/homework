@@ -145,34 +145,34 @@ int lru(int block_num) {  // 最近最久未使用算法，返回缺页终端次
     return interruptions_num;
 }
 
-int get_page_chag(int itr_times, int n) {  // 计算换页次数
-    if (itr_times - n < 0) {  // 换页次数不可能为负数
+int get_page_chag(int itr_times, int block_num) {  // 计算换页次数
+    if (itr_times - block_num < 0) {  // 换页次数不可能为负数
         return 0;
     }
-    return itr_times - n;
+    return itr_times - block_num;
 }
 
 int main() {
     srand((unsigned)time(NULL));  // 设置时间为随机数种子
     init();
-    int n;
+    int block_num;
     int itr_times = 0;
     int page_chag_times = 0;
     cout << "input the number of blocks" << endl;
-    cin >> n;
-    itr_times = opt(n);
+    cin >> block_num;
+    itr_times = opt(block_num);
     cout << "When use OPT, the number of interruptions is " << itr_times << "." << endl;
-    cout << "When use OPT, the number of page changing is " << get_page_chag(itr_times, n) << "." << endl;
+    cout << "When use OPT, the number of page changing is " << get_page_chag(itr_times, block_num) << "." << endl;
     cout << "And the page fault rate is " << itr_times*100.0/maxn << "\%." << endl;
     clean_block();
-    itr_times = fifo(n);
+    itr_times = fifo(block_num);
     cout << "When use FIFO, the number of interruptions is " << itr_times << "." << endl;
-    cout << "When use FIFO, the number of page changing is " << get_page_chag(itr_times, n) << "." << endl;
+    cout << "When use FIFO, the number of page changing is " << get_page_chag(itr_times, block_num) << "." << endl;
     cout << "And the page fault rate is " << itr_times*100.0/maxn << "\%." << endl;
     clean_block();
-    itr_times = lru(n);
+    itr_times = lru(block_num);
     cout << "When use LRU, the number of interruptions is " << itr_times << "." << endl;
-    cout << "When use LRU, the number of page changing is " << get_page_chag(itr_times, n) << "." << endl;
+    cout << "When use LRU, the number of page changing is " << get_page_chag(itr_times, block_num) << "." << endl;
     cout << "And the page fault rate is " << itr_times*100.0/maxn << "\%." << endl;
     return 0;
 }
