@@ -10,8 +10,8 @@ using std::queue;
 
 const int maxn = 30;
 
-int page[maxn] = {1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5};  // 书本 P119 例子
-int block[maxn];
+int page[maxn];  // 页面序列
+int block[maxn];  // 物理块数组
 
 void init() {  //随机生成一个页面走向的序列
     for (int i = 0; i < maxn; i++) {
