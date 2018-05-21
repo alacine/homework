@@ -12,9 +12,7 @@ def f2(x):
 def romberg(f, a, b, T):
     T.append([])
     h = b - a # 步长
-    i = 0
-    err = 999.0
-    n = 1 # 区间数量
+    i, err, n = 0, 999.0, 1 # n为区间数量
     T[0].append((f(a) + f(b)) * h / 2)
 
     while err >= EPS: # 当误差足够小，即小于预定的误差时结束计算，否则区间数量翻倍
@@ -47,8 +45,7 @@ def show(T):
         print()
 
 def main():
-    T = []
-    W = []
+    T, W = [], []
     romberg(f1, 0, math.pi, T)
     show(T)
     print()
