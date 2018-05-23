@@ -28,8 +28,7 @@ def Guass(a, b, x):
         # show_c(c)
 
     # 回带求值
-    for i in range(0, len(c)-1):
-        x.append(0)
+    x = [0 for i in range(0, len(c)-1)]
     for i in range(len(c)-1, -1, -1):
         if i == len(c) - 1:
             x.append(c[i][len(c[i])-1] / c[i][i])
