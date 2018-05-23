@@ -5,7 +5,7 @@ import copy
 def show_c(c):
     for i in c:
         for j in i:
-            print("\t%g" % j, end = " ")
+            print('\t%g' % j, end = ' ')
         print()
     print()
 
@@ -43,18 +43,18 @@ def Guass(a, b, x):
 
 # 按要求格式化输出结果
 def show_answer(c, x):
-    print("A")
+    print('A')
     for i in range(0, len(c)):
         for j in range(0, len(c[i])-1):
-            print("\t%0.2lf" % c[i][j], end = "")
+            print('\t%0.2lf' % c[i][j], end = '')
         print()
-    print("b")
+    print('b')
     for i in range(0, len(c)):
-        print("\t%0.2lf" % c[i][len(c)-1], end = "")
-    print("\nx")
+        print('\t%0.2lf' % c[i][len(c)-1], end = '')
+    print('\nx')
     for i in range(0, len(x)):
-        print("\t%0.2lf" % x[i], end = "")
-    print("\n")
+        print('\t%0.2lf' % x[i], end = '')
+    print('\n')
 
 def main():
     A = [[1, 2, 1], [2, 2, 3], [-1, -3, 0]]
@@ -73,5 +73,5 @@ def main():
     c2 = Guass(A2, b2, x2)
     show_answer(c2, x2)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

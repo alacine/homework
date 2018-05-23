@@ -23,11 +23,11 @@ def newton(k, x, fx, x1, c, nt):
 def show(k, c, nt, x1):
     for i in range(0, k):
         for j in range(0, i + 1):
-            print("c[%d][%d]=%0.5lf" %(i, j, c[i][j]), end = " ")
+            print('c[%d][%d]=%0.5lf' %(i, j, c[i][j]), end = ' ')
         print()
     print()
     for i in range(0, k):
-        print("N_%d<%g>=%0.5lf" %(i, x1, nt[i]))
+        print('N_%d<%g>=%0.5lf' %(i, x1, nt[i]))
 
 def main():
     c, nt = [], []
@@ -39,5 +39,5 @@ def main():
     newton(k, x, fx, x1, c, nt)
     show(k, c, nt, x1)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

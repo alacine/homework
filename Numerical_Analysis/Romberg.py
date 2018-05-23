@@ -8,6 +8,21 @@ def f1(x):
 def f2(x):
     return 4 / (1 + x * x)
 
+# 用于输出外推结果表格
+def show(T):
+    print('区间数\t', end = ' ')
+    for i in range (0, len(T)):
+        print('%d次外推\t' %i, end = ' ')
+    print()
+    for i in range(0, len(T)):
+        print('----------------', end = '')
+    print()
+    for i in range(0, len(T)):
+        print(2**i, end = '\t')
+        for j in range(0, i+1):
+            print('%0.6lf\t' %T[i][j], end = '')
+        print()
+
 # 龙贝格算法的实现
 def romberg(f, a, b, T):
     T.append([])
@@ -27,22 +42,7 @@ def romberg(f, a, b, T):
         h /= 2 # 步长减半
         n *= 2 # 区间数量翻倍
 
-    print("#interval=%d, err=%e, res=%0.6lf\n" %(n, err, T[i][i]))
-
-# 用于输出外推结果表格
-def show(T):
-    print("区间数\t", end = " ")
-    for i in range (0, len(T)):
-        print("%d次外推\t" %i, end = " ")
-    print()
-    for i in range(0, len(T)):
-        print("----------------", end = "")
-    print()
-    for i in range(0, len(T)):
-        print(2**i, end = "\t")
-        for j in range(0, i+1):
-            print("%0.6lf\t" %T[i][j], end = "")
-        print()
+    print('#interval=%d, err=%e, res=%0.6lf\n' %(n, err, T[i][i]))
 
 def main():
     T, W = [], []
@@ -52,5 +52,5 @@ def main():
     romberg(f2, 0, 1, W)
     show(W)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
