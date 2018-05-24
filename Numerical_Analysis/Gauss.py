@@ -2,10 +2,10 @@
 import copy
 
 # 输出列主元消去过程(取消20行和31行的注释)
-def show_c(c):
+def show_process(c):
     for i in c:
         for j in i:
-            print('\t%0.3g' % j, end = ' ')
+            print('%10g' % j, end = ' ')
         print()
     print()
 
@@ -17,7 +17,7 @@ def merge(a, b):
 
 # 高斯列主元消去算法
 def guass(c):
-    # show_c(c)
+    # show_process(c)
 
     # 列主元消去
     for i in range(0, len(c)-1):
@@ -28,7 +28,7 @@ def guass(c):
             m = - c[j][i] / c[i][i]
             for k in range(0, len(c[j])):
                 c[j][k] += m * c[i][k]
-        # show_c(c)
+        # show_process(c)
 
     # 回带求值
     x = [0 for i in range(0, len(c)-1)]
@@ -48,14 +48,14 @@ def show_answer(c, x):
     print('A')
     for i in range(0, len(c)):
         for j in range(0, len(c[i])-1):
-            print('\t%.3g' % c[i][j], end = '')
+            print('%10.3g' % c[i][j], end = '')
         print()
     print('b')
     for i in range(0, len(c)):
-        print('\t%.3g' % c[i][len(c[i])-1], end = '')
+        print('%10.3g' % c[i][len(c[i])-1], end = '')
     print('\nx')
     for i in range(0, len(x)):
-        print('\t%.3g' % x[i], end = '')
+        print('%10.3g' % x[i], end = '')
     print('\n')
 
 def main():
