@@ -1,4 +1,4 @@
-# 计算差商
+# 计算差商 difference quotient
 def get_diff_quo(k, x, fx, c):
     for i in range(0, k):
         c.append([])
