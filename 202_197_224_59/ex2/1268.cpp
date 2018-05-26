@@ -22,7 +22,6 @@ void init(int n, int m) {
 int main() {
     int T;
     int m, n;
-    freopen("1268.txt", "r", stdin);
     scanf("%d", &T);
     while (T--) {
         int r_max, c_max;
