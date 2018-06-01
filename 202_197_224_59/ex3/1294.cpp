@@ -8,18 +8,23 @@ int t[maxn];
 
 int main() {
     int K, a, b, n;
-    //freopen("ex.txt", "r", stdin);
     scanf("%d", &K);
     while (K--) {
         scanf("%s", s);
-        t[0] = 0;
-        for (int i = 1; i < strlen(s); i++) {
-            t[i] = t[i-1] + !(s[i]==s[i-1]);
+        int l = strlen(s);
+        t[1] = 0;
+        for (int i = 2; i <= l; i++) {
+            if (s[i-1] == s[i-2]) {
+                t[i] = t[i-1];
+            }
+            else {
+                t[i] = t[i-1] + 1;
+            }
         }
         scanf("%d", &n);
         while (n--) {
             scanf("%d %d", &a, &b);
-            printf("%d\n", t[b-1]-t[a-1]);
+            printf("%d\n", t[b]-t[a]);
         }
     }
     return 0;
