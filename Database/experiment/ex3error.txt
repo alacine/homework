@@ -1,110 +1,110 @@
 
-Table BORROWERÒÑ±ä¸ü¡£
+Table BORROWERå·²å˜æ›´ã€‚
 
 
-Table LOANÒÑ±ä¸ü¡£
+Table LOANå·²å˜æ›´ã€‚
 
 
-ÔÚĞĞ: 4 ÉÏ¿ªÊ¼Ö´ĞĞÃüÁîÊ±³ö´í -
+åœ¨è¡Œ: 4 ä¸Šå¼€å§‹æ‰§è¡Œå‘½ä»¤æ—¶å‡ºé”™ -
 alter table branch add constraint branch_pk primary key (branch_name)
-´íÎó±¨¸æ -
-ORA-02260: ±íÖ»ÄÜ¾ßÓĞÒ»¸öÖ÷¼ü
+é”™è¯¯æŠ¥å‘Š -
+ORA-02260: è¡¨åªèƒ½å…·æœ‰ä¸€ä¸ªä¸»é”®
 02260. 00000 -  "table can have only one primary key"
 *Cause:    Self-evident.
 *Action:   Remove the extra primary key.
 
-ÔÚĞĞ: 5 ÉÏ¿ªÊ¼Ö´ĞĞÃüÁîÊ±³ö´í -
+åœ¨è¡Œ: 5 ä¸Šå¼€å§‹æ‰§è¡Œå‘½ä»¤æ—¶å‡ºé”™ -
 alter table customer add constraint customer_pk primary key (customer_name)
-´íÎó±¨¸æ -
-ORA-02260: ±íÖ»ÄÜ¾ßÓĞÒ»¸öÖ÷¼ü
+é”™è¯¯æŠ¥å‘Š -
+ORA-02260: è¡¨åªèƒ½å…·æœ‰ä¸€ä¸ªä¸»é”®
 02260. 00000 -  "table can have only one primary key"
 *Cause:    Self-evident.
 *Action:   Remove the extra primary key.
 
-Table DEPOSITORÒÑ±ä¸ü¡£
+Table DEPOSITORå·²å˜æ›´ã€‚
 
 
-ÔÚĞĞ: 7 ÉÏ¿ªÊ¼Ö´ĞĞÃüÁîÊ±³ö´í -
+åœ¨è¡Œ: 7 ä¸Šå¼€å§‹æ‰§è¡Œå‘½ä»¤æ—¶å‡ºé”™ -
 alter table account add constraint account_pk primary key (account_number)
-´íÎó±¨¸æ -
-ORA-02260: ±íÖ»ÄÜ¾ßÓĞÒ»¸öÖ÷¼ü
+é”™è¯¯æŠ¥å‘Š -
+ORA-02260: è¡¨åªèƒ½å…·æœ‰ä¸€ä¸ªä¸»é”®
 02260. 00000 -  "table can have only one primary key"
 *Cause:    Self-evident.
 *Action:   Remove the extra primary key.
 
-1ĞĞÒÑ²åÈë¡£
+1è¡Œå·²æ’å…¥ã€‚
 
 
-ÔÚĞĞ: 11 ÉÏ¿ªÊ¼Ö´ĞĞÃüÁîÊ±³ö´í -
+åœ¨è¡Œ: 11 ä¸Šå¼€å§‹æ‰§è¡Œå‘½ä»¤æ—¶å‡ºé”™ -
 insert into branch values('Xiangtan University', 'Xiangtan', 5000000)
-´íÎó±¨¸æ -
-ORA-00001: Î¥·´Î¨Ò»Ô¼ÊøÌõ¼ş (2016551103.BRANCH_PK)
+é”™è¯¯æŠ¥å‘Š -
+ORA-00001: è¿åå”¯ä¸€çº¦æŸæ¡ä»¶ (2016551103.BRANCH_PK)
 
 
-Table BORROWERÒÑ±ä¸ü¡£
+Table BORROWERå·²å˜æ›´ã€‚
 
 
-Table BORROWERÒÑ±ä¸ü¡£
+Table BORROWERå·²å˜æ›´ã€‚
 
 
-Table LOANÒÑ±ä¸ü¡£
+Table LOANå·²å˜æ›´ã€‚
 
 
-ÔÚĞĞ: 19 ÉÏ¿ªÊ¼Ö´ĞĞÃüÁîÊ±³ö´í -
+åœ¨è¡Œ: 19 ä¸Šå¼€å§‹æ‰§è¡Œå‘½ä»¤æ—¶å‡ºé”™ -
 alter table account add constraint account_fk foreign key (branch_name) references branch(branch_name)
-´íÎó±¨¸æ -
-ORA-02275: ´Ë±íÖĞÒÑ¾­´æÔÚÕâÑùµÄÒıÓÃÔ¼ÊøÌõ¼ş
+é”™è¯¯æŠ¥å‘Š -
+ORA-02275: æ­¤è¡¨ä¸­å·²ç»å­˜åœ¨è¿™æ ·çš„å¼•ç”¨çº¦æŸæ¡ä»¶
 02275. 00000 -  "such a referential constraint already exists in the table"
 *Cause:    Self-evident.
 *Action:   Remove the extra constraint.
 
-Table DEPOSITORÒÑ±ä¸ü¡£
+Table DEPOSITORå·²å˜æ›´ã€‚
 
 
-Table DEPOSITORÒÑ±ä¸ü¡£
+Table DEPOSITORå·²å˜æ›´ã€‚
 
 
-ÔÚĞĞ: 25 ÉÏ¿ªÊ¼Ö´ĞĞÃüÁîÊ±³ö´í -
+åœ¨è¡Œ: 25 ä¸Šå¼€å§‹æ‰§è¡Œå‘½ä»¤æ—¶å‡ºé”™ -
 insert into loan values('L-001', 'Xingtan University', 1000)
-´íÎó±¨¸æ -
-ORA-02291: Î¥·´ÍêÕûÔ¼ÊøÌõ¼ş (2016551103.LOAN_FK) - Î´ÕÒµ½¸¸Ïî¹Ø¼ü×Ö
+é”™è¯¯æŠ¥å‘Š -
+ORA-02291: è¿åå®Œæ•´çº¦æŸæ¡ä»¶ (2016551103.LOAN_FK) - æœªæ‰¾åˆ°çˆ¶é¡¹å…³é”®å­—
 
 
-ÔÚĞĞ: 26 ÉÏ¿ªÊ¼Ö´ĞĞÃüÁîÊ±³ö´í -
+åœ¨è¡Œ: 26 ä¸Šå¼€å§‹æ‰§è¡Œå‘½ä»¤æ—¶å‡ºé”™ -
 insert into loan values('L-002', 'Rain Lake', 2000)
-´íÎó±¨¸æ -
-ORA-02291: Î¥·´ÍêÕûÔ¼ÊøÌõ¼ş (2016551103.LOAN_FK) - Î´ÕÒµ½¸¸Ïî¹Ø¼ü×Ö
+é”™è¯¯æŠ¥å‘Š -
+ORA-02291: è¿åå®Œæ•´çº¦æŸæ¡ä»¶ (2016551103.LOAN_FK) - æœªæ‰¾åˆ°çˆ¶é¡¹å…³é”®å­—
 
 
-1ĞĞÒÑÉ¾³ı¡£
+1è¡Œå·²åˆ é™¤ã€‚
 
 
-Table LOANÒÑ±ä¸ü¡£
+Table LOANå·²å˜æ›´ã€‚
 
 
-ÔÚĞĞ: 35 ÉÏ¿ªÊ¼Ö´ĞĞÃüÁîÊ±³ö´í -
+åœ¨è¡Œ: 35 ä¸Šå¼€å§‹æ‰§è¡Œå‘½ä»¤æ—¶å‡ºé”™ -
 insert into loan values('L-002','Xiangtan University',1000)
-´íÎó±¨¸æ -
-ORA-02291: Î¥·´ÍêÕûÔ¼ÊøÌõ¼ş (2016551103.LOAN_FK) - Î´ÕÒµ½¸¸Ïî¹Ø¼ü×Ö
+é”™è¯¯æŠ¥å‘Š -
+ORA-02291: è¿åå®Œæ•´çº¦æŸæ¡ä»¶ (2016551103.LOAN_FK) - æœªæ‰¾åˆ°çˆ¶é¡¹å…³é”®å­—
 
 
-Table LOANÒÑ±ä¸ü¡£
+Table LOANå·²å˜æ›´ã€‚
 
 
-ÔÚĞĞ: 39 ÉÏ¿ªÊ¼Ö´ĞĞÃüÁîÊ±³ö´í -
+åœ¨è¡Œ: 39 ä¸Šå¼€å§‹æ‰§è¡Œå‘½ä»¤æ—¶å‡ºé”™ -
 insert into loan values('L-002','Xiangtan University',1000)
-´íÎó±¨¸æ -
-ORA-02291: Î¥·´ÍêÕûÔ¼ÊøÌõ¼ş (2016551103.LOAN_FK) - Î´ÕÒµ½¸¸Ïî¹Ø¼ü×Ö
+é”™è¯¯æŠ¥å‘Š -
+ORA-02291: è¿åå®Œæ•´çº¦æŸæ¡ä»¶ (2016551103.LOAN_FK) - æœªæ‰¾åˆ°çˆ¶é¡¹å…³é”®å­—
 
 
-Table LOANÒÑ±ä¸ü¡£
+Table LOANå·²å˜æ›´ã€‚
 
 
-Table LOANÒÑ±ä¸ü¡£
+Table LOANå·²å˜æ›´ã€‚
 
 
-ÔÚĞĞ: 48 ÉÏ¿ªÊ¼Ö´ĞĞÃüÁîÊ±³ö´í -
+åœ¨è¡Œ: 48 ä¸Šå¼€å§‹æ‰§è¡Œå‘½ä»¤æ—¶å‡ºé”™ -
 insert into loan values('L-003','Xiangtan University',-2000)
-´íÎó±¨¸æ -
-ORA-02290: Î¥·´¼ì²éÔ¼ÊøÌõ¼ş (2016551103.LOAN_CKECK)
+é”™è¯¯æŠ¥å‘Š -
+ORA-02290: è¿åæ£€æŸ¥çº¦æŸæ¡ä»¶ (2016551103.LOAN_CKECK)
 
