@@ -1,0 +1,110 @@
+
+Table BORROWER已变更。
+
+
+Table LOAN已变更。
+
+
+在行: 4 上开始执行命令时出错 -
+alter table branch add constraint branch_pk primary key (branch_name)
+错误报告 -
+ORA-02260: 表只能具有一个主键
+02260. 00000 -  "table can have only one primary key"
+*Cause:    Self-evident.
+*Action:   Remove the extra primary key.
+
+在行: 5 上开始执行命令时出错 -
+alter table customer add constraint customer_pk primary key (customer_name)
+错误报告 -
+ORA-02260: 表只能具有一个主键
+02260. 00000 -  "table can have only one primary key"
+*Cause:    Self-evident.
+*Action:   Remove the extra primary key.
+
+Table DEPOSITOR已变更。
+
+
+在行: 7 上开始执行命令时出错 -
+alter table account add constraint account_pk primary key (account_number)
+错误报告 -
+ORA-02260: 表只能具有一个主键
+02260. 00000 -  "table can have only one primary key"
+*Cause:    Self-evident.
+*Action:   Remove the extra primary key.
+
+1行已插入。
+
+
+在行: 11 上开始执行命令时出错 -
+insert into branch values('Xiangtan University', 'Xiangtan', 5000000)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.BRANCH_PK)
+
+
+Table BORROWER已变更。
+
+
+Table BORROWER已变更。
+
+
+Table LOAN已变更。
+
+
+在行: 19 上开始执行命令时出错 -
+alter table account add constraint account_fk foreign key (branch_name) references branch(branch_name)
+错误报告 -
+ORA-02275: 此表中已经存在这样的引用约束条件
+02275. 00000 -  "such a referential constraint already exists in the table"
+*Cause:    Self-evident.
+*Action:   Remove the extra constraint.
+
+Table DEPOSITOR已变更。
+
+
+Table DEPOSITOR已变更。
+
+
+在行: 25 上开始执行命令时出错 -
+insert into loan values('L-001', 'Xingtan University', 1000)
+错误报告 -
+ORA-02291: 违反完整约束条件 (2016551103.LOAN_FK) - 未找到父项关键字
+
+
+在行: 26 上开始执行命令时出错 -
+insert into loan values('L-002', 'Rain Lake', 2000)
+错误报告 -
+ORA-02291: 违反完整约束条件 (2016551103.LOAN_FK) - 未找到父项关键字
+
+
+1行已删除。
+
+
+Table LOAN已变更。
+
+
+在行: 35 上开始执行命令时出错 -
+insert into loan values('L-002','Xiangtan University',1000)
+错误报告 -
+ORA-02291: 违反完整约束条件 (2016551103.LOAN_FK) - 未找到父项关键字
+
+
+Table LOAN已变更。
+
+
+在行: 39 上开始执行命令时出错 -
+insert into loan values('L-002','Xiangtan University',1000)
+错误报告 -
+ORA-02291: 违反完整约束条件 (2016551103.LOAN_FK) - 未找到父项关键字
+
+
+Table LOAN已变更。
+
+
+Table LOAN已变更。
+
+
+在行: 48 上开始执行命令时出错 -
+insert into loan values('L-003','Xiangtan University',-2000)
+错误报告 -
+ORA-02290: 违反检查约束条件 (2016551103.LOAN_CKECK)
+
