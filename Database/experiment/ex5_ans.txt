@@ -1,0 +1,221 @@
+
+CUSTOMER_NAME       
+--------------------
+Adams
+Brooks
+Curry
+Glenn
+Green
+Hayes
+Jackson
+Johnson
+Jones
+Lindsay
+Majeris
+
+CUSTOMER_NAME       
+--------------------
+McBride
+Smith
+Turner
+Williams
+
+已选择 15 行。
+
+
+BRANCH_NAME          BRANCH_CITY                        ASSETS
+-------------------- ------------------------------ ----------
+Downtown             Brooklyn                           900000
+Redwood              Palo Alto                         2100000
+Perryridge           Horseneck                         1700000
+Mianus               Horseneck                          400200
+Round Hill           Horseneck                         8000000
+Pownal               Bennington                         400000
+North Town           Rye                               3700000
+Brighton             Brooklyn                          7000000
+Central              Rye                                400280
+
+已选择 9 行。
+
+
+CUSTOMER_NAME       
+--------------------
+Hayes
+Hayes
+Johnson
+Johnson
+Jones
+Lindsay
+Majeris
+Smith
+Smith
+Turner
+
+已选择 10 行。
+
+未选择任何行
+未选择任何行
+
+CUSTOMER_NAME        CUSTOMER_CITY        CUSTOMER_STREET     
+-------------------- -------------------- --------------------
+Majeris              First                Rye                 
+McBride              Safety               Rye                 
+
+
+CUSTOMER_NAME        CUSTOMER_CITY        CUSTOMER_STREET     
+-------------------- -------------------- --------------------
+Jones                Main                 Harrison            
+Hayes                Main                 Harrison            
+Johnson              Alma                 Palo Alto           
+Jackson              University           Salt Lake           
+
+
+LOAN_NUMBE BRANCH_NAME              AMOUNT
+---------- -------------------- ----------
+L-17       Downtown                   1000
+L-23       Redwood                    2000
+L-15       Perryridge                 1500
+L-14       Downtown                   1500
+L-16       Perryridge                 1300
+
+
+CUSTOMER_NAME        CUSTOMER_STREET      CUSTOMER_CITY        BRANCH_NAME          BRANCH_CITY                    LOAN_NUMBE     AMOUNT
+-------------------- -------------------- -------------------- -------------------- ------------------------------ ---------- ----------
+Adams                Pittsfield           Spring               Perryridge           Horseneck                      L-16             1300
+Curry                Rye                  North                Mianus               Horseneck                      L-93              500
+Hayes                Harrison             Main                 Perryridge           Horseneck                      L-15             1500
+Jackson              Salt Lake            University           Downtown             Brooklyn                       L-14             1500
+Jones                Harrison             Main                 Downtown             Brooklyn                       L-17             1000
+McBride              Rye                  Safety               North Town           Rye                            L-20             7500
+Smith                Rye                  Main                 Round Hill           Horseneck                      L-11              900
+Smith                Rye                  Main                 Central              Rye                            L-21              570
+Smith                Rye                  Main                 Redwood              Palo Alto                      L-23             2000
+Williams             Princeton            Nassau               Downtown             Brooklyn                       L-17             1000
+
+已选择 10 行。
+
+
+CUSTOMER_NAME        CUSTOMER_STREET      CUSTOMER_CITY        BRANCH_NAME          BRANCH_CITY                    ACCOUNT_NU    BALANCE
+-------------------- -------------------- -------------------- -------------------- ------------------------------ ---------- ----------
+Hayes                Harrison             Main                 Downtown             Brooklyn                       A-101             500
+Hayes                Harrison             Main                 Perryridge           Horseneck                      A-102             400
+Johnson              Palo Alto            Alma                 Downtown             Brooklyn                       A-101             500
+Johnson              Palo Alto            Alma                 Perryridge           Horseneck                      A-201             900
+Jones                Harrison             Main                 Brighton             Brooklyn                       A-217             750
+Lindsay              Pittsfield           Park                 Redwood              Palo Alto                      A-222             700
+Majeris              Rye                  First                Central              Rye                            A-333             850
+Smith                Rye                  Main                 Mianus               Horseneck                      A-215             700
+Smith                Rye                  Main                 North Town           Rye                            A-444             625
+Turner               Stamford             Putnam               Round Hill           Horseneck                      A-305             350
+
+已选择 10 行。
+
+
+CUSTOMER_NAME       
+--------------------
+Adams
+Curry
+Hayes
+Jackson
+Johnson
+Jones
+Lindsay
+Majeris
+McBride
+Smith
+Turner
+
+CUSTOMER_NAME       
+--------------------
+Williams
+
+已选择 12 行。
+
+
+CUSTOMER_NAME       
+--------------------
+Majeris
+Lindsay
+Turner
+Johnson
+Johnson
+
+
+CUSTOMER_NAME       
+--------------------
+Hayes
+Hayes
+Jones
+Smith
+Smith
+
+
+View BORROW 已创建。
+
+
+View DEPOSIT 已创建。
+
+
+View BORROW_AND_DEPOSIT 已创建。
+
+
+CUSTOMER_NAME        BRANCH_NAME          ACCOUNT_NU    BALANCE
+-------------------- -------------------- ---------- ----------
+Johnson              Perryridge           A-201             900
+
+
+CUSTOMER_NAME        ACCOUNT_NU
+-------------------- ----------
+Hayes                A-101     
+Hayes                A-102     
+Johnson              A-101     
+Johnson              A-201     
+Jones                A-217     
+Lindsay              A-222     
+Majeris              A-333     
+Smith                A-215     
+Smith                A-444     
+Turner               A-305     
+Jackson                        
+
+CUSTOMER_NAME        ACCOUNT_NU
+-------------------- ----------
+Green                          
+McBride                        
+Adams                          
+Glenn                          
+Curry                          
+Williams                       
+Brooks                         
+
+已选择 18 行。
+
+
+ACCOUNT_NU CUSTOMER_NAME        BRANCH_NAME             BALANCE
+---------- -------------------- -------------------- ----------
+A-101      Hayes                Downtown                    500
+A-101      Johnson              Downtown                    500
+A-102      Hayes                Perryridge                  400
+A-201      Johnson              Perryridge                  900
+A-215      Smith                Mianus                      700
+A-217      Jones                Brighton                    750
+A-222      Lindsay              Redwood                     700
+A-305      Turner               Round Hill                  350
+A-333      Majeris              Central                     850
+A-444      Smith                North Town                  625
+
+已选择 10 行。
+
+
+LOAN_NUMBE CUSTOMER_NAME            AMOUNT
+---------- -------------------- ----------
+L-14       Jackson                    1500
+L-17       Williams                   1000
+L-17       Jones                      1000
+
+
+Table T_BRANCH 已创建。
+
+
+9 行已插入。
+
