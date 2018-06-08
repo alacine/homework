@@ -20,7 +20,7 @@ Smith
 Turner
 Williams
 
-“——°‘Ò 15 ––°£
+Â∑≤ÈÄâÊã© 15 Ë°å„ÄÇ
 
 
 BRANCH_NAME          BRANCH_CITY                        ASSETS
@@ -35,7 +35,7 @@ North Town           Rye                               3700000
 Brighton             Brooklyn                          7000000
 Central              Rye                                400280
 
-“——°‘Ò 9 ––°£
+Â∑≤ÈÄâÊã© 9 Ë°å„ÄÇ
 
 
 CUSTOMER_NAME       
@@ -51,10 +51,10 @@ Smith
 Smith
 Turner
 
-“——°‘Ò 10 ––°£
+Â∑≤ÈÄâÊã© 10 Ë°å„ÄÇ
 
-Œ¥—°‘Ò»Œ∫Œ––
-Œ¥—°‘Ò»Œ∫Œ––
+Êú™ÈÄâÊã©‰ªª‰ΩïË°å
+Êú™ÈÄâÊã©‰ªª‰ΩïË°å
 
 CUSTOMER_NAME        CUSTOMER_CITY        CUSTOMER_STREET     
 -------------------- -------------------- --------------------
@@ -92,7 +92,7 @@ Smith                Rye                  Main                 Central          
 Smith                Rye                  Main                 Redwood              Palo Alto                      L-23             2000
 Williams             Princeton            Nassau               Downtown             Brooklyn                       L-17             1000
 
-“——°‘Ò 10 ––°£
+Â∑≤ÈÄâÊã© 10 Ë°å„ÄÇ
 
 
 CUSTOMER_NAME        CUSTOMER_STREET      CUSTOMER_CITY        BRANCH_NAME          BRANCH_CITY                    ACCOUNT_NU    BALANCE
@@ -108,7 +108,7 @@ Smith                Rye                  Main                 Mianus           
 Smith                Rye                  Main                 North Town           Rye                            A-444             625
 Turner               Stamford             Putnam               Round Hill           Horseneck                      A-305             350
 
-“——°‘Ò 10 ––°£
+Â∑≤ÈÄâÊã© 10 Ë°å„ÄÇ
 
 
 CUSTOMER_NAME       
@@ -129,7 +129,7 @@ CUSTOMER_NAME
 --------------------
 Williams
 
-“——°‘Ò 12 ––°£
+Â∑≤ÈÄâÊã© 12 Ë°å„ÄÇ
 
 
 CUSTOMER_NAME       
@@ -150,13 +150,13 @@ Smith
 Smith
 
 
-View BORROW “—¥¥Ω®°£
+View BORROW Â∑≤ÂàõÂª∫„ÄÇ
 
 
-View DEPOSIT “—¥¥Ω®°£
+View DEPOSIT Â∑≤ÂàõÂª∫„ÄÇ
 
 
-View BORROW_AND_DEPOSIT “—¥¥Ω®°£
+View BORROW_AND_DEPOSIT Â∑≤ÂàõÂª∫„ÄÇ
 
 
 CUSTOMER_NAME        BRANCH_NAME          ACCOUNT_NU    BALANCE
@@ -188,7 +188,7 @@ Curry
 Williams                       
 Brooks                         
 
-“——°‘Ò 18 ––°£
+Â∑≤ÈÄâÊã© 18 Ë°å„ÄÇ
 
 
 ACCOUNT_NU CUSTOMER_NAME        BRANCH_NAME             BALANCE
@@ -204,7 +204,7 @@ A-305      Turner               Round Hill                  350
 A-333      Majeris              Central                     850
 A-444      Smith                North Town                  625
 
-“——°‘Ò 10 ––°£
+Â∑≤ÈÄâÊã© 10 Ë°å„ÄÇ
 
 
 LOAN_NUMBE CUSTOMER_NAME            AMOUNT
@@ -214,8 +214,8 @@ L-17       Williams                   1000
 L-17       Jones                      1000
 
 
-Table T_BRANCH “—¥¥Ω®°£
+Table T_BRANCH Â∑≤ÂàõÂª∫„ÄÇ
 
 
-9 ––“—≤Â»Î°£
+9 Ë°åÂ∑≤ÊèíÂÖ•„ÄÇ
 
