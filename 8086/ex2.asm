@@ -3,7 +3,7 @@ DATAS SEGMENT
 DATAS ENDS
 
 STACKS SEGMENT
-    ;æ­¤å¤„è¾“å…¥å †æ ˆæ®µä»£ç 
+    ;;´Ë´¦ÊäÈë¶ÑÕ»¶Î´úÂë
 STACKS ENDS
 
 CODES SEGMENT
@@ -12,10 +12,11 @@ START:
     MOV AX,DATAS
     MOV DS,AX
     
-    ;æµç¨‹æŽ§åˆ¶loopå¾ªçŽ¯è¾“å‡ºå¤§å†™å­—æ¯
+    ;Á÷³Ì¿ØÖÆloopÑ­»·Êä³ö´óÐ´×ÖÄ¸
     mov dl,40h
     mov cx,100
 s1: add dl,1
+	;µ±³¬³ö´óÐ´×ÖÄ¸µÄ·¶Î§Ê±¾ÍÍË³ö
     cmp dl,5ah
     jg s2
     mov ah,02h
@@ -32,3 +33,4 @@ s3: MOV AH,4CH
     
 CODES ENDS
     END START
+

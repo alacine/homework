@@ -33,6 +33,9 @@ START:
     ;重新赋段地址
     mov ax,datas
     mov ds,ax
+    lea dx,pb
+    mov ah,09h
+    int 21h
     ;开始复制操作
     mov ax, ext
     mov es, ax
@@ -51,6 +54,9 @@ START:
     INT 21H
 CODES ENDS
     END START
+
+
+
 
 
 

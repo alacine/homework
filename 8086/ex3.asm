@@ -1,30 +1,30 @@
 DATAS SEGMENT
-    ;æ­¤å¤„è¾“å…¥æ•°æ®æ®µä»£ç 
+    ;;´Ë´¦ÊäÈëÊý¾Ý¶Î´úÂë
 DATAS ENDS
 
 STACKS SEGMENT
-    ;æ­¤å¤„è¾“å…¥å †æ ˆæ®µä»£ç 
+    ;´Ë´¦ÊäÈë¶ÑÕ»¶Î´úÂë
 STACKS ENDS
 
 CODES SEGMENT
     ASSUME CS:CODES,DS:DATAS,SS:STACKS
 START:
-	;è¾“å…¥ä¸€ä¸ªå­—æ¯
-	mov ah,01h
-	int 21h
-	mov bl,al
-	;è°ƒç”¨å­ç¨‹åº
+	;ÊäÈëÒ»¸ö×ÖÄ¸
+    mov ah,01h
+    int 21h
+    mov bl,al
+    ;µ÷ÓÃ×Ó³ÌÐò
     call func
-    ;è¾“å‡º
+    ;Êä³ö
     mov ah,02h
     int 21h
     
     MOV AH,4CH
     INT 21H
 func proc near
-	cmp bl,60h
-	jl l1
-	jg l2
+    cmp bl,60h
+    jl l1
+    jg l2
 l1: add bl,20h
     jmp l3
 l2: sub bl,20h
@@ -35,3 +35,4 @@ func endp
     
 CODES ENDS
     END START
+
