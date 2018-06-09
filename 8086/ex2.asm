@@ -3,7 +3,7 @@ DATAS SEGMENT
 DATAS ENDS
 
 STACKS SEGMENT
-    ;;此处输入堆栈段代码
+    ;此处输入堆栈段代码
 STACKS ENDS
 
 CODES SEGMENT
@@ -16,7 +16,7 @@ START:
     mov dl,40h
     mov cx,100
 s1: add dl,1
-	;当超出大写字母的范围时就退出
+    ;当超出大写字母的范围时就退出
     cmp dl,5ah
     jg s2
     mov ah,02h
@@ -33,4 +33,5 @@ s3: MOV AH,4CH
     
 CODES ENDS
     END START
+
 
