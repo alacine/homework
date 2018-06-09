@@ -1,3 +1,18 @@
+## 一、实验项目 
+编程实现一个十进制数据处理任务。  
+
+## 二、编程环境 
+* 操作系统：windows7 32位
+* 软件：masm for windows
+
+## 三、调试数据与结果  
+![photo1](ex5_1.png)
+![photo2](ex5_2.png)
+![photo3](ex5_3.png)
+
+## 四、实验源程序  
+实现一串一位数的相加，最大和为999
+```
 DATAS SEGMENT
     ;此处输入数据段代码
 DATAS ENDS
@@ -59,3 +74,7 @@ sum:;先输出一个换行
     INT 21H
 CODES ENDS
     END START
+```
+
+## 五、体会
+更好地掌握了加法指令，提高了程序的编写能力。

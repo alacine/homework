@@ -1,3 +1,16 @@
+## 一、实验项目 
+编程实现一个串处理任务。  
+
+## 二、编程环境 
+* 操作系统：windows7 32位
+* 软件：masm for windows
+
+## 三、调试数据与结果  
+![photo1](ex4_1.png)
+
+## 四、实验源程序  
+实现串的复制  
+```
 DATAS SEGMENT
     a db 'aaaaaaa',0ah,0dh,'$'
 	pa db 'This is a: $'
@@ -54,3 +67,7 @@ START:
     INT 21H
 CODES ENDS
     END START
+```
+
+## 五、体会
+更好地掌握了串操作指令。
