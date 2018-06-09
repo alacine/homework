@@ -25,9 +25,9 @@ func proc near
     cmp bl,60h
     jl l1
     jg l2
-l1: add bl,20h
+l1: add bl,20h;大写转小写
     jmp l3
-l2: sub bl,20h
+l2: sub bl,20h;小写转大写
     jmp l3
 l3: mov dl,bl
     ret
@@ -35,6 +35,3 @@ func endp
     
 CODES ENDS
     END START
-
-
-
