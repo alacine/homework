@@ -1,21 +1,21 @@
 DATAS SEGMENT
-    ;�˴��������ݶδ���
+    ;此处输入数据段代码
 DATAS ENDS
 
 STACKS SEGMENT
-    ;�˴������ջ�δ���
+    ;此处输入堆栈段代码
 STACKS ENDS
 
 CODES SEGMENT
     ASSUME CS:CODES,DS:DATAS,SS:STACKS
 START:
-    ;����һ����ĸ
+    ;输入一个字母
     mov ah,01h
     int 21h
     mov bl,al
-    ;�����ӳ���
+    ;调用子程序
     call func
-    ;���
+    ;输出
     mov ah,02h
     int 21h
     
@@ -25,9 +25,9 @@ func proc near
     cmp bl,60h
     jl l1
     jg l2
-l1: add bl,20h;��дתСд
+l1: add bl,20h;大写转小写
     jmp l3
-l2: sub bl,20h;Сдת��д
+l2: sub bl,20h;小写转大写
     jmp l3
 l3: mov dl,bl
     ret

@@ -1,22 +1,22 @@
 DATAS SEGMENT
-    ;´Ë´¦ÊäÈëÊý¾Ý¶Î´úÂë
+    ;æ­¤å¤„è¾“å…¥æ•°æ®æ®µä»£ç 
 DATAS ENDS
 
 STACKS SEGMENT
-    ;´Ë´¦ÊäÈë¶ÑÕ»¶Î´úÂë
+    ;æ­¤å¤„è¾“å…¥å †æ ˆæ®µä»£ç 
 STACKS ENDS
 
 CODES SEGMENT
     ASSUME CS:CODES,DS:DATAS,SS:STACKS
 START:
-    ;ÇåÁã
+    ;æ¸…é›¶
     xor ax,ax
     xor bx,bx
     xor cx,cx
-    ;ÊäÈëÒ»´®Ò»Î»Êý
+    ;è¾“å…¥ä¸€ä¸²ä¸€ä½æ•°
 input:mov ah,01h
     int 21h
-    cmp al,0dh;ÊäÈëÎª»Ø³µÊ±½áÊøÊäÈë
+    cmp al,0dh;è¾“å…¥ä¸ºå›žè½¦æ—¶ç»“æŸè¾“å…¥
     je sum
     sub al,30h
     mov cl,al
@@ -27,18 +27,18 @@ input:mov ah,01h
     mov bx,ax
     jmp input
     
-sum:;ÏÈÊä³öÒ»¸ö»»ÐÐ
+sum:;å…ˆè¾“å‡ºä¸€ä¸ªæ¢è¡Œ
     mov dl,0ah
     mov ah,02h
     int 21h
-    ;Êä³ö°ÙÎ»
+    ;è¾“å‡ºç™¾ä½
     mov ax,bx
     and ax,0f00h
     mov dl,ah
     add dl,30h
     mov ah,02h
     int 21h
-    ;Êä³öÊ®Î»
+    ;è¾“å‡ºåä½
     mov ax,bx
     and ax,00f0h
     mov cl,4
@@ -47,7 +47,7 @@ sum:;ÏÈÊä³öÒ»¸ö»»ÐÐ
     add dl,30h
     mov ah,02h
     int 21h
-    ;Êä³ö¸öÎ»
+    ;è¾“å‡ºä¸ªä½
     mov ax,bx
     and ax,000fh
     mov dl,al

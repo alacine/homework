@@ -3,7 +3,7 @@ DATAS SEGMENT
 DATAS ENDS
 
 STACKS SEGMENT
-    ;´Ë´¦ÊäÈë¶ÑÕ»¶Î´úÂë
+    ;æ­¤å¤„è¾“å…¥å †æ ˆæ®µä»£ç 
 STACKS ENDS
 
 CODES SEGMENT
@@ -12,7 +12,7 @@ START:
     MOV AX,DATAS
     MOV DS,AX
     
-    ;ÌáÊ¾Óï
+    ;æç¤ºè¯­
     lea dx,a
     mov ah,09h
     int 21h
@@ -23,7 +23,7 @@ START:
     mov ah,02h
     int 21h
     
-    ;ÊäÈë
+    ;è¾“å…¥
 input:
     mov ah,01h
     int 21h

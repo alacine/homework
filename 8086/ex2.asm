@@ -3,7 +3,7 @@ DATAS SEGMENT
 DATAS ENDS
 
 STACKS SEGMENT
-    ;�˴������ջ�δ���
+    ;此处输入堆栈段代码
 STACKS ENDS
 
 CODES SEGMENT
@@ -12,11 +12,11 @@ START:
     MOV AX,DATAS
     MOV DS,AX
     
-    ;���̿���loopѭ�������д��ĸ
+    ;流程控制loop循环输出大写字母
     mov dl,40h
     mov cx,100
 s1: add dl,1
-    ;��������д��ĸ�ķ�Χʱ���˳�
+    ;当超出大写字母的范围时就退出
     cmp dl,5ah
     jg s2
     mov ah,02h

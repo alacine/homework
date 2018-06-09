@@ -13,7 +13,7 @@ CODES SEGMENT
 START:
     MOV AX,DATAS
     MOV DS,AX
-    ;��ʾ��
+    ;提示语
     lea dx, pa
     mov ah, 09h
     int 21h
@@ -23,20 +23,20 @@ START:
     lea dx, pb
     mov ah, 09h
     int 21h
-    ;ԭ��b���е�����
+    ;原来b串中的内容
     mov ax,ext
     mov ds,ax
     lea dx, b
     mov ah, 09h
     int 21h
     
-    ;���¸��ε�ַ
+    ;重新赋段地址
     mov ax,datas
     mov ds,ax
     lea dx,pb
     mov ah,09h
     int 21h
-    ;��ʼ���Ʋ���
+    ;开始复制操作
     mov ax, ext
     mov es, ax
     lea si, a
