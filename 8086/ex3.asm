@@ -1,5 +1,5 @@
 DATAS SEGMENT
-    ;;此处输入数据段代码
+    ;此处输入数据段代码
 DATAS ENDS
 
 STACKS SEGMENT
@@ -9,7 +9,7 @@ STACKS ENDS
 CODES SEGMENT
     ASSUME CS:CODES,DS:DATAS,SS:STACKS
 START:
-	;输入一个字母
+    ;输入一个字母
     mov ah,01h
     int 21h
     mov bl,al
@@ -35,4 +35,6 @@ func endp
     
 CODES ENDS
     END START
+
+
 
