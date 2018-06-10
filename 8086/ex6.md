@@ -1,3 +1,26 @@
+## 一、实验项目  
+编程实现三个以上相互关联的数据文件中内容的关联性处理。
+
+## 二、编程环境 
+* 操作系统：windows7 32位
+* 软件：masm for windows
+
+## 三、调试数据与结果  
+* 运行程序之前，操作目录下的情况  
+![photo0](ex6_0.png)
+* 运行程序前，文件中的内容  
+![photo1](ex6_1.png)
+![photo2](ex6_2.png)
+![photo3](ex6_3.png)
+* 运行程序输出test.txt的内容和b(来自与test1.txt)中的内容 
+![photo4](ex6_4.png)
+* 运行程序之后，test2.txt中的内容  
+![photo5](ex6_5.png)
+* 运行程序之后，文件夹中的情况  
+![photo6](ex6_6.png)
+
+## 四、实验源程序  
+```
 DATAS SEGMENT
     ;此处输入数据段代码
     path db 'd:/ass_test/test.txt',0
@@ -89,3 +112,8 @@ delete_file1:
     INT 21H
 CODES ENDS
 END START
+```
+
+## 五、体会  
+学会了如何进行简单的文件操作，读、写、删除，编程能力得到提高。  
+更好地掌握了系统功能的调用。
