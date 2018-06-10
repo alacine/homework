@@ -6,6 +6,11 @@
 * 软件：masm for windows
 
 ## 三、调试数据与结果  
+![photo1](ex7_1.png)
+![photo2](ex7_2.png)
+![photo3](ex7_3.png)
+![photo4](ex7_4.png)
+
 
 ## 四、实验源程序  
 编写了一个简单的游戏，包含猜数游戏，简单交互和分支结果
