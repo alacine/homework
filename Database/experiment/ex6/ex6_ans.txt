@@ -1,0 +1,117 @@
+
+MAX(BALANCE)
+------------
+         900
+
+
+BRANCH_NAME          MAX(BALANCE)
+-------------------- ------------
+Round Hill                    350
+Mianus                        700
+Perryridge                    900
+Redwood                       700
+Brighton                      750
+Central                       850
+Downtown                      500
+North Town                    625
+
+已选择 8 行。
+
+
+BRANCH_NAME          SUM(AMOUNT) COUNT(LOAN_NUMBER) AVG(AMOUNT)
+-------------------- ----------- ------------------ -----------
+North Town                  7500                  1        7500
+Perryridge                  2800                  2        1400
+Downtown                    2500                  2        1250
+Redwood                     2000                  1        2000
+Round Hill                   900                  1         900
+Central                      570                  1         570
+Mianus                       500                  1         500
+
+已选择 7 行。
+
+
+BRANCH_NAME          SUM(AMOUNT) COUNT(LOAN_NUMBER) AVG(AMOUNT)
+-------------------- ----------- ------------------ -----------
+Round Hill                   900                  1         900
+Redwood                     2000                  1        2000
+Downtown                    2500                  2        1250
+Perryridge                  2800                  2        1400
+North Town                  7500                  1        7500
+
+
+BRANCH_NAME          AVG(BALANCE)
+-------------------- ------------
+Round Hill                    350
+Mianus                        700
+Perryridge                    650
+Redwood                       700
+Brighton                      750
+Central                       850
+Downtown                      500
+North Town                    625
+
+已选择 8 行。
+
+
+BRANCH_NAME          AVG(BALANCE)
+-------------------- ------------
+Mianus                        700
+Perryridge                    650
+Redwood                       700
+Brighton                      750
+Central                       850
+
+
+CUSTOMER_NAME       
+--------------------
+Jackson
+McBride
+Adams
+Curry
+Williams
+
+
+CUSTOMER_NAME       
+--------------------
+Jackson
+McBride
+Adams
+Curry
+Williams
+
+
+ACCOUNT_NU BRANCH_NAME             BALANCE CUSTOMER_NAME       
+---------- -------------------- ---------- --------------------
+A-101      Downtown                    500 Hayes               
+A-101      Downtown                    500 Johnson             
+A-102      Perryridge                  400 Hayes               
+A-201      Perryridge                  900 Johnson             
+A-217      Brighton                    750 Jones               
+
+
+CUSTOMER_NAME       
+--------------------
+Johnson
+Hayes
+
+
+BRANCH_NAME         
+--------------------
+Perryridge
+Central
+Brighton
+
+
+CUSTOMER_NAME        PERRYRIDGE   BRIGHTON   DOWNTOWN
+-------------------- ---------- ---------- ----------
+Turner                        0          0          0
+Johnson                     900          0        500
+Lindsay                       0          0          0
+Majeris                       0          0          0
+Jones                         0        750          0
+Hayes                       400          0        500
+Smith                         0          0          0
+
+已选择 7 行。
+

@@ -52,11 +52,15 @@ where branch_name = 'Perryridge' or
       branch_name = 'Downtown';
 
 --9
-select distinct customer_name
-from account natural join depositor
-where branch_name in (select branch_name
-                     from account natural join depositor
-                     where customer_name = 'Hayes');
+select distinct a.customer_name
+from account natural join depositor a
+where not exists (select b.branch_name
+       from account natural join depositor b
+       where a.branch_name = b.branch_name)
+      contains
+      (select c.branch_name
+       from account natural join depositor c
+       where c.customer_name = 'Hayes');
 
 --10
 select branch_name

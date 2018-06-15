@@ -1,0 +1,342 @@
+
+在行: 1 上开始执行命令时出错 -
+delete customer
+错误报告 -
+ORA-02292: 违反完整约束条件 (2016551103.BORROWER_FK) - 已找到子记录
+
+
+在行: 2 上开始执行命令时出错 -
+delete branch
+错误报告 -
+ORA-02292: 违反完整约束条件 (2016551103.ACCOUNT_FK) - 已找到子记录
+
+
+在行: 3 上开始执行命令时出错 -
+delete account
+错误报告 -
+ORA-02292: 违反完整约束条件 (2016551103.DEPOSITOR_FK1) - 已找到子记录
+
+
+10 行已删除。
+
+
+在行: 5 上开始执行命令时出错 -
+delete loan
+错误报告 -
+ORA-02292: 违反完整约束条件 (2016551103.BORROWER_FK1) - 已找到子记录
+
+
+10 行已删除。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+在行: 19 上开始执行命令时出错 -
+insert into loan values('L-17','Downtown',1000)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.LOAN_PK)
+
+
+在行: 20 上开始执行命令时出错 -
+insert into loan values('L-23','Redwood',2000)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.LOAN_PK)
+
+
+在行: 21 上开始执行命令时出错 -
+insert into loan values('L-15','Perryridge',1500)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.LOAN_PK)
+
+
+在行: 22 上开始执行命令时出错 -
+insert into loan values('L-14','Downtown',1500)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.LOAN_PK)
+
+
+在行: 23 上开始执行命令时出错 -
+insert into loan values('L-93','Mianus',500)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.LOAN_PK)
+
+
+在行: 24 上开始执行命令时出错 -
+insert into loan values('L-11','Round Hill',900)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.LOAN_PK)
+
+
+在行: 25 上开始执行命令时出错 -
+insert into loan values('L-16','Perryridge',1300)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.LOAN_PK)
+
+
+在行: 26 上开始执行命令时出错 -
+insert into loan values('L-20','North Town',7500)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.LOAN_PK)
+
+
+在行: 27 上开始执行命令时出错 -
+insert into loan values('L-21','Central',570)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.LOAN_PK)
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+1行已插入。
+
+
+在行: 41 上开始执行命令时出错 -
+insert into account values('A-101','Downtown',500)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.ACCOUNT_PK)
+
+
+在行: 42 上开始执行命令时出错 -
+insert into account values('A-215','Mianus',700)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.ACCOUNT_PK)
+
+
+在行: 43 上开始执行命令时出错 -
+insert into account values('A-102','Perryridge',400)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.ACCOUNT_PK)
+
+
+在行: 44 上开始执行命令时出错 -
+insert into account values('A-305','Round Hill',350)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.ACCOUNT_PK)
+
+
+在行: 45 上开始执行命令时出错 -
+insert into account values('A-201','Perryridge',900)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.ACCOUNT_PK)
+
+
+在行: 46 上开始执行命令时出错 -
+insert into account values('A-222','Redwood',700)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.ACCOUNT_PK)
+
+
+在行: 47 上开始执行命令时出错 -
+insert into account values('A-217','Brighton',750)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.ACCOUNT_PK)
+
+
+在行: 48 上开始执行命令时出错 -
+insert into account values('A-333','Central',850)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.ACCOUNT_PK)
+
+
+在行: 49 上开始执行命令时出错 -
+insert into account values('A-444','North Town',625)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.ACCOUNT_PK)
+
+
+在行: 51 上开始执行命令时出错 -
+insert into customer values('Jones','Main','Harrison')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 52 上开始执行命令时出错 -
+insert into customer values('Smith','Main','Rye')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 53 上开始执行命令时出错 -
+insert into customer values('Hayes','Main','Harrison')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 54 上开始执行命令时出错 -
+insert into customer values('Curry','North','Rye')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 55 上开始执行命令时出错 -
+insert into customer values('Lindsay','Park','Pittsfield')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 56 上开始执行命令时出错 -
+insert into customer values('Turner','Putnam','Stamford')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 57 上开始执行命令时出错 -
+insert into customer values('Williams','Nassau','Princeton')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 58 上开始执行命令时出错 -
+insert into customer values('Adams','Spring','Pittsfield')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 59 上开始执行命令时出错 -
+insert into customer values('Johnson','Alma','Palo Alto')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 60 上开始执行命令时出错 -
+insert into customer values('Glenn','Sand Hill','Woodside')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 61 上开始执行命令时出错 -
+insert into customer values('Brooks','Senator','Brooklyn')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 62 上开始执行命令时出错 -
+insert into customer values('Green','Walnut','Stamford')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 63 上开始执行命令时出错 -
+insert into customer values('Jackson','University','Salt Lake')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 64 上开始执行命令时出错 -
+insert into customer values('Majeris','First','Rye')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 65 上开始执行命令时出错 -
+insert into customer values('McBride','Safety','Rye')
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.CUSTOMER_PK)
+
+
+在行: 67 上开始执行命令时出错 -
+insert into branch values('Downtown','Brooklyn',900000)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.BRANCH_PK)
+
+
+在行: 68 上开始执行命令时出错 -
+insert into branch values('Redwood','Palo Alto',2100000)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.BRANCH_PK)
+
+
+在行: 69 上开始执行命令时出错 -
+insert into branch values('Perryridge','Horseneck',1700000)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.BRANCH_PK)
+
+
+在行: 70 上开始执行命令时出错 -
+insert into branch values('Mianus','Horseneck',400200)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.BRANCH_PK)
+
+
+在行: 71 上开始执行命令时出错 -
+insert into branch values('Round Hill','Horseneck',8000000)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.BRANCH_PK)
+
+
+在行: 72 上开始执行命令时出错 -
+insert into branch values('Pownal','Bennington',400000)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.BRANCH_PK)
+
+
+在行: 73 上开始执行命令时出错 -
+insert into branch values('North Town','Rye',3700000)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.BRANCH_PK)
+
+
+在行: 74 上开始执行命令时出错 -
+insert into branch values('Brighton','Brooklyn',7000000)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.BRANCH_PK)
+
+
+在行: 75 上开始执行命令时出错 -
+insert into branch values('Central','Rye',400280)
+错误报告 -
+ORA-00001: 违反唯一约束条件 (2016551103.BRANCH_PK)
+
