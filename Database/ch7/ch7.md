@@ -29,48 +29,31 @@
 为实践习题7.1~7.3中的每个E-R图构建适当的关系模式。  
 （加粗代替下划线）  
 * 7.1  
-> customer(**id**, name)
-> 
-> car(**license**)
-> 
-> own(id, **license**)
-> 
-> accident(**report_id**, data, place)
-> 
-> car_acc(**report_id**, **license**)
-> 
-> Policy(**pol_id**)
-> 
-> car_pol(**license**, **pol_id**)
-> 
-> payment(**pay_id**, pay_time, end_time)
-> 
-> pol_pay(**pol_id**, **pay_id**)
+> customer(**id**, name)  
+> car(**license**)  
+> own(id, **license**)  
+> accident(**report_id**, data, place)  
+> car_acc(**report_id**, **license**)  
+> Policy(**pol_id**)  
+> car_pol(**license**, **pol_id**)  
+> payment(**pay_id**, pay_time, end_time)  
+> pol_pay(**pol_id**, **pay_id**)  
 
 * 7.2(1)  
-> Student(**ID**, name)
-> 
-> section(**sec_id**)
-> 
-> exam(**exam_id**, marks)
-> 
-> exam_marks(**ID**, **sec_id**, **exam_id**)
-> 
+> Student(**ID**, name)  
+> section(**sec_id**)  
+> exam(**exam_id**, marks)  
+> exam_marks(**ID**, **sec_id**, **exam_id**)  
 
 * 7.2(2)
-> Student(**ID**, name)
-> 
-> section(**sec_id**)
-> 
-> exam_marks(**ID**, **sec_id**, **exam_id**, marks)
-> 
+> Student(**ID**, name)  
+> section(**sec_id**)  
+> exam_marks(**ID**, **sec_id**, **exam_id**, marks)  
 
 * 7.3  
-> competition(**com_id**, team_id, team_name, self_score, other_score)
-> 
-> team(**team_id**, team_name)
-> 
-> player(**player_id**, name, score)  
+> competition(**com_id**, team_id, team_name, self_score, other_score)  
+> team(**team_id**, team_name)  
+> player(**player_id**, name, score)    
 
 ### 7.17  
 扩展时间习题7.3中的E-R图，以追踪整个联赛中所有队伍的信息。  
@@ -80,17 +63,11 @@
 考虑图7-29中的E-R图，它对一家网上书店建模。  
 a. 列出实体集及其主码。  
 > （加粗代替下划线）  
-> 
 > author(**name**, address, URL)  
-> 
 > book(**ISBN**, title, year, price)  
-> 
 > publisher(**name**, address, phone, URL)  
-> 
 > shopping_basket(basket_id)  
-> 
 > warehouse(**code**, address, phone)  
-> 
 > customer(**email**, name, address, phone)  
 
 b. 假设...扩展E-R图。  
@@ -105,46 +82,26 @@ c. 用概化扩展E-R图。
 ![p11](7_21.png)  
 > (加粗代表下划线)  
 > brand(**brand_id**, brand_name)  
-> 
 > model(**model**, model_name)  
-> 
 > b_m(**model_id**, brand_name  
-> 
 > &emsp;&emsp;foreign key brand_name references brand,  
-> 
 > &emsp;&emsp;foreign key model_id references model)  
-> 
 > option(**opt_id**, opt_info)  
-> 
-> opt(**opt_id**,  model_id
-> 
+> opt(**opt_id**,  model_id  
 > &emsp;&emsp;foreign key opt_id references option,  
-> 
 > &emsp;&emsp;foreign key model_id references model)  
-> 
 > vehichle(**VIN**)  
-> 
 > m_V(**VIN**, model-id  
-> 
 > &emsp;&emsp;foreign key VIN references vehicle,  
-> 
 > &emsp;&emsp;foreign key model_id references model)  
-> 
-> distributor(**distributor_id**, distributor_name)
-> 
-> sell(**VIN**, distributor_id
-> 
-> &emsp;&emsp;foreign key VIN references vehicle,
-> 
-> &emsp;&emsp;foreign key distributor_id references distributor)
-> 
-> customer(**customer_id**, customer_name)
-> 
-> buy(**VIN**, customer_id
-> 
-> &emsp;&emsp;foreign key VIN references vehicle,
-> 
-> &emsp;&emsp;foreign key customer_id references customer)
+> distributor(**distributor_id**, distributor_name)  
+> sell(**VIN**, distributor_id  
+> &emsp;&emsp;foreign key VIN references vehicle,  
+> &emsp;&emsp;foreign key distributor_id references distributor)  
+> customer(**customer_id**, customer_name)  
+> buy(**VIN**, customer_id  
+> &emsp;&emsp;foreign key VIN references vehicle,  
+> &emsp;&emsp;foreign key customer_id references customer)  
 
 ### 7.22  
 为全球性的快递公司（例如DHL或者FedEX）设计一个数据库。  
