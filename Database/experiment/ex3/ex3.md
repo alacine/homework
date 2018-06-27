@@ -16,15 +16,16 @@ alter table branch add constraint branch_pk primary key (branch_name);
 alter table customer add constraint customer_pk primary key (customer_name);
 alter table depositor add constraint depositor_pk primary key (customer_name, account_number);
 alter table account add constraint account_pk primary key (account_number);
-```
+```  
 ![p1](1_a.png)  
+
 b．运行下列SQL语句：  
 ```sql
 insert into branch values(‘Xiangtan University’,’Xiangtan’,4000000);  
 insert into branch values(‘Xiangtan University’,’Xiangtan’,5000000);  
 ```
 记录结果并分析原因。  
-![p2](1_b.png)
+![p2](1_b.png)  
 > 原因：branch_name 是主键，违反了主键的约束条件  
 
 2. 外键约束
@@ -75,7 +76,7 @@ d. 删除掉这个约束。
 alter table loan drop constraint loan_unique;
 ```
 ![p8](3_d.png)
-1. check约束  
+4. check约束  
 
 a. 在loan表上建立一个check约束，保证amount必须为正数。  
 ```sql
