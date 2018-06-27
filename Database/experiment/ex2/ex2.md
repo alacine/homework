@@ -1,4 +1,4 @@
-## 实验二报告  
+## 实验二（DDL中的表操作）报告  
 
 ### 实验目的  
 1. 熟悉和掌握 SQL的 Create Table, Drop Table, Alter Table语句语法；  
