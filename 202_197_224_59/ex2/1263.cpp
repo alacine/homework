@@ -17,40 +17,36 @@ void reload(int &xa, int &ya, int &xb, int &yb) {
     ya = yd, yb = yu;
 }
 
-int cal_area1() {
-    if (x1 >= x4 || x2 <= x3 || y1 >= y4 || y2 <= y3) {
-        puts("-------1-------");
-        return 0;
+int cal_area(int xa, int ya, int xb, int yb) {
+    int ans;
+    if (xa > xb || ya > yb) {
+        return ans = 0;
     }
-    if (x1 > x3 && x1 < x4 && y1 > y3 && y1 < y4) {
-        puts("-------2-------");
-        return (y4 - y1) * (x4 - x1);
+    else {
+        ans = (xb - xa) * (yb - ya);
     }
-    if (x2 > x3 && x2 < x4 && y2 > y3 && y2 < y4) {
-        puts("-------3-------");
-        return (y3 - y2) * (x3 - x2);
-    }
-    if (x1 > x3 && x1 < x4 && y2 > y3 && y2 < y4) {
-        puts("-------4-------");
-        return (y2 - y3) * (x4 - x1);
-    }
-    if (x2 > x3 && x2 < x4 && y1 > y3 && y1 < y4) {
-        puts("-------5-------");
-        return (y4 - y1) * (x2 - x3);
-    }
-    puts("-------6-------");
+    return ans;
 }
 
-int cal_area() {
-    
+void show() {
+    printf("%d %d %d %d\n", x1, y1, x2, y2);
+    printf("%d %d %d %d\n", x3, y3, x4, y4);
 }
 
 int main() {
+    //freopen("ex.txt", "r", stdin);
     while (scanf("%d %d %d %d", &x1, &y1, &x2, &y2) != EOF) {
         scanf("%d %d %d %d", &x3, &y3, &x4, &y4);
         reload(x1, y1, x2, y2);
         reload(x3, y3, x4, y4);
-        printf("%d\n", cal_area());
+        int x5 = max(x1, x3);
+        int y5 = max(y1, y3);
+        int x6 = min(x2, x4);
+        int y6 = min(y2, y4);
+        int area1 = cal_area(x1, y1, x2, y2);
+        int area2 = cal_area(x3, y3, x4, y4);
+        int area3 = cal_area(x5, y5, x6, y6);
+        printf("%d\n", area1 + area2 - area3);
     }
     return 0;
 }
