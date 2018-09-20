@@ -210,8 +210,8 @@ create view obj2_1("学号") as
 
 --对选修C13课程的学生，按分数跳跃式排名(可以并列)，显示名次与学号，按名次、学号升序排列
 drop view obj2_2;
-create view obj2_2("学号", "名次") as
-    select "学号", rank() over(order by nvl("分数", 0) desc) as srank
+create view obj2_2("名次", "学号") as
+    select rank() over(order by nvl("分数", 0) desc) as srank, "学号"
     from "成绩"
     where "课程号" = 'C13'
     order by srank, "学号";
@@ -219,14 +219,14 @@ create view obj2_2("学号", "名次") as
 --按平均分数对课程连续排名(可以并列)，显示名次、课程号与平均分数(保留2位小数)，按名次、课程号升序排列
 drop view obj2_3;
 create view obj2_3("名次", "课程号", "平均分数") as
-    select rank() over(order by avg("分数")) as srank, "课程号", round(avg("分数"), 2)
+    select dense_rank() over(order by avg("分数") desc) as srank, "课程号", round(avg("分数"), 2)
     from "成绩"
     group by "课程号"
     order by srank, "课程号";
 
 -- 查询每门课程的课程号，以及每门课程考试成绩第一名（可以并列）的学生的姓名，按课程号与姓名升序排列
 drop view obj2_4;
-create view obj2_4("课程", "姓名") as
+create view obj2_4("课程号", "姓名") as
     select "课程号", "姓名"
     from "成绩" a natural join "学生" b
     where "分数" = (select max("分数")
@@ -234,11 +234,12 @@ create view obj2_4("课程", "姓名") as
                     where a."课程号" = c."课程号")
     order by "课程号", "姓名";
 
-
 --列出emp表中工资在3500到5000之间的员工的姓名，但只取姓名的前5个字符，不足5个则以*补足，按姓名升序排列
 drop view obj2_5;
 create view obj2_5("姓名") as
     select rpad(ename, 5, '*')
     from emp
     where sal >= 3500 and sal <= 5000
-    order by ename;
+order by ename;
+
+commit;
