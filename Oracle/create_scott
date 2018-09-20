@@ -1,0 +1,17 @@
+1.创建c##scott用户(这里创建的用户为:c##scott，密码为:tiger)
+create user c##scott identified by tiger 
+
+2.为用户授权   
+grant connect,resource,unlimited tablespace to c##scott container=all; 
+
+3.设置用户使用的表空间   
+alter user c##scott default tablespace users;   
+alter user c##scott temporary tablespace temp;  
+
+4.使用c##scott用户登录
+connect c##scott/tiger  
+
+5.显示当前登录的用户   
+show user
+
+6.退出登录，重新以c##scott登录，运行scott_local_ddl.sql脚本
