@@ -138,8 +138,12 @@ select trunc(sysdate, 'YYYY') from dual;
 select trunc(sysdate, 'MM') from dual;
 select trunc(sysdate, 'D') from dual;
 --General Comparison Functions
-select greatest() from dual;
-select least() from dual;
+select greatest(5, 2, 4, 9) from dual;
+select greatest('15', '2', '4', '9') from dual;
+select greatest('apples', 'applas', 'applis') from dual;
+select least(5, 2, 4, 9) from dual;
+select least('15', '2', '4', '9') from dual;
+select least('apples', 'applas', 'applis') from dual;
 --Conversion Functions
 select to_char() from dual;
 select to_char() from dual;
@@ -177,12 +181,13 @@ select row_number() from dual;
 
 
 --2
-
+--按天统计学生注册人数
 select "注册日期", count("姓名")
 from "学生"
 group by "注册日期";
 
 --3
+--将重修成绩表的记录按学校规定合并进成绩表
 
 --4
 select "姓名", sum(case when "科目" = "语文" then "成绩" else 0 end) "语文",
@@ -193,7 +198,6 @@ group by "姓名";
 
 --5
 --创建视图，视图名依次命名为obj2_1、obj2_2、… 、obj2_5
-
 --查询每门课程考试成绩的第一名(可以并列)的学生的学号，按学号升序排列
 drop view obj2_1;
 create view obj2_1("学号") as
@@ -205,6 +209,7 @@ create view obj2_1("学号") as
     order by "学号";
 
 --对选修C13课程的学生，按分数跳跃式排名(可以并列)，显示名次与学号，按名次、学号升序排列
+drop view obj2_2;
 create view obj2_2("学号", "名次") as
     select "学号", rank() over(order by nvl("分数", 0) desc) as srank
     from "成绩"
@@ -223,11 +228,17 @@ create view obj2_3("名次", "课程号", "平均分数") as
 drop view obj2_4;
 create view obj2_4("课程", "姓名") as
     select "课程号", "姓名"
-    from "成绩" natural join "学生" a
+    from "成绩" a natural join "学生" b
     where "分数" = (select max("分数")
-                    from "成绩" b
-                    where a."课程号" = b."课程号")
+                    from "成绩" c
+                    where a."课程号" = c."课程号")
     order by "课程号", "姓名";
 
 
 --列出emp表中工资在3500到5000之间的员工的姓名，但只取姓名的前5个字符，不足5个则以*补足，按姓名升序排列
+drop view obj2_5;
+create view obj2_5("姓名") as
+    select rpad(ename, 5, '*')
+    from emp
+    where sal >= 3500 and sal <= 5000
+    order by ename;
