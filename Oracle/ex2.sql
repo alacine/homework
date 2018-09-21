@@ -117,11 +117,11 @@ select extract(day from date '2003-08-22') from dual;
 select last_day('15-3月-03') from dual;
 select last_day('03-2月-03') from dual;
 select last_day('03-2月-04') from dual;
-
+--两个日期之间相差的时间(以月为单位)
 select months_between('01-1月-03', '14-3月-03') from dual;
 select months_between('14-3月-03', '01-1月-03') from dual;
 select months_between('03-1月-03', '14-1月-03') from dual;
-
+--下一个星期几的日期
 select next_day('01-8月-03', '星期二') from dual;
 select next_day('06-8月-03', '星期三') from dual;
 select next_day('06-8月-03', '星期日') from dual;
@@ -129,7 +129,7 @@ select next_day('06-8月-03', '星期日') from dual;
 select round(sysdate, 'year') from dual;
 select round(sysdate, 'month') from dual;
 select round(sysdate, 'day') from dual;
-
+--返回当前系统日期
 select sysdate from dual;
 select next_day(sysdate, '星期三') from dual;
 select months_between(sysdate, '14-1月-03') from dual;
@@ -138,26 +138,49 @@ select trunc(sysdate, 'YYYY') from dual;
 select trunc(sysdate, 'MM') from dual;
 select trunc(sysdate, 'D') from dual;
 --General Comparison Functions
+--最大值
 select greatest(5, 2, 4, 9) from dual;
 select greatest('15', '2', '4', '9') from dual;
 select greatest('apples', 'applas', 'applis') from dual;
+--最小值
 select least(5, 2, 4, 9) from dual;
 select least('15', '2', '4', '9') from dual;
 select least('apples', 'applas', 'applis') from dual;
 --Conversion Functions
-select to_char() from dual;
-select to_char() from dual;
-select to_date() from dual;
-select to_number() from dual;
+--把数字或日期安装某种格式转变成字符串
+select to_char(sysdate, 'yyyy-dd-mm') from dual;
+select to_char(1210.72, '9999.9') from dual;
+select to_char(hiredate, 'yy/dd/mm') from emp;
+--把字符串转变成日期
+select to_date('2018/9/21', 'yyyy/mm/dd') from dual;
+select to_date('070903', 'mmddyy') from dual;
+select to_date('20180921', 'yyyymmdd') from dual;
+--把字符串转变成数字
+select to_number('1210.12') from dual;
+select to_number('1210.12', '9999.99') from dual;
+select to_number('1210', '9999') from dual;
 --Encoding and Decoding Functions
-select decode(sign(sal-1500), 1, sal+500, -1, sal+100, sal) from scott.emp;
-select decode(mod(sal,1000), 0, 'level_0', 1, 'level_1', 2, 'level_2', 'level_3') from scott.emp;
-select decode(sign(lpad(ename,1)-'z'), 1, sal+500, -1, sal+100, sal) from scott.emp;
+--把表达式的值与后面的值依次比较，当匹配到相等的值时，返回对应的值，类似if-elseif-...-else
+select decode(sign(sal-1500), 1, sal+500, -1, sal+100, sal) from emp;
+select decode(mod(sal,1000), 0, 'level_0', 1, 'level_1', 2, 'level_2', 'level_3') from emp;
+select decode(deptno, 10, 'A', 20, 'R', 30, 'S', 40, 'O', 'none') from dept;
 --NULL-Related Functions
-select coalesce() from dual;
-select nullif() from dual;
-select nvl() from dual;
-select nvl2() from dual;
+--返回第一个非空的表达式，如果全是空值则返回空值(至少有两个表达式)
+select coalesce(1) from dual;
+select coalesce(1, null) from dual;
+select coalesce(null, 1) from dual;
+--判断两个表达式是否相等，是返回null，否返回第一个表达式的值
+select nullif(12, 12) from dual;
+select nullif(12, 13) from dual;
+select nullif('apples', 'applas') from dual;
+--当查询的某个值为空值时，用指定的值代替，并不会更改表
+select ename, nvl(comm, 0) from emp where job = 'CLERK';
+select ename, nvl(comm, 0) from emp where comm is null;
+select job, nvl(mgr, 1000000) from emp;
+--查询的某个值为非空时，用一个值代替，空时也用一个值代替，同样不会更改表
+select ename, nvl2(comm, 1, 0) from emp where job = 'CLERK';
+select ename, nvl2(comm, 1, 0) from emp where comm is null;
+select job, nvl2(mgr, 1, 0) from emp;
 --Environment and Identifier Functions
 select uid() from dual;
 select user() from dual;
