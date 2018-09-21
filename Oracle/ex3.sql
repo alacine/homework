@@ -65,7 +65,11 @@ create sequence obj3_7
   minvalue 1;
 
 --创建序列，该序列起始值为1000，步长为2，最大值为10000，不可循环，序列名为“obj3_8”
-
+drop sequence obj3_8;
+create sequence obj3_8
+    start with 1000
+    increment by 2
+    nocycle;
 
 --查看序列
 --利用数据字典视图user_SEQUENCES、all_SEQUENCES查看序列信息
