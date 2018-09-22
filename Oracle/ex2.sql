@@ -182,16 +182,43 @@ select ename, nvl2(comm, 1, 0) from emp where job = 'CLERK';
 select ename, nvl2(comm, 1, 0) from emp where comm is null;
 select job, nvl2(mgr, 1, 0) from emp;
 --Environment and Identifier Functions
-select uid() from dual;
-select user() from dual;
+--返回当前登录用户的UID
+select uid from dual;
+select username from all_users where user_id = uid;
+select username from all_users where user_id < uid;
+--返回当前登录用户
+select user from dual;
+select user_id from all_users where username = user;
+show user;
 --Aggregate Functions
-select avg() from dual;
-select count() from dual;
-select dense_rank() from dual;
-select max() from dual;
-select min() from dual;
-select rank() from dual;
-select sum() from dual;
+--求平均值默认不计算空值的行
+select avg(sal) from emp;
+select avg(mgr) from emp;
+select avg(nvl(mgr, 0)) from emp;
+--返回表达式的数量，不计算空值的行
+select count(1) from dual;
+select count(ename) from emp;
+select count(mgr) from emp;
+--连续式排名函数
+select ename, dense_rank() over(order by sal) from emp;
+select ename, dense_rank() over(order by mgr)from emp;
+select ename, dense_rank() over(order by (nvl(mgr, 0)) desc) from emp;
+--最大值
+select max(sal) from emp;
+select max(ename) from emp;
+select job, max(sal) from emp group by job;
+--最小值
+select min(sal) from emp;
+select min(ename) from emp;
+select job, min(sal) from emp group by job;
+--跳跃式排名函数
+select ename, rank() over(order by sal) from emp;
+select ename, rank() over(order by mgr)from emp;
+select ename, rank() over(order by (nvl(mgr, 0)) desc) from emp;
+--求和
+select sum(sal) from emp;
+select sum(mgr) from emp;
+select job, sum(sal) from emp group by job;
 --Analytic Funcions
 select avg() from dual;
 select count() from dual;
@@ -200,8 +227,10 @@ select max() from dual;
 select min() from dual;
 select rank() from dual;
 select sum() from dual;
-select row_number() from dual;
-
+--为每一行分配一个唯一的数字
+select ename, row_number() over(order by sal) as rn from emp;
+select ename, job, row_number() over(partition by job order by sal) as rn from emp;
+select ename, comm, row_number() over(partition by comm order by sal) as rn from emp;
 
 --2
 --按天统计学生注册人数
@@ -211,6 +240,10 @@ group by "注册日期";
 
 --3
 --将重修成绩表的记录按学校规定合并进成绩表
+--创建重修成绩表sc_temp(sno, score) 并输入重修考试成绩
+merge into "成绩"
+using sc_temp
+on "成绩"."学号"=sc."学号" and "课程号"
 
 --4
 select "姓名", sum(case when "科目" = "语文" then "成绩" else 0 end) "语文",
