@@ -1,0 +1,10 @@
+Error starting at line : 87 in command -
+alter sequence obj3_6
+  maxvalue 82000
+    minvalue 100
+      increment by 5
+Error report -
+ORA-04007: MINVALUE cannot be made to exceed the current value
+04007. 00000 -  "MINVALUE cannot be made to exceed the current value"
+*Cause:    the given MINVALUE would be greater than the current value
+*Action:   always make sure that MINVALUE is <= the current value

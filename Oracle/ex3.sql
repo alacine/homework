@@ -73,17 +73,29 @@ create sequence obj3_8
 
 --查看序列
 --利用数据字典视图user_SEQUENCES、all_SEQUENCES查看序列信息
+select * from user_SEQUENCES;
+select * from all_SEQUENCES;
 
 --引用序列
 --向DEPT表中插入三条记录，利用序列obj3_6生成部门编号
+insert into dept values(obj3_6.nextval, 'newdept1', 'xtu1');
+insert into dept values(obj3_6.nextval, 'newdept2', 'xtu2');
+insert into dept values(obj3_6.nextval, 'newdept3', 'xtu3');
 
 --修改序列
 --修改序列“obj3_6”，将该序列最大值设为“82000”，最小值设为“100”，步长设为“5”
+select obj3_6.currval from dual;
+alter sequence obj3_6
+  maxvalue 82000
+  minvalue 100
+  increment by 5;
 
 --修改序列“obj3_7”，将该序列最大值设为“1000”
-
+alter sequence obj3_7
+  maxvalue 1000;
 
 commit;
+rollback;
 --4用户（用自己的数据库）
 --创建用户
 --创建一个用户，用户名为你自己姓名的汉语拼音，密码是你的学号
