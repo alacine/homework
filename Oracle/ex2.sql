@@ -220,13 +220,13 @@ select sum(sal) from emp;
 select sum(mgr) from emp;
 select job, sum(sal) from emp group by job;
 --Analytic Funcions
-select avg() from dual;
-select count() from dual;
-select dense_rank() from dual;
-select max() from dual;
-select min() from dual;
-select rank() from dual;
-select sum() from dual;
+avg
+count
+dense_rank
+max
+min
+rank
+sum
 --为每一行分配一个唯一的数字
 select ename, row_number() over(order by sal) as rn from emp;
 select ename, job, row_number() over(partition by job order by sal) as rn from emp;
@@ -240,10 +240,13 @@ group by "注册日期";
 
 --3
 --将重修成绩表的记录按学校规定合并进成绩表
+--学校规定：没有参加该课程期末考试的学生，不能参加该课程的重修考试，即使考了也不登成绩
 --创建重修成绩表sc_temp(sno, score) 并输入重修考试成绩
 merge into "成绩"
 using sc_temp
-on "成绩"."学号"=sc."学号" and "课程号"
+on ("成绩"."学号"=sc_temp."学号" and "课程号"='C25' and "成绩"."分数" is not null)
+when matched then
+    update set "成绩"."分数" = sc_temp."分数";
 
 --4
 select "姓名", sum(case when "科目" = "语文" then "成绩" else 0 end) "语文",
