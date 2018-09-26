@@ -85,6 +85,8 @@ insert into dept values(obj3_6.nextval, 'newdept3', 'xtu3');
 --修改序列
 --修改序列“obj3_6”，将该序列最大值设为“82000”，最小值设为“100”，步长设为“5”
 select obj3_6.currval from dual;
+select obj3_6.nextval from dual;
+--多次使用序列，使得currval大于等于100，才能进行以下修改
 alter sequence obj3_6
   maxvalue 82000
   minvalue 100
