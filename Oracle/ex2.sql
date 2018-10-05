@@ -200,9 +200,9 @@ select count(1) from dual;
 select count(ename) from emp;
 select count(mgr) from emp;
 --连续式排名函数
-select ename, dense_rank() over(order by sal) from emp;
-select ename, dense_rank() over(order by mgr)from emp;
-select ename, dense_rank() over(order by (nvl(mgr, 0)) desc) from emp;
+select dense_rank(800) within group(order by sal) from emp;
+select dense_rank(10000) within group(order by mgr) from emp;
+select dense_rank(7777, 1200) within group(order by mgr, sal) from emp;
 --最大值
 select max(sal) from emp;
 select max(ename) from emp;
@@ -212,21 +212,41 @@ select min(sal) from emp;
 select min(ename) from emp;
 select job, min(sal) from emp group by job;
 --跳跃式排名函数
-select ename, rank() over(order by sal) from emp;
-select ename, rank() over(order by mgr)from emp;
-select ename, rank() over(order by (nvl(mgr, 0)) desc) from emp;
+select rank(800) within group(order by sal) from emp;
+select rank(10000) within group(order by mgr) from emp;
+select rank(7777, 1200) within group(order by mgr, sal) from emp;
 --求和
 select sum(sal) from emp;
 select sum(mgr) from emp;
 select job, sum(sal) from emp group by job;
 --Analytic Funcions
-avg
-count
-dense_rank
-max
-min
-rank
-sum
+select distinct job, avg(sal) over(partition by job) from emp;
+select distinct deptno, avg(sal) over(partition by deptno) from emp;
+select distinct job, avg(mgr) over(partition by job) from emp;
+
+select distinct job, count(empno) over(partition by job) from emp;
+select distinct deptno, count(empno) over(partition by deptno) from emp;
+select distinct deptno, count(job) over(partition by deptno) from emp;
+
+select ename, dense_rank() over(order by sal) from emp;
+select ename, dense_rank() over(order by mgr)from emp;
+select ename, dense_rank() over(order by (nvl(mgr, 0)) desc) from emp;
+
+select distinct job, max(sal) over(partition by job) from emp;
+select distinct job, max(mgr) over(partition by job) from emp;
+select distinct deptno, max(sal) over(partition by deptno) from emp;
+
+select distinct job, min(sal) over(partition by job) from emp;
+select distinct job, min(mgr) over(partition by job) from emp;
+select distinct deptno, min(sal) over(partition by deptno) from emp;
+
+select ename, rank() over(order by sal) from emp;
+select ename, rank() over(order by mgr)from emp;
+select ename, rank() over(order by (nvl(mgr, 0)) desc) from emp;
+
+select distinct job, sum(sal) over(partition by job) from emp;
+select distinct deptno, sum(sal) over(partition by deptno) from emp;
+select distinct job, sum(mgr) over(partition by job) from emp;
 --为每一行分配一个唯一的数字
 select ename, row_number() over(order by sal) as rn from emp;
 select ename, job, row_number() over(partition by job order by sal) as rn from emp;
