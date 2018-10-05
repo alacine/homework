@@ -101,18 +101,35 @@ rollback;
 --4用户（用自己的数据库）
 --创建用户
 --创建一个用户，用户名为你自己姓名的汉语拼音，密码是你的学号
+create user c##ruian identified by 2016551103;
 
 --该用户授予一定的权限
+grant connect to c##ruian;
 
 --授予用户权限
 --新开一个会话，以新创建的用户身份连接并对scott中的emp表进行查询、删除操作。如果权限不够，则授予相应权限。最后，回滚事务
+select * from emp;
+grant select on c##scott.emp to c##ruian;
+delete from emp where job = 'CLERK';
+grant delect on c##scott.emp to c##ruian;
+rollback;
 
 --修改用户信息
 --修改该用户的口令，然后用新口令重新连接
+alter user c##ruian identified by password;
+sqlplus c##ruian/password
 
 --封锁该用户的账号，然后解锁
+alter user c##ruian account lock;
+alter user c##ruian account unlock;
 
 --查询用户与权限信息
 --利用数据字典视图dba_user、user_sys_privs、user_tab_privs、user_role_privs、session_privs查询用户与权限信息
+select * from dba_users where username = 'C##RUIAN';
+select * from user_sys_privs;
+select * from user_tab_privs;
+select * from user_role_privs;
+select * from session_privs;
 
 --删除用户
+drop user c##ruian;
