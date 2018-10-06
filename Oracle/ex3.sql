@@ -27,7 +27,7 @@ select * from user_indexes;
 select * from user_ind_columns;
 
 --删除索引
---删除索引“student_ gender _index”
+--删除索引“student_gender_index”
 drop index student_gender_index;
 
 --2同义词
@@ -47,6 +47,15 @@ create synonym obj3_5 for obj2_1;
 --创建视图obj2_5的公共同义词，公共同义词的命名规则：字符串“obj3_”后面跟上你的学号
 drop public synonym obj3_2016551103;
 create public synonym obj3_2016551103 for obj2_5;
+
+--查看同义词
+--利用数据字典user_synonyms、all_synonyms查看同义词信息
+select * from user_synonyms;
+select * from all_synonyms;
+
+--删除同义词
+--删除同义词st1
+drop synonym st1;
 
 --3序列
 --创建序列
@@ -69,6 +78,7 @@ drop sequence obj3_8;
 create sequence obj3_8
     start with 1000
     increment by 2
+    maxvalue 10000
     nocycle;
 
 --查看序列
