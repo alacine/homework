@@ -86,7 +86,6 @@ select translate('accd', 'cd', 'efg') from dual;
 select trim(' ab cd e ') from dual;
 select trim(leading 'a' from 'ab cd a') from dual;
 select trim(trailing 'a' from 'ab cd a'), trim(both 'a' from 'ab cd a') from dual;
-select trim(' ab cd e ') from dual;
 --转换为大写
 select upper('a') from dual;
 select upper('b') from dual;
@@ -271,7 +270,7 @@ when matched then
 --4
 select "姓名", sum(case when "科目" = "语文" then "成绩" else 0 end) "语文",
                sum(case when "科目" = "数学" then "成绩" else 0 end) "数学",
-               sum(case when "科目" = "英语" then "成绩" else 0 end) "英语",
+               sum(case when "科目" = "英语" then "成绩" else 0 end) "英语"
 from "表格"
 group by "姓名";
 
@@ -319,6 +318,6 @@ create view obj2_5("姓名") as
     select rpad(ename, 5, '*')
     from emp
     where sal >= 3500 and sal <= 5000
-order by ename;
+    order by ename;
 
 commit;
