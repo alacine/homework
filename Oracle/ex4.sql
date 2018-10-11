@@ -10,11 +10,12 @@ begin
   select sal, job into vsal, vjob
     from emp
     where ename = 'SMITH';
-  dbms_output.put_line(vsal||', '||vjob);
+  dbms_output.put_line('薪水: '||vsal||', 职位: '||vjob);
 end;
 select object_name, authid from user_procedures;
 select line, text from user_source where name='OBJ4_1';
 execute obj4_1;
+
 --2、接收部门编号，输出部门名和地理位置。(存储过程)
 create or replace procedure obj4_2(vdeptno dept.deptno%type) as
   vdname dept.dname%type;
@@ -24,16 +25,45 @@ begin
     into vdname, vloc
     from dept
     where deptno= vdeptno;
-  dbms_output.put_line(vdeptno||', '||vdname||', '||vloc);
+  dbms_output.put_line('部门名: '||vdname||', 地理位置: '||vloc);
 end;
 execute obj4_2(20);
+
 --3、接收雇员号，输出该雇员的工资和提成，没有提成的用0替代。（用%type实现）。(存储过程)
 create or replace procedure obj4_3(vempno emp.empno%type) as
-  vsal emp.sal%tpye;
-  vcom
+  vsal emp.sal%type;
+  vcomm emp.comm%type;
+begin
+  select sal, nvl(comm, 0)
+    into vsal, vcomm
+    from emp
+    where vempno=empno;
+  dbms_output.put_line('工资: '||vsal||', 提成: '||vcomm);
+end;
+execute obj4_3(7369);
+
 --4、接收雇员号，输出该雇员的所有信息，没有提成的用0替代。（用%rowtype实现）。(存储过程)
+create or replace procedure obj4_4(vempno emp.empno%type) as
+  vemp emp%rowtype;
+begin
+  select * into vemp
+    from emp
+    where vempno=emp.empno;
+  dbms_output.put_line('empno: '||vemp.empno||' ename: '||vemp.ename||' job: '||vemp.job||' mgr: '||vemp.mgr||
+                       ' hiredate: '||vemp.hiredate||' sal: '||vemp.sal||' comm: '||nvl(vemp.comm, 0)||' deptno: '||vemp.deptno);
+end;
+execute obj4_4(7369);
 
 --5、接收雇员号，输出该雇员的工资。(存储函数)
+create or replace function obj4_5(vempno emp.empno%type) return number as
+  vsal emp.sal%type;
+begin
+  select sal into vsal
+    from emp
+    where vempno = emp.empno;
+  return vsal;
+end;
+select obj4_5(7369) from dual;
 
 --6、接收一个雇员名或雇员编号，判断他的job，根据job不同，为他增加相应的sal（用if-elsif实现，不要改动到基本表emp，创建一个与emp表一模一样的表emp1）。(存储过程)
 /*
@@ -47,6 +77,14 @@ create or replace procedure obj4_3(vempno emp.empno%type) as
 
     otherwise   +3000
 */
+drop table emp1;
+create table emp1 as select * from emp;
+create or replace procedure obj4_6(a varchar2(100)) as
+  vename emp1.ename%type;
+  vempno emp1.empno%type;
+  vjob emp1.job%type;
+  vsal emp1.sal%type;
+
 --7、输入部门编号，按照下列加薪比例执行给该部门的雇员加薪(用CASE实现，修改emp1表的数据) (存储过程)
 /*
     deptno  raise(%)
