@@ -68,35 +68,40 @@ select obj4_5(7369) from dual;
 --6、接收一个雇员名或雇员编号，判断他的job，根据job不同，为他增加相应的sal（用if-elsif实现，不要改动到基本表emp，创建一个与emp表一模一样的表emp1）。(存储过程)
 /*
     Job       raise
-
     clerk     +500
-
     salesman    +1000
-
     analyst    +1500
-
     otherwise   +3000
 */
 drop table emp1;
 create table emp1 as select * from emp;
-create or replace procedure obj4_6(a varchar2(100)) as
+create or replace procedure obj4_6(foo varchar2) as
   vename emp1.ename%type;
   vempno emp1.empno%type;
   vjob emp1.job%type;
   vsal emp1.sal%type;
+  vcomm emp1.comm%type;
+  vdeptno emp1.deptno%type;
+begin
+    select job, sal into vjob, vsal from emp1 where to_char(empno) = foo or ename = foo;
+    if vjob = 'CLERK' then vsal := vsal + 500;
+    elsif vjob = 'SALESMAN' then vsal := vsal + 1000;
+    elsif vjob = 'ANALYST' then vsal := vsal + 1000;
+    else vsal := vsal + 1000;
+    end if;
+    update emp1 set sal = vsal where to_char(empno) = foo or ename = foo;
+    dbms_output.put_line('职位: '||vjob||' 薪水增加到: '||vsal);
+end;
+execute obj4_6(7369);
+execute obj4_6('SMITH');
 
 --7、输入部门编号，按照下列加薪比例执行给该部门的雇员加薪(用CASE实现，修改emp1表的数据) (存储过程)
 /*
     deptno  raise(%)
-
     10      8%
-
     20      10%
-
     30      20%
-
     40      20%
-
     加薪比例以现有的sal为标准。
 */
 --以下8-12题与以下表有关：学生、学费标准表、收费表、收费明细表。先从a_db模式中将这些表等复制到自己的模式中。
