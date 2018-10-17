@@ -104,6 +104,21 @@ execute obj4_6('SMITH');
     40      20%
     加薪比例以现有的sal为标准。
 */
+create or replace procedure obj4_7(vdeptno emp1.deptno%type) as
+    vename emp1.ename%type;
+    vempno emp1.empno%type;
+    vsal emp1.sal%type;
+begin
+    case vdeptno
+        when 10 then update emp1 set sal = sal * 1.08 where deptno = vdeptno;
+        when 20 then update emp1 set sal = sal * 1.1 where deptno = vdeptno;
+        when 30 then update emp1 set sal = sal * 1.2 where deptno = vdeptno;
+        when 40 then update emp1 set sal = sal * 1.2 where deptno = vdeptno;
+    end;
+    dbms_output.put_line('更新'||vdeptno||'部门的薪水');
+end;
+execute obj4_7(10);
+
 --以下8-12题与以下表有关：学生、学费标准表、收费表、收费明细表。先从a_db模式中将这些表等复制到自己的模式中。
 
 --学生每学年开学前必须注册。开始注册前要初始化学生表，所有状态为“注册”的学生的状态设置为空值，注册后设置为"注册"，还有“毕业”、“开除”、“休学”等状态。注册时在收费表生成相应记录。学生每学年按学生所属专业收取学费，交学费时产生收费明细记录，并修改收费表中相应记录。
