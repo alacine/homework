@@ -27,7 +27,7 @@ begin
     where deptno= vdeptno;
   dbms_output.put_line('部门名: '||vdname||', 地理位置: '||vloc);
 end;
-execute obj4_2(20);
+execute obj4_2(10);
 
 --3、接收雇员号，输出该雇员的工资和提成，没有提成的用0替代。（用%type实现）。(存储过程)
 create or replace procedure obj4_3(vempno emp.empno%type) as
@@ -86,8 +86,8 @@ begin
     select job, sal into vjob, vsal from emp1 where to_char(empno) = foo or ename = foo;
     if vjob = 'CLERK' then vsal := vsal + 500;
     elsif vjob = 'SALESMAN' then vsal := vsal + 1000;
-    elsif vjob = 'ANALYST' then vsal := vsal + 1000;
-    else vsal := vsal + 1000;
+    elsif vjob = 'ANALYST' then vsal := vsal + 1500;
+    else vsal := vsal + 3000;
     end if;
     update emp1 set sal = vsal where to_char(empno) = foo or ename = foo;
     dbms_output.put_line('职位: '||vjob||' 薪水增加到: '||vsal);
@@ -114,16 +114,35 @@ begin
         when 20 then update emp1 set sal = sal * 1.1 where deptno = vdeptno;
         when 30 then update emp1 set sal = sal * 1.2 where deptno = vdeptno;
         when 40 then update emp1 set sal = sal * 1.2 where deptno = vdeptno;
-    end;
-    dbms_output.put_line('更新'||vdeptno||'部门的薪水');
+    end case;
+    dbms_output.put_line('更新'||vdeptno||'号部门的薪水');
 end;
 execute obj4_7(10);
 
 --以下8-12题与以下表有关：学生、学费标准表、收费表、收费明细表。先从a_db模式中将这些表等复制到自己的模式中。
+create table "学生" as select * from a_db."学生";
+create table "学费标准表" as select * from a_db."学费标准表";
+create table "收费表" as select * from a_db."收费表";
+create table "收费明细表" as select * from a_db."收费明细表";
 
---学生每学年开学前必须注册。开始注册前要初始化学生表，所有状态为“注册”的学生的状态设置为空值，注册后设置为"注册"，还有“毕业”、“开除”、“休学”等状态。注册时在收费表生成相应记录。学生每学年按学生所属专业收取学费，交学费时产生收费明细记录，并修改收费表中相应记录。
+--学生每学年开学前必须注册。注册前要初始化学生表，所有学生（状态为“毕业”、“开除”、“休学”的除外）的状态设置为空值。注册时将状态设置为“注册”，并在收费表生成相应记录。学生每学年按专业收取学费，交学费时产生收费明细记录，并修改收费表中相应记录。
 
 --8、在学生表中增加一列，用来记录学生的密码，写一个PL/SQL程序，模拟登录的过程。输入学号和密码，判断是否正确，对于登录成功和失败分别给出提示信息。(存储过程)
+alter table "学生" drop column "密码";
+alter table "学生" add "密码" varchar2(16) default '123456';
+create or replace procedure obj4_8(input_number "学生"."学号"%type, input_passwd "学生"."密码"%type) as
+    vnumber "学生"."学号"%type;
+    vpasswd "学生"."密码"%type;
+    vname "学生"."姓名"%type;
+begin
+    select "密码", "姓名" into vpasswd, vname from "学生" where "学号" = input_number;
+    if vpasswd = input_passwd then dbms_output.put_line('登录成功，'||vname);
+    else dbms_output.put_line('登录失败，请重试');
+    end if;
+    exception
+        when no_data_found then dbms_output.put_line('登录失败，请重试');
+end;
+execute obj4_8('S101', '123456');
 
 --9、编写一个向学费标准表添加记录的过程。
 
