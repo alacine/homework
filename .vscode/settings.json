@@ -28,5 +28,6 @@
     },
     "code-runner.runInTerminal": true,
     "powermode.enabled": true,
-    "powermode.enableShake": false
+    "powermode.enableShake": false,
+    "editor.fontFamily": "'Monaco' , 'Courier New', monospace"
 }
