@@ -145,11 +145,80 @@ end;
 execute obj4_8('S101', '123456');
 
 --9、编写一个向学费标准表添加记录的过程。
+create or replace procedure obj4_9(input_year "学费标准表"."学年"%type,
+                                   input_major "学费标准表"."专业"%type,
+                                   input_tuition "学费标准表"."学费"%type) as
+begin
+    insert into "学费标准表" values(input_year, input_major, input_tuition);
+end;
+execute obj4_9('2018', '计算机科学与技术', 7777);
 
 --10、编写一个学生注册的过程，注册日期默认为当天，以学号为参数。
+create or replace procedure obj4_10(input_number "学生"."学号"%type,
+                                    input_passwd "学生"."密码"%type default '123456') as
+    vnumber "学生"."学号"%type;
+    vstatus "学生"."状态"%type;
+    vmajor "学生"."专业"%type;
+    vtuition "收费表"."应交学费"%type;
+begin
+    select "学号", "状态", "专业" into vnumber, vstatus, vmajor
+        from "学生"
+        where "学号" = input_number;
+    if vstatus is null then
+        update "学生"
+            set "状态" = '注册', "密码" = input_passwd, "注册日期" = sysdate
+            where "学号" = vnumber;
+        select "学费" into vtuition
+            from "学费标准表"
+            where "专业" = vmajor and "学年" = extract(year from sysdate);
+        insert into "收费表" values(extract(year from sysdate), input_number, vtuition, 0);
+        dbms_output.put_line('注册成功');
+    else dbms_output.put_line('该学号已经注册');
+    end if;
+    exception
+        when no_data_found then dbms_output.put_line('没有该学号的学生，请检查你的学号');
+end;
+update "学生" set "状态" = null where "学号" = 'S101' or "学号" = 'S102' or "学号" = 'S103';
+execute obj4_10('S101', '654321');
+execute obj4_10('S102');
+execute obj4_10('S103', '888888');
+execute obj4_10('S777', '654321');
 
 --11、编写一个收学费的过程，收费日期默认为当天，以学年、 学号、学费为参数。
+create or replace procedure obj4_11(input_number "学生"."学号"%type, paid "收费明细表"."学费"%type) as
+    vno "收费明细表"."编号"%type;
+begin
+    select max("编号")+1 into vno from "收费明细表";
+    insert into "收费明细表" values(vno, extract(year from sysdate), input_number, paid, sysdate);
+    update "收费表"
+        set "已交学费" = "已交学费" + paid
+        where "学年" = extract(year from sysdate) and "学号" = input_number;
+end;
+execute obj4_11('S101', 2000);
 
 --12、编写一个过程，输出指定学年的欠费情况（含欠费人数、欠费总金额）。
+create or replace procedure obj4_12(input_year "收费表"."学年"%type) as
+    vnumber int;
+    vmoney_sum "收费表"."已交学费"%type;
+begin
+    select count(*), sum("应交学费"-"已交学费") into vnumber, vmoney_sum
+        from "收费表"
+        where "学年" = input_year and "应交学费" > "已交学费";
+    dbms_output.put_line(input_year||'年，欠费人数为：'||vnumber||'欠费总金额为：'||vmoney_sum);
+end;
+execute obj4_12(2018);
 
 --13、输出如下九九乘法表。(存储过程)
+create or replace procedure obj4_13 as
+    x int;
+begin
+    x := 1;
+    while x <= 9 loop
+        for i in 1..x loop
+            dbms_output.put(x||'*'||i||'='||x*i||'  ');
+        end loop;
+        x := x + 1;
+        dbms_output.new_line();
+    end loop;
+end;
+execute obj4_13;
