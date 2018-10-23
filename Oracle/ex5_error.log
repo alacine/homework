@@ -1,0 +1,21 @@
+dbms_output.put_line(vname||'; '||vmajor||'; '||'欠费'||c_row."应交学费"-c_row."已交学费"||'元');
+
+obj5_4报错如下:
+
+Error starting at line : 73 in command -
+BEGIN obj5_4(2018); END;
+Error report -
+ORA-06502: PL/SQL: numeric or value error: character to number conversion error
+ORA-06512: at "A2016551103.OBJ5_4", line 14
+ORA-06512: at line 1
+06502. 00000 -  "PL/SQL: numeric or value error%s"
+*Cause:    An arithmetic, numeric, string, conversion, or constraint error
+           occurred. For example, this error occurs if an attempt is made to
+           assign the value NULL to a variable declared NOT NULL, or if an
+           attempt is made to assign an integer larger than 99 to a variable
+           declared NUMBER(2).
+*Action:   Change the data, how it is manipulated, or how it is declared so
+           that values do not violate constraints.
+
+输出语句有误，当输出多项内容时，其中的计算表达式要用括号括起来，如下
+dbms_output.put_line(vname||'; '||vmajor||'; '||'欠费'||(c_row."应交学费"-c_row."已交学费")||'元');
