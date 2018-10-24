@@ -175,8 +175,6 @@ begin
         dbms_output.put_line('注册成功');
     else dbms_output.put_line('该学号已经注册');
     end if;
-    exception
-        when no_data_found then dbms_output.put_line('没有该学号的学生，请检查你的学号');
 end;
 update "学生" set "状态" = null where "学号" = 'S101' or "学号" = 'S102' or "学号" = 'S103';
 execute obj4_10('S101', '654321');
