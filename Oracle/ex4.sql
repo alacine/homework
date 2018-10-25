@@ -139,8 +139,6 @@ begin
     if vpasswd = input_passwd then dbms_output.put_line('登录成功，'||vname);
     else dbms_output.put_line('登录失败，请重试');
     end if;
-    exception
-        when no_data_found then dbms_output.put_line('登录失败，请重试');
 end;
 execute obj4_8('S101', '123456');
 
@@ -155,7 +153,7 @@ execute obj4_9('2018', '计算机科学与技术', 7777);
 
 --10、编写一个学生注册的过程，注册日期默认为当天，以学号为参数。
 create or replace procedure obj4_10(input_number "学生"."学号"%type,
-                                    input_passwd "学生"."密码"%type default '123456') as
+                                    input_passwd "学生"."密码"%type) as
     vnumber "学生"."学号"%type;
     vstatus "学生"."状态"%type;
     vmajor "学生"."专业"%type;
@@ -178,9 +176,8 @@ begin
 end;
 update "学生" set "状态" = null where "学号" = 'S101' or "学号" = 'S102' or "学号" = 'S103';
 execute obj4_10('S101', '654321');
-execute obj4_10('S102');
+execute obj4_10('S102', '123456');
 execute obj4_10('S103', '888888');
-execute obj4_10('S777', '654321');
 
 --11、编写一个收学费的过程，收费日期默认为当天，以学年、 学号、学费为参数。
 create or replace procedure obj4_11(input_number "学生"."学号"%type, paid "收费明细表"."学费"%type) as
