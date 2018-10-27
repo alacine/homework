@@ -16,7 +16,7 @@ select object_name, authid from user_procedures;
 select line, text from user_source where name='OBJ4_1';
 execute obj4_1;
 
---2、接收部门编号，输出部门名和地理位置。(存储过程)
+--2、传送参数部门编号，输出该部门名和地理位置。(存储过程)
 create or replace procedure obj4_2(vdeptno dept.deptno%type) as
   vdname dept.dname%type;
   vloc dept.loc%type;
@@ -29,7 +29,7 @@ begin
 end;
 execute obj4_2(10);
 
---3、接收雇员号，输出该雇员的工资和提成，没有提成的用0替代。（用%type实现）。(存储过程)
+--3、传送参数雇员号，输出该雇员的工资和提成，没有提成的用0替代。（用%type实现）。(存储过程)
 create or replace procedure obj4_3(vempno emp.empno%type) as
   vsal emp.sal%type;
   vcomm emp.comm%type;
@@ -42,7 +42,7 @@ begin
 end;
 execute obj4_3(7369);
 
---4、接收雇员号，输出该雇员的所有信息，没有提成的用0替代。（用%rowtype实现）。(存储过程)
+--4、传送参数雇员号，输出该雇员的所有信息，没有提成的用0替代。（用%rowtype实现）。(存储过程)
 create or replace procedure obj4_4(vempno emp.empno%type) as
   vemp emp%rowtype;
 begin
@@ -54,7 +54,7 @@ begin
 end;
 execute obj4_4(7369);
 
---5、接收雇员号，输出该雇员的工资。(存储函数)
+--5、传送参数雇员号，返回该雇员的工资。(存储函数)
 create or replace function obj4_5(vempno emp.empno%type) return number as
   vsal emp.sal%type;
 begin
@@ -65,7 +65,7 @@ begin
 end;
 select obj4_5(7369) from dual;
 
---6、接收一个雇员名或雇员编号，判断他的job，根据job不同，为他增加相应的sal（用if-elsif实现，不要改动到基本表emp，创建一个与emp表一模一样的表emp1）。(存储过程)
+--6、传送参数雇员名或雇员编号，判断他的job，根据job不同，为他增加相应的sal（用if-elsif实现，不要改动到基本表emp，创建一个与emp表一模一样的表emp1）。(存储过程)
 /*
     Job       raise
     clerk     +500
@@ -95,7 +95,7 @@ end;
 execute obj4_6(7369);
 execute obj4_6('SMITH');
 
---7、输入部门编号，按照下列加薪比例执行给该部门的雇员加薪(用CASE实现，修改emp1表的数据) (存储过程)
+--7、传送参数部门编号，按照下列加工资比例给该部门的雇员加工资(用CASE实现，修改emp1表的数据) (存储过程)
 /*
     deptno  raise(%)
     10      8%
