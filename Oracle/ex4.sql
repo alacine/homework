@@ -4,8 +4,8 @@
 set serveroutput on;
 --1、输出名为SMITH的雇员的薪水和职位。(存储过程)
 create or replace procedure obj4_1 as
-  vsal number;
-  vjob varchar2(100);
+  vsal emp.sal%type;
+  vjob emp.job%type;
 begin
   select sal, job into vsal, vjob
     from emp
