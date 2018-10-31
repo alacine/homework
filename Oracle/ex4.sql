@@ -180,14 +180,17 @@ execute obj4_10('S102', '123456');
 execute obj4_10('S103', '888888');
 
 --11、编写一个收学费的过程，收费日期默认为当天，以学年、 学号、学费为参数。
-create or replace procedure obj4_11(input_number "学生"."学号"%type, paid "收费明细表"."学费"%type) as
+create or replace procedure obj4_11(input_number "学生"."学号"%type,
+                                    paid "收费明细表"."学费"%type,
+                                    input_year "收费表"."学年"%type default extract(year from sysdate)) as
     vno "收费明细表"."编号"%type;
 begin
     select max("编号")+1 into vno from "收费明细表";
-    insert into "收费明细表" values(vno, extract(year from sysdate), input_number, paid, sysdate);
+    insert into "收费明细表" values(vno, input_year, input_number, paid, sysdate);
     update "收费表"
         set "已交学费" = "已交学费" + paid
-        where "学年" = extract(year from sysdate) and "学号" = input_number;
+        where "学年" = input_year and "学号" = input_number;
+    dbms_output.put_line('缴费成功');
 end;
 execute obj4_11('S101', 2000);
 
