@@ -1,5 +1,20 @@
 set serveroutput on;
 -- 有针对性地给“实验四”上机内容中的过程与函数增加异常处理部分，保留原来的过程与函数，修改后的过程与函数另外保存，如obj4_1另存为obj6_1，以此类推。
+--1、输出名为SMITH的雇员的薪水和职位。(存储过程)
+create or replace procedure obj6_1 as
+  vsal emp.sal%type;
+  vjob emp.job%type;
+begin
+  select sal, job into vsal, vjob
+    from emp
+    where ename = 'SMITH';
+  dbms_output.put_line('薪水: '||vsal||', 职位: '||vjob);
+  exception
+      when no_data_found then dbms_output.put_line('没有SMITH这个雇员');
+      when too_many_rows then dbms_output.put_line('超过一人名字叫SMITH');
+end;
+execute obj6_1;
+
 --2、接收部门编号，输出部门名和地理位置。(存储过程)
 create or replace procedure obj6_2(vdeptno dept.deptno%type) as
     vdname dept.dname%type;
@@ -30,10 +45,41 @@ begin
 end;
 execute obj6_3(9999);
 
+--6、传送参数雇员名或雇员编号，判断他的job，根据job不同，为他增加相应的sal（用if-elsif实现，不要改动到基本表emp，创建一个与emp表一模一样的表emp1）。(存储过程)
+/*
+    Job       raise
+    clerk     +500
+    salesman    +1000
+    analyst    +1500
+    otherwise   +3000
+*/
+drop table emp1;
+create table emp1 as select * from emp;
+create or replace procedure obj6_6(foo varchar2) as
+  vename emp1.ename%type;
+  vempno emp1.empno%type;
+  vjob emp1.job%type;
+  vsal emp1.sal%type;
+  vcomm emp1.comm%type;
+  vdeptno emp1.deptno%type;
+begin
+    select job, sal into vjob, vsal from emp1 where to_char(empno) = foo or ename = foo;
+    if vjob = 'CLERK' then vsal := vsal + 500;
+    elsif vjob = 'SALESMAN' then vsal := vsal + 1000;
+    elsif vjob = 'ANALYST' then vsal := vsal + 1500;
+    else vsal := vsal + 3000;
+    end if;
+    update emp1 set sal = vsal where to_char(empno) = foo or ename = foo;
+    dbms_output.put_line('职位: '||vjob||' 薪水增加到: '||vsal);
+    exception
+        when no_data_found then dbms_output.put_line('雇员不存在');
+        when too_many_rows then dbms_output.put_line('多人同名，请尝试输入雇员号');
+end;
+
 --8、在学生表中增加一列，用来记录学生的密码，写一个PL/SQL程序，模拟登录的过程。输入学号和密码，判断是否正确，对于登录成功和失败分别给出提示信息。(存储过程)
 alter table "学生" drop column "密码";
 alter table "学生" add "密码" varchar2(16) default '123456';
-create or replace procedure obj4_8(input_number "学生"."学号"%type, input_passwd "学生"."密码"%type) as
+create or replace procedure obj6_8(input_number "学生"."学号"%type, input_passwd "学生"."密码"%type) as
     vnumber "学生"."学号"%type;
     vpasswd "学生"."密码"%type;
     vname "学生"."姓名"%type;
@@ -51,8 +97,28 @@ begin
         when no_data_found then dbms_output.put_line('学号不存在');
         when not_register then dbms_output.put_line('该学号没有注册，请先注册');
 end;
-execute obj4_8('S777', '123456');
-execute obj4_8('S105', '123456');
+execute obj6_8('S777', '123456');
+execute obj6_8('S105', '123456');
+
+--9、编写一个向学费标准表添加记录的过程。
+create or replace procedure obj6_9(input_year "学费标准表"."学年"%type,
+                                   input_major "学费标准表"."专业"%type,
+                                   input_tuition "学费标准表"."学费"%type) as
+    vtuition "学费标准表"."学费"%type;
+begin
+    select "学费" into vtuition
+        from "学费标准表"
+        where "学年" = input_year and "专业" = input_major;
+    if vtuition is not null then
+        dbms_output.put_line('已有该学年该专业的记录');
+    end if;
+    exception
+        when no_data_found then
+            insert into "学费标准表" values(input_year, input_major, input_tuition);
+end;
+show err;
+execute obj6_9('2018', '计算机科学与技术', 7777);
+
 --10、编写一个学生注册的过程，注册日期默认为当天，以学号为参数。
 create or replace procedure obj6_10(input_number "学生"."学号"%type,
                                     input_passwd "学生"."密码"%type default null) as
@@ -86,3 +152,20 @@ execute obj6_10('S101', '654321');
 execute obj6_10('S102');
 execute obj6_10('S103', '888888');
 execute obj6_10('S777', '654321');
+
+--11、编写一个收学费的过程，收费日期默认为当天，以学年、 学号、学费为参数。
+create or replace procedure obj6_11(input_number "学生"."学号"%type,
+                                    paid "收费明细表"."学费"%type,
+                                    input_year "收费表"."学年"%type default extract(year from sysdate)) as
+    vno "收费明细表"."编号"%type;
+begin
+    select * from "收费表" where "学号" = input_number;
+    select max("编号")+1 into vno from "收费明细表";
+    insert into "收费明细表" values(vno, input_year, input_number, paid, sysdate);
+    update "收费表"
+        set "已交学费" = "已交学费" + paid
+        where "学年" = input_year and "学号" = input_number;
+    dbms_output.put_line('缴费成功');
+    exception
+        when no_data_found then dbms_output.put_line('没有该学号学生的收费信息，请尝试注册学号');
+end;
