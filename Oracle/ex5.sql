@@ -44,7 +44,7 @@ begin
     for c_row in c_emp loop
         dbms_output.put_line('更新工资');
         if c_row.job = 'CLERK' then csal := c_row.sal + 500;
-        elsif c_row.job = 'SALESMANa' then csal := c_row.sal + 1000;
+        elsif c_row.job = 'SALESMAN' then csal := c_row.sal + 1000;
         elsif c_row.job = 'ANALYST' then csal := c_row.sal + 1500;
         else csal := c_row.sal + 2000;
         end if;
