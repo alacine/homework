@@ -158,14 +158,39 @@ create or replace procedure obj6_11(input_number "学生"."学号"%type,
                                     paid "收费明细表"."学费"%type,
                                     input_year "收费表"."学年"%type default extract(year from sysdate)) as
     vno "收费明细表"."编号"%type;
+    check_number int;
+    check_paid "收费表"."应交学费"%type;
+    check_year int;
+    input_number_err exception;
+    paid_err exception;
+    input_year_err exception;
+    paid_not_enough exception;
 begin
-    select * from "收费表" where "学号" = input_number;
+    select count(*) into check_number
+        from "收费表" where "学号" = input_number;
+    if check_number = 0 then raise input_number_err; end if;
+    select count(*) into check_year
+        from "收费表" where "学号" = input_number and "学年" = input_year;
+    if check_year = 0 then raise input_year_err; end if;
+    select ("应交学费"-"已交学费"-paid) into check_paid
+        from "收费表" where "学号" = input_number and "学年" = input_year;
+    if check_paid < 0 then raise paid_err; end if;
     select max("编号")+1 into vno from "收费明细表";
     insert into "收费明细表" values(vno, input_year, input_number, paid, sysdate);
     update "收费表"
         set "已交学费" = "已交学费" + paid
         where "学年" = input_year and "学号" = input_number;
     dbms_output.put_line('缴费成功');
+    select ("应交学费"-"已交学费") into check_paid
+        from "收费表" where "学号" = input_number and "学年" = input_year;
+    if check_paid > 0 then raise paid_not_enough; end if;
     exception
-        when no_data_found then dbms_output.put_line('没有该学号学生的收费信息，请尝试注册学号');
+        when input_number_err then dbms_output.put_line('没有该学号学生的收费信息，请尝试注册学号');
+        when input_year_err then dbms_output.put_line('没有该学生没有'||input_year||'学年的欠费信息，请检查输入学年');
+        when paid_err then dbms_output.put_line('缴费金额有误');
+        when paid_not_enough then dbms_output.put_line('但该学号学生'||input_year||'学年的缴费仍然处于欠费状态');
 end;
+execute obj6_11('S999', 777);
+execute obj6_11('S103', 7777);
+execute obj6_11('S103', 7777, 2017);
+delete from "收费表" where "学号" = 'S103' and "学年" = 2018;
