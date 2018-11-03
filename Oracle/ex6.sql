@@ -45,6 +45,33 @@ begin
 end;
 execute obj6_3(9999);
 
+--4、传送参数雇员号，输出该雇员的所有信息，没有提成的用0替代。（用%rowtype实现）。(存储过程)
+create or replace procedure obj6_4(vempno emp.empno%type) as
+    vemp emp%rowtype;
+begin
+    select * into vemp
+        from emp
+        where vempno=emp.empno;
+    dbms_output.put_line('empno: '||vemp.empno||' ename: '||vemp.ename||' job: '||vemp.job||' mgr: '||vemp.mgr||
+                         ' hiredate: '||vemp.hiredate||' sal: '||vemp.sal||' comm: '||nvl(vemp.comm, 0)||' deptno: '||vemp.deptno);
+    exception
+        when no_data_found then dbms_output.put_line('没有这个雇员，请检查你的输入');
+end;
+execute obj6_4(9999);
+
+--5、传送参数雇员号，返回该雇员的工资。(存储函数)
+create or replace function obj6_5(vempno emp.empno%type) return number as
+    vsal emp.sal%type;
+begin
+    select sal into vsal
+        from emp
+        where vempno = emp.empno;
+    exception
+        when no_data_found then vsal := -1;
+    return vsal;
+end;
+select obj6_5(9999) from dual;
+
 --6、传送参数雇员名或雇员编号，判断他的job，根据job不同，为他增加相应的sal（用if-elsif实现，不要改动到基本表emp，创建一个与emp表一模一样的表emp1）。(存储过程)
 /*
     Job       raise
@@ -56,12 +83,12 @@ execute obj6_3(9999);
 drop table emp1;
 create table emp1 as select * from emp;
 create or replace procedure obj6_6(foo varchar2) as
-  vename emp1.ename%type;
-  vempno emp1.empno%type;
-  vjob emp1.job%type;
-  vsal emp1.sal%type;
-  vcomm emp1.comm%type;
-  vdeptno emp1.deptno%type;
+    vename emp1.ename%type;
+    vempno emp1.empno%type;
+    vjob emp1.job%type;
+    vsal emp1.sal%type;
+    vcomm emp1.comm%type;
+    vdeptno emp1.deptno%type;
 begin
     select job, sal into vjob, vsal from emp1 where to_char(empno) = foo or ename = foo;
     if vjob = 'CLERK' then vsal := vsal + 500;
@@ -75,6 +102,34 @@ begin
         when no_data_found then dbms_output.put_line('雇员不存在');
         when too_many_rows then dbms_output.put_line('多人同名，请尝试输入雇员号');
 end;
+
+--7、传送参数部门编号，按照下列加工资比例给该部门的雇员加工资(用CASE实现，修改emp1表的数据) (存储过程)
+/*
+    deptno  raise(%)
+    10      8%
+    20      10%
+    30      20%
+    40      20%
+    加薪比例以现有的sal为标准。
+*/
+create or replace procedure obj6_7(vdeptno emp1.deptno%type) as
+    vename emp1.ename%type;
+    vempno emp1.empno%type;
+    vsal emp1.sal%type;
+    no_such_dept exception;
+begin
+    case vdeptno
+        when 10 then update emp1 set sal = sal * 1.08 where deptno = vdeptno;
+        when 20 then update emp1 set sal = sal * 1.1 where deptno = vdeptno;
+        when 30 then update emp1 set sal = sal * 1.2 where deptno = vdeptno;
+        when 40 then update emp1 set sal = sal * 1.2 where deptno = vdeptno;
+        else raise no_such_dept;
+    end case;
+    dbms_output.put_line('更新'||vdeptno||'号部门的薪水');
+    exception
+        when no_such_dept then dbms_output.put_line('没有这个部门，请检查你的输入');
+end;
+execute obj6_7(99);
 
 --8、在学生表中增加一列，用来记录学生的密码，写一个PL/SQL程序，模拟登录的过程。输入学号和密码，判断是否正确，对于登录成功和失败分别给出提示信息。(存储过程)
 alter table "学生" drop column "密码";
@@ -194,3 +249,19 @@ execute obj6_11('S999', 777);
 execute obj6_11('S103', 7777);
 execute obj6_11('S103', 7777, 2017);
 delete from "收费表" where "学号" = 'S103' and "学年" = 2018;
+
+--12、编写一个过程，输出指定学年的欠费情况（含欠费人数、欠费总金额）。
+create or replace procedure obj6_12(input_year "收费表"."学年"%type) as
+    vnumber int;
+    vmoney_sum "收费表"."已交学费"%type;
+    vyear "收费表"."学年"%type;
+begin
+    select "学年" into vyear from "收费表" where "学年" = input_year;
+    select count(*), sum("应交学费"-"已交学费") into vnumber, vmoney_sum
+        from "收费表"
+        where "学年" = input_year and "应交学费" > "已交学费";
+    dbms_output.put_line(input_year||'年，欠费人数为：'||vnumber||'欠费总金额为：'||vmoney_sum);
+    exception
+        when no_data_found then dbms_output.put_line('没有该学年的欠费情况');
+end;
+execute obj6_12(9999);
