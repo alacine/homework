@@ -1,0 +1,7 @@
+select "学年" from "收费表" where "学年" = input_year;
+
+obj6_12 报错
+PLS-00428: an INTO clause is expected in this SELECT statement
+
+vyear "收费表"."学年"%type;
+select "学年" into vyear from "收费表" where "学年" = input_year;
