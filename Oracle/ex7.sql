@@ -204,12 +204,16 @@ create or replace function obj7_9(bit varchar2) return int as
 begin
     ans := 0;
     len := length(bit);
+    if len >= 256 then raise_application_error(-20001, 'input bit too long');
+    end if;
+    if ltrim(bit, '01') is not null then raise_application_error(-20002, 'input str is not valid bin value');
+    end if;
     for i in 1..len loop
         ans := ans + power(2, len - i) * to_number(substr(bit, i, 1));
     end loop;
     return ans;
 end;
 select obj7_9('1001001') from dual;
-select obj7_9('1000001') from dual;
+select obj7_9('1a000001') from dual;
 
 commit;
