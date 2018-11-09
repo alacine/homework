@@ -1,0 +1,39 @@
+-- 1. 创建一个emp1表的插入或修改触发器，功能是：员工的工资不能超过自己的经理的工资，超过则报错误。
+create or replace trigger obj8_1
+    before insert or update of sal on emp1 for each row
+    -- declare pragma autonomous_transaction;
+declare
+    mgr_sal emp1.sal%type := 0;
+begin
+    select sal into mgr_sal
+        from emp1
+        where empno = :new.mgr;
+    if :new.sal > mgr_sal then
+        raise_application_error(-20001, ' 别扯了，给你经理留个面子');
+    end if;
+end;
+update emp1 set sal = 9999 where empno = 7369;
+
+报错:
+
+Error starting at line : 25 in command -
+update emp1 set sal = 9999 where empno = 7369
+Error report -
+ORA-04091: table A2016551103.EMP1 is mutating, trigger/function may not see it
+ORA-06512: at "A2016551103.OBJ8_1", line 4
+ORA-04088: error during execution of trigger 'A2016551103.OBJ8_1'
+
+create or replace trigger obj8_1
+    before insert or update of sal on emp1 for each row
+declare
+    pragma autonomous_transaction;
+    mgr_sal emp1.sal%type := 0;
+begin
+    select sal into mgr_sal
+        from emp1
+        where empno = :new.mgr;
+    if :new.sal > mgr_sal then
+        raise_application_error(-20001, ' 别扯了，给你经理留个面子');
+    end if;
+end;
+update emp1 set sal = 9999 where empno = 7369;
