@@ -94,5 +94,37 @@ delete from empdept where empno = 99;
 delete from dept1 where deptno = 99;
 
 -- 5. 创建一个emp3表的触发器，功能是：当插入记录时，若dept表不存在相应的部门，则拒绝插入；当修改记录中部门号deptno时，若dept1表不存在相应的部门，则拒绝修改。也就是不定义外键，用触发器完成相应的约束。
+create or replace trigger obj8_5 before
+    insert or update on emp3 for each row
+declare
+    cnt int;
+begin
+    case
+        when inserting then
+            select count(*) into cnt
+                from dept
+                where deptno = :new.deptno;
+            if cnt = 0 then raise_application_error(-20001, '违反外键约束，dept中没有这个部门');
+            end if;
+        when updating then
+            select count(*) into cnt
+                from dept1
+                where deptno = :new.deptno;
+            if cnt = 0 then raise_application_error(-20002, '违反外键约束，dept1中没有这个部门');
+            end if;
+    end case;
+end;
+insert into emp3 values(99, '99', '99', 99, null, 99, 99, 99);
+update emp3 set deptno = 99 where deptno = 30;
 
 -- 6. 创建一个emp4表的触发器，功能是：当插入或修改记录时，将员工的姓名转换成大写字母。
+create or replace trigger obj8_6 before
+    insert or update on emp4 for each row
+begin
+    :new.ename := upper(:new.ename);
+    dbms_output.put_line('帮你改成大写的了，不用谢我');
+end;
+insert into emp4(ename) values('aaa');
+delete from emp4 where ename = 'AAA';
+
+commit;
