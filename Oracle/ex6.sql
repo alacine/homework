@@ -171,7 +171,6 @@ begin
         when no_data_found then
             insert into "学费标准表" values(input_year, input_major, input_tuition);
 end;
-show err;
 execute obj6_9('2018', '计算机科学与技术', 7777);
 
 --10、编写一个学生注册的过程，注册日期默认为当天，以学号为参数。
@@ -243,7 +242,7 @@ begin
         when input_number_err then dbms_output.put_line('没有该学号学生的收费信息，请尝试注册学号');
         when input_year_err then dbms_output.put_line('没有该学生没有'||input_year||'学年的欠费信息，请检查输入学年');
         when paid_err then dbms_output.put_line('缴费金额有误');
-        when paid_not_enough then dbms_output.put_line('但该学号学生'||input_year||'学年的缴费仍然处于欠费状态');
+        when paid_not_enough then dbms_output.put_line('但该学生'||input_year||'学年的缴费仍然处于欠费状态');
 end;
 execute obj6_11('S999', 777);
 execute obj6_11('S103', 7777);
