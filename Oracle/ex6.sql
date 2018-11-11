@@ -240,7 +240,7 @@ begin
     if check_paid > 0 then raise paid_not_enough; end if;
     exception
         when input_number_err then dbms_output.put_line('没有该学号学生的收费信息，请尝试注册学号');
-        when input_year_err then dbms_output.put_line('没有该学生没有'||input_year||'学年的欠费信息，请检查输入学年');
+        when input_year_err then dbms_output.put_line('该学生没有'||input_year||'学年的欠费信息，请检查输入学年');
         when paid_err then dbms_output.put_line('缴费金额有误');
         when paid_not_enough then dbms_output.put_line('但该学生'||input_year||'学年的缴费仍然处于欠费状态');
 end;
