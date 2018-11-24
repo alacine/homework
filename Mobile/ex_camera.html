@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <video id="localVideo"></video>
+        <script>
+            var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+                if (getUserMedia) {
+                    //do something
+                } else {
+                    alert('你的浏览器不支持getUserMedia');
+                }
+                navigator.getUserMedia({
+                    video: true,
+                    audio: true
+                }, onSuccess, onError);
+                var locaVideo = document.getElementById('localVideo');
+                function onSuccess(stream) {
+                    locaVideo.src = window.URL.createObjectURL(stream);
+                    locaVideo.autoplay = true;
+                }
+                function onError(e) {
+                    console.log(e)
+                }
+        </script>
+    </body>
+</html>
