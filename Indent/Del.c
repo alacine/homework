@@ -22,7 +22,6 @@ int del(int argc, char *argv[]){
 			flag=0;
 			continue;
 		}
-		
 		else if(ch==' ' && jd_flag==0){
 			flag++;
 			if(flag>1){

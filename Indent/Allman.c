@@ -39,7 +39,6 @@ int Allman(int argc, char *argv[]){
 			}
 			continue;
 		}
-		
 		else if(ch=='}' && jd_flag==0){
 			flag--;
 			fputs("\n",fq);
@@ -53,7 +52,6 @@ int Allman(int argc, char *argv[]){
 			}
 			continue;
 		}
-		
 		else if(ch==';' && jd_flag==0){
 			fputc(';',fq);
 			fputs("\n",fq);

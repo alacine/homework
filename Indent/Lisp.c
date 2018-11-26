@@ -9,7 +9,6 @@ int Lisp(int argc, char *argv[]){
 	char ch;
 	int i=0;
 	
-	
 	if( (fp=fopen("h_ing.c","r")) == NULL || (fq=fopen(argv[3],"w")) == NULL ){
 		printf("Can not open h_ing.c file\n");
 		exit(1);

@@ -14,7 +14,6 @@ int Ratliff(int argc, char *argv[]){
 		exit(1);
 	}
 	
-	
 	int flag=0;
 	int jd_flag=0;
 	while((ch=getc(fp)) != EOF){

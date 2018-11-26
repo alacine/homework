@@ -34,7 +34,6 @@ int Horstmann(int argc, char *argv[]){
 			fputs("   ",fq);
 			continue;
 		}
-		
 		else if(ch=='}' && jd_flag==0){
 			flag--;
 			fputs("\n",fq);
@@ -48,7 +47,6 @@ int Horstmann(int argc, char *argv[]){
 			}
 			continue;
 		}
-		
 		else if(ch==';' && jd_flag==0){
 			fputc(';',fq);
 			fputs("\n",fq);

@@ -5,14 +5,12 @@ while (x==y) {
     somethingelse();
 }
 
-
 //Allman
 while (x==y)
 {
     something();
     somethingelse();
 }
-
 
 //GNU
 while (x==y)
@@ -21,7 +19,6 @@ while (x==y)
     somethingelse();
   }
 
-
 //Whitesmiths
 while (x==y)
     {
@@ -29,19 +26,16 @@ while (x==y)
     somethingelse();
     }
 
-
 //Horstmann
 while (x==y)
 {   something();
     somethingelse();
 }
 
-
 //Pico
 while (x==y)
 {   something();
     somethingelse();}
-
 
 //Ratliff
 while (x==y) {
@@ -49,11 +43,7 @@ while (x==y) {
     somethingelse();
 	}
 
-
 //Lisp
 while (x==y) {
     something();
     somethingelse(); }
-
-
-

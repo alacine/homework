@@ -1,6 +1,7 @@
 /*函数head,先格式化头文件、宏定义
  *存在问题：最后一个不会被格式化，需要手动在最后一个头文件或宏定义行末加上分号';'
  */
+#include<stdlib.h>
 #include<stdio.h>
 int head(){
 	FILE *fp,*fq;

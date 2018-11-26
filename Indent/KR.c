@@ -14,8 +14,6 @@ int KR(int argc, char *argv[]){
 		exit(1);
 	}
 
-
-
 	int flag=0;
 	int jd_flag=0;
 	while((ch=getc(fp)) != EOF){
@@ -33,7 +31,6 @@ int KR(int argc, char *argv[]){
 			}
 			continue;
 		}
-		
 		else if(ch=='}' && jd_flag==0){
 			flag--;
 			fputs("\n",fq);
@@ -47,7 +44,6 @@ int KR(int argc, char *argv[]){
 			}
 			continue;
 		}
-		
 		else if(ch==';' && jd_flag==0){
 			fputc(';',fq);
 			fputs("\n",fq);
@@ -56,8 +52,6 @@ int KR(int argc, char *argv[]){
 			}
 			continue;
 		}
-		
-		
 		fputc(ch,fq);
 	}
 

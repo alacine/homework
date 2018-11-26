@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+/*
 #include "Del.c"
 #include "headfile_indent.c"
 #include "Clean.c"
@@ -14,7 +14,19 @@
 #include "Pico.c"
 #include "Ratliff.c"
 #include "Lisp.c"
+*/
+#include "Del.h"
+#include "headfile_indent.h"
+#include "Clean.h"
 
+#include "KR.h"
+#include "Allman.h"
+#include "GNU.h"
+#include "Whitesmiths.h"
+#include "Horstmann.h"
+#include "Pico.h"
+#include "Ratliff.h"
+#include "Lisp.h"
 
 char ch;
 FILE *fp,*fq;
