@@ -1,13 +1,32 @@
-def change_to_graph(f, S):
+from sys import argv
+
+def f_to_graph(f, S):
     graph = {}
     for elem in S:
         graph[elem] = []
     for elem in f:
-        graph[elem[0]].append(f[(elem[0], elem[1])])
+        if f[(elem[0], elem[1])] == []:
+            continue
+        graph[elem[0]].append(f[(elem[0], elem[1])][0])
     return graph
 
-def bfs(graph, s):
-    pass
+def bfs(graph, s0):
+    queue = []
+    seen = set()
+    queue.append(s0)
+    seen.add(s0)
+    parent = {s0: None}
+    while len(queue) > 0:
+        vertex = queue.pop(0)
+        nodes = graph[vertex]
+        for i in nodes:
+            if i not in seen:
+                queue.append(i)
+                seen.add(i)
+                parent[i] = vertex
+        #print(vertex)
+    #print('parent', parent, len(parent))
+    return parent
 
 class Dfa(object):
     # dfa 类
@@ -19,12 +38,30 @@ class Dfa(object):
         self.s0 = s0 # 初态集, 用单值存储
         self.Z = Z # 终态集, 用list存储
 
-    def show(self):
-        print('S:\n', self.S)
-        print('sigma:\n', self.sigma)
-        print('f:\n', self.f)
-        print('s0:\n', self.s0)
-        print('Z:\n', self.Z)
+    def __str__(self):
+        print('f:')
+        for elem in self.f:
+            if self.f[elem] == []:
+                continue
+            print('\t', elem[0], '+', elem[1], '->', self.f[elem][0])
+        return "S:\n\t{}\nsigma:\n\t{}\ns0:\n\t{}\nZ:\n\t{}\n".format(self.S, self.sigma, self.s0, self.Z)
+
+    def print_to_dot(self, outputfile):
+        # 把当前dfa输出当dot文件中, 用于dot生成图片
+        fe = open(outputfile, 'w')
+        fe.write('digraph dfa {\nrankdir = LR\n')
+        fe.write('start -> ' + self.s0 + '\n')
+        for elem in self.f:
+            if self.f[elem] == []:
+                continue
+            fe.write(elem[0] + ' -> ' + self.f[elem][0] + ' [label = \"' + elem[1] + '\"]\n')
+        fe.write('start [shape = box]\n')
+        for i in self.S:
+            fe.write(i + ' [shape = circle]\n')
+        for i in self.Z:
+            fe.write(i + ' [shape = doublecircle]\n')
+        fe.write('}\n')
+        fe.close()
 
     def read(self):
         # 读入dfa
@@ -49,7 +86,7 @@ class Dfa(object):
             else:
                 self.f[(f_tmp[0], f_tmp[1])].append(f_tmp[2])
 
-        self.s0 = input('输入初始状态:\n')
+        self.s0 = input('输入初始状态(有且只有一个):\n')
         Z_input = input('输入终态集(每个状态之间用空格隔开):\n')
         self.Z = Z_input.split()
 
@@ -80,8 +117,10 @@ class Dfa(object):
                 print('ERROR: 终态集不包含在状态集内')
                 return False
 
-        f_graph = change_to_graph(self.f, self.S)
-        print(f_graph)
+        f_graph = f_to_graph(self.f, self.S)
+        step = bfs(f_graph, self.s0)
+        if len(step) < len(self.S):
+            return False
         #if not bfs(f_graph, self.s0[0]):
         #    return False
 
@@ -92,15 +131,33 @@ class Dfa(object):
         pass
 
     def demo(self, string):
+        cur_status = self.s0
+        for letter in string:
+            if self.f[(cur_status, letter)] == []:
+                print('匹配失败')
+                return False
+            print(cur_status, letter, end=' ')
+            cur_status = self.f[(cur_status, letter)][0]
+            print(cur_status)
+        if cur_status in self.Z:
+            print('匹配成功')
+            return True
+        else:
+            print('匹配失败')
+            return False
         # dfa的规则字符串板顶: 输入一个字符串, 模拟dfa识别字符串的过程
         # 并判定该字符串是否是规则字符串
-        pass
 
 def main():
+    script, outputfile = argv
     a = Dfa()
     a.read()
-    a.show()
-    print(a.check())
+    if a.check():
+        print(a)
+        a.demo('babababababaab')
+        a.print_to_dot(outputfile)
+    else:
+        print('ERROR: 输入的dfa不规范')
 
 if __name__ == '__main__':
     main()
