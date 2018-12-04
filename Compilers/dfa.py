@@ -1,6 +1,8 @@
 from sys import argv
 
 def f_to_graph(f, S):
+    # 传入dfa的映射f和状态集S
+    # 返回dfa的映射转化成的图(dictionary), 用于后续bfs, 返回值为
     graph = {}
     for elem in S:
         graph[elem] = []
@@ -11,6 +13,8 @@ def f_to_graph(f, S):
     return graph
 
 def bfs(graph, s0):
+    # 传入图和起始状态s0
+    # bfs 返回搜索到的所有状态(list)
     queue = []
     seen = set()
     queue.append(s0)
@@ -39,6 +43,7 @@ class Dfa(object):
         self.Z = Z # 终态集, 用list存储
 
     def __str__(self):
+        # 用于输出dfa
         print('f:')
         for elem in self.f:
             if not self.f[elem]:
@@ -47,7 +52,7 @@ class Dfa(object):
         return "S:\n\t{}\nsigma:\n\t{}\ns0:\n\t{}\nZ:\n\t{}\n".format(self.S, self.sigma, self.s0, self.Z)
 
     def print_to_dot(self, outputfile):
-        # 把当前dfa输出当dot文件中, 用于dot生成图片
+        # 把当前dfa输出到dot文件中, 用于dot生成图片
         fe = open(outputfile, 'w')
         fe.write('digraph dfa {\nrankdir = LR\n')
         fe.write('start -> ' + self.s0 + '\n')
@@ -70,7 +75,7 @@ class Dfa(object):
         sigma_input = input('输入字母表(每个字符之间用空格隔开):\n')
         self.sigma = sigma_input.split()
 
-        print('输入映射集(每个映射都是一个三元组, 三元组元素用空格隔开)')
+        print('输入映射集(每个映射都是一个三元组, 三元组元素用空格隔开, 空行表示结束)')
         print('例如(s0 a s1)表示s0状态输入a进入状态s1')
         for i in self.S:
             # 初始化一个状态转化矩阵
@@ -78,7 +83,7 @@ class Dfa(object):
                 self.f[(i, j)] = []
         while True:
             f_input = input()
-            if f_input == '':
+            if not f_input:
                 break
             f_tmp = f_input.split()
             if f_tmp[0] not in self.S or f_tmp[1] not in self.sigma or f_tmp[2] not in self.S:
@@ -102,14 +107,11 @@ class Dfa(object):
                 print('ERROR: 映射不全是单值映射')
                 return False
         
-        #if len(self.s0) > 1 or len(self.s0) == 0:
-        #    print('ERROR: 初始状态有且仅有一个')
-        #    return False
         if self.s0 not in self.S:
             print('ERROR: 初始状态不在状态集内')
             return False
 
-        if len(self.Z) == 0:
+        if not self.Z:
             print('ERROR: 终态集不能为空')
             return False
         for status in self.Z:
@@ -117,12 +119,12 @@ class Dfa(object):
                 print('ERROR: 终态集不包含在状态集内')
                 return False
 
+        # 把映射转换为图
         f_graph = f_to_graph(self.f, self.S)
+        # 通过bfs找到所有能够从初始状态出发到达的状态
         step = bfs(f_graph, self.s0)
         if len(step) < len(self.S):
             return False
-        #if not bfs(f_graph, self.s0[0]):
-        #    return False
 
         return True
 
@@ -131,31 +133,33 @@ class Dfa(object):
         pass
 
     def demo(self, string):
+        # dfa的规则字符串板顶: 输入一个字符串, 模拟dfa识别字符串的过程
+        # 并判定该字符串是否是规则字符串
         cur_status = self.s0
         for letter in string:
             if not self.f[(cur_status, letter)]:
-                print('匹配失败')
                 return False
             print(cur_status, letter, end=' ')
             cur_status = self.f[(cur_status, letter)][0]
             print(cur_status)
         if cur_status in self.Z:
-            print('匹配成功')
             return True
         else:
-            print('匹配失败')
             return False
-        # dfa的规则字符串板顶: 输入一个字符串, 模拟dfa识别字符串的过程
-        # 并判定该字符串是否是规则字符串
 
 def main():
     script, outputfile = argv
+    
     a = Dfa()
     a.read()
+
     if a.check():
         print(a)
-        a.demo('babababababaab')
         a.print_to_dot(outputfile)
+        if a.demo('babababababaab'):
+            print('匹配失败')
+        else:
+            print('匹配成功')
     else:
         print('ERROR: 输入的dfa不规范')
 
