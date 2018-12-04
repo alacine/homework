@@ -17,7 +17,7 @@ python dfa.py xxx.dot < xxx.txt
 # dot 转图片(使用dot命令要安装graphviz)
 dot -Tpng xxx.dot -o xxx.png
 
-# 脚本批量执行(推荐Linux)
+# 脚本批量执行
 ./run.sh
 ```
 
