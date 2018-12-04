@@ -4,12 +4,12 @@ def f_to_graph(f, S):
     # 传入dfa的映射f和状态集S
     # 返回dfa的映射转化成的图(dictionary), 用于后续bfs, 返回值为
     graph = {}
-    for elem in S:
-        graph[elem] = []
-    for elem in f:
-        if not f[(elem[0], elem[1])]:
+    for status in S:
+        graph[status] = []
+    for key in f:
+        if not f[(key[0], key[1])]:
             continue
-        graph[elem[0]].append(f[(elem[0], elem[1])][0])
+        graph[key[0]].append(f[(key[0], key[1])][0])
     return graph
 
 def bfs(graph, s0):
@@ -61,11 +61,11 @@ class Dfa(object):
                 continue
             fe.write(elem[0] + ' -> ' + self.f[elem][0] + ' [label = \"' + elem[1] + '\"]\n')
         fe.write('start [shape = box]\n')
-        for i in self.S:
-            fe.write(i + ' [shape = circle]\n')
-        for i in self.Z:
-            fe.write(i + ' [shape = doublecircle]\n')
-        fe.write('}\n')
+        for status in self.S:
+            fe.write(status + ' [shape = circle]\n')
+        for status in self.Z:
+            fe.write(status + ' [shape = doublecircle]\n')
+        fe.write('\n')
         fe.close()
 
     def read(self):
@@ -77,10 +77,10 @@ class Dfa(object):
 
         print('输入映射集(每个映射都是一个三元组, 三元组元素用空格隔开, 空行表示结束)')
         print('例如(s0 a s1)表示s0状态输入a进入状态s1')
-        for i in self.S:
+        for status in self.S:
             # 初始化一个状态转化矩阵
-            for j in self.sigma:
-                self.f[(i, j)] = []
+            for letter in self.sigma:
+                self.f[(status, letter)] = []
         while True:
             f_input = input()
             if not f_input:
@@ -128,38 +128,81 @@ class Dfa(object):
 
         return True
 
-    def get_string(self, n):
+    def get_string(self, cur_status, n, string = ''):
         # 输入任意一个整数n, dfa列表显示其识别的所有长度小于等于n的字符串
-        pass
+        # 三个参数分别是当前状态cur_status, 最大长度n, 字符串string(默认是空字符串)
+        # 如果string不为空, 那么查找到的字符串是以传入的字符串开头的且符合要求的字符串(这条与本实验无关)
+        if len(string) < n:
+            if cur_status in self.Z:
+                print(string)
+        else:
+            if cur_status in self.Z:
+                print(string)
+            return
 
-    def demo(self, string):
-        # dfa的规则字符串板顶: 输入一个字符串, 模拟dfa识别字符串的过程
-        # 并判定该字符串是否是规则字符串
+        for letter in self.sigma:
+            # 采用递归的方式查找, 当找到一个可以继续下去的状态就进入下一个状态
+            # 找不到就回退一步, 类似与dfs
+            if self.f[(cur_status, letter)]:
+                string += letter
+                self.get_string(self.f[(cur_status, letter)][0], n, string)
+                string = string[:-1]
+
+    def demo(self, string, outputfile):
+        # dfa的规则字符串判定: 模拟dfa识别字符串的过程
+        # string表示要匹配的字符串, display表示是否输出过程返回是否匹配成功
+        # 匹配的过程会输出在屏幕上, 同时会保存在dot文件中
         cur_status = self.s0
+        cnt = 1
+        fe = open(outputfile, 'a')
+        fe.write('start -> ' + self.s0 + ' [label = 0, fontcolor = red, color = "red"]\n')
+
         for letter in string:
             if not self.f[(cur_status, letter)]:
+                fe.write('}\n')
+                fe.close()
                 return False
             print(cur_status, letter, end=' ')
+            fe.write(cur_status + ' -> ' + self.f[(cur_status, letter)][0] +
+                    ' [label = ' + str(cnt) + ', fontcolor = red, color = "red"]\n')
+
             cur_status = self.f[(cur_status, letter)][0]
+
+            cnt += 1
             print(cur_status)
+
         if cur_status in self.Z:
+            fe.write('}\n')
+            fe.close()
             return True
         else:
+            fe.write('}\n')
+            fe.close()
             return False
 
 def main():
+    # 命令行获取一个额外的参数(要生成的dot文件名)
     script, outputfile = argv
-    
+
+    # 初始化一个Dfa类型的a, 并读入a的数据
     a = Dfa()
     a.read()
+    print(a)
 
+    # 检查a的正确性, 只有正确才能继续其他的操作
     if a.check():
-        print(a)
+        # 把a的信息输出到dot文件中
         a.print_to_dot(outputfile)
-        if a.demo('babababababaab'):
-            print('匹配失败')
-        else:
+        # 匹配输入的字符串是否是规则字符串
+        string = input('输入你想尝试匹配的字符串: \n')
+        if a.demo(string, outputfile):
             print('匹配成功')
+        else:
+            print('匹配失败')
+        # 输出a能识别的所有长度小于n的字符串
+        n = int(input('输入最大长度: \n'))
+        a.get_string(a.s0, n)
+
     else:
         print('ERROR: 输入的dfa不规范')
 

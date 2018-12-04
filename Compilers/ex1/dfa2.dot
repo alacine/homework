@@ -1,0 +1,27 @@
+digraph dfa {
+rankdir = LR
+start -> s0
+s0 -> s1 [label = "a"]
+s0 -> s2 [label = "b"]
+s1 -> s3 [label = "a"]
+s1 -> s2 [label = "b"]
+s2 -> s1 [label = "a"]
+s2 -> s3 [label = "b"]
+s3 -> s3 [label = "a"]
+s3 -> s3 [label = "b"]
+start [shape = box]
+s0 [shape = circle]
+s1 [shape = circle]
+s2 [shape = circle]
+s3 [shape = circle]
+s3 [shape = doublecircle]
+
+start -> s0 [label = 0, fontcolor = red, color = "red"]
+s0 -> s1 [label = 1, fontcolor = red, color = "red"]
+s1 -> s3 [label = 2, fontcolor = red, color = "red"]
+s3 -> s3 [label = 3, fontcolor = red, color = "red"]
+s3 -> s3 [label = 4, fontcolor = red, color = "red"]
+s3 -> s3 [label = 5, fontcolor = red, color = "red"]
+s3 -> s3 [label = 6, fontcolor = red, color = "red"]
+s3 -> s3 [label = 7, fontcolor = red, color = "red"]
+}
