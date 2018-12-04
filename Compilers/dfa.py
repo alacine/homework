@@ -5,7 +5,7 @@ def f_to_graph(f, S):
     for elem in S:
         graph[elem] = []
     for elem in f:
-        if f[(elem[0], elem[1])] == []:
+        if not f[(elem[0], elem[1])]:
             continue
         graph[elem[0]].append(f[(elem[0], elem[1])][0])
     return graph
@@ -41,7 +41,7 @@ class Dfa(object):
     def __str__(self):
         print('f:')
         for elem in self.f:
-            if self.f[elem] == []:
+            if not self.f[elem]:
                 continue
             print('\t', elem[0], '+', elem[1], '->', self.f[elem][0])
         return "S:\n\t{}\nsigma:\n\t{}\ns0:\n\t{}\nZ:\n\t{}\n".format(self.S, self.sigma, self.s0, self.Z)
@@ -52,7 +52,7 @@ class Dfa(object):
         fe.write('digraph dfa {\nrankdir = LR\n')
         fe.write('start -> ' + self.s0 + '\n')
         for elem in self.f:
-            if self.f[elem] == []:
+            if not self.f[elem]:
                 continue
             fe.write(elem[0] + ' -> ' + self.f[elem][0] + ' [label = \"' + elem[1] + '\"]\n')
         fe.write('start [shape = box]\n')
@@ -133,7 +133,7 @@ class Dfa(object):
     def demo(self, string):
         cur_status = self.s0
         for letter in string:
-            if self.f[(cur_status, letter)] == []:
+            if not self.f[(cur_status, letter)]:
                 print('匹配失败')
                 return False
             print(cur_status, letter, end=' ')
