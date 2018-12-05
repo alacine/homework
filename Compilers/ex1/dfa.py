@@ -54,17 +54,17 @@ class Dfa(object):
     def print_to_dot(self, outputfile):
         # 把当前dfa输出到dot文件中, 用于dot生成图片
         fe = open(outputfile, 'w')
-        fe.write('digraph dfa {\nrankdir = LR\n')
-        fe.write('start -> ' + self.s0 + '\n')
+        fe.write('digraph dfa {\nrankdir = LR;\n')
+        fe.write('start -> ' + self.s0 + ';\n')
         for elem in self.f:
             if not self.f[elem]:
                 continue
-            fe.write(elem[0] + ' -> ' + self.f[elem][0] + ' [label = \"' + elem[1] + '\"]\n')
-        fe.write('start [shape = box]\n')
+            fe.write(elem[0] + ' -> ' + self.f[elem][0] + ' [label = \"' + elem[1] + '\"];\n')
+        fe.write('start [shape = box];\n')
         for status in self.S:
-            fe.write(status + ' [shape = circle]\n')
+            fe.write(status + ' [shape = circle];\n')
         for status in self.Z:
-            fe.write(status + ' [shape = doublecircle]\n')
+            fe.write(status + ' [shape = doublecircle];\n')
         fe.write('\n')
         fe.close()
 
@@ -155,7 +155,7 @@ class Dfa(object):
         cur_status = self.s0
         cnt = 1
         fe = open(outputfile, 'a')
-        fe.write('start -> ' + self.s0 + ' [label = 0, fontcolor = red, color = "red"]\n')
+        fe.write('start -> ' + self.s0 + ' [label = 0, fontcolor = red, color = "red"];\n')
 
         for letter in string:
             if not self.f[(cur_status, letter)]:
@@ -164,7 +164,7 @@ class Dfa(object):
                 return False
             print(cur_status, letter, end=' ')
             fe.write(cur_status + ' -> ' + self.f[(cur_status, letter)][0] +
-                    ' [label = ' + str(cnt) + ', fontcolor = red, color = "red"]\n')
+                    ' [label = ' + str(cnt) + ', fontcolor = red, color = "red"];\n')
 
             cur_status = self.f[(cur_status, letter)][0]
 
