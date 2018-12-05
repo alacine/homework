@@ -70,10 +70,8 @@ class Dfa(object):
 
     def read(self):
         # 读入dfa
-        S_input = input('输入状态集(每个状态之间用空格隔开):\n')
-        self.S = S_input.split()
-        sigma_input = input('输入字母表(每个字符之间用空格隔开):\n')
-        self.sigma = sigma_input.split()
+        self.S = input('输入状态集(每个状态之间用空格隔开):\n').split()
+        self.sigma = input('输入字母表(每个字符之间用空格隔开):\n').split()
 
         print('输入映射集(每个映射都是一个三元组, 三元组元素用空格隔开, 空行表示结束)')
         print('例如(s0 a s1)表示s0状态输入a进入状态s1')
@@ -92,8 +90,7 @@ class Dfa(object):
                 self.f[(f_tmp[0], f_tmp[1])].append(f_tmp[2])
 
         self.s0 = input('输入初始状态(有且只有一个):\n')
-        Z_input = input('输入终态集(每个状态之间用空格隔开):\n')
-        self.Z = Z_input.split()
+        self.Z = input('输入终态集(每个状态之间用空格隔开):\n').split()
 
     def check(self):
         # 检查dfa的正确性: dfa的五元组是否正确
