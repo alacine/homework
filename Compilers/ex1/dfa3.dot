@@ -29,14 +29,9 @@ s5 [shape = doublecircle];
 s6 [shape = doublecircle];
 
 start -> s0 [label = 0, fontcolor = red, color = "red"];
-s0 -> s2 [label = 1, fontcolor = red, color = "red"];
-s2 -> s1 [label = 2, fontcolor = red, color = "red"];
-s1 -> s2 [label = 3, fontcolor = red, color = "red"];
-s2 -> s1 [label = 4, fontcolor = red, color = "red"];
-s1 -> s2 [label = 5, fontcolor = red, color = "red"];
-s2 -> s5 [label = 6, fontcolor = red, color = "red"];
-s5 -> s5 [label = 7, fontcolor = red, color = "red"];
-s5 -> s6 [label = 8, fontcolor = red, color = "red"];
-s6 -> s3 [label = 9, fontcolor = red, color = "red"];
-s3 -> s3 [label = 10, fontcolor = red, color = "red"];
+s0 -> s1 [label = 1, fontcolor = red, color = "red"];
+s1 -> s3 [label = 2, fontcolor = red, color = "red"];
+s3 -> s4 [label = 3, fontcolor = red, color = "red"];
+s4 -> s5 [label = 4, fontcolor = red, color = "red"];
+s5 -> s6 [label = 5, fontcolor = red, color = "red"];
 }
