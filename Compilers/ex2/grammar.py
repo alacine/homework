@@ -32,10 +32,15 @@ class Grammar:
         for key in self.xi:
             self.xi[key] = self.xi[key].split()
 
+    def demo(self, string):
+        return True
+
 def main():
-    g = Grammar()
-    g.read()
-    print(g)
+    cal = Grammar('i', 'ETF', 'E', {'E':['E+T', 'T'], 'T':['T*F', 'F'], 'F':['(E)', 'i']})
+    print(cal)
+    cal.demo('i+i*i')
+    #g.read()
+    #print(g)
 
 if __name__ == '__main__':
     main()
