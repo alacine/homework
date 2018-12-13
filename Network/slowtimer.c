@@ -10,8 +10,7 @@
 PROCESS	slowtimer()
 {
     long	lasttime, now;	/* previous and current times in seconds*/
-    //int	delay;	/* actual delay in seconds	*/
-    double delay; /*使用double类型, 使得delay的精度更高*/
+    int	delay;	/* actual delay in seconds	*/
 
     signal(Net.sema);
     gettime(&lasttime);
@@ -34,14 +33,14 @@ PROCESS	slowtimer()
         delay = now - lasttime_ipf;
         if (delay <= 0 || delay > 4*STGRAN)
             delay = STGRAN;	/* likely clock reset */
-        lasttime_arp = now;
+        lasttime_ipf = now;
         ipftimer(delay);
 
         gettime(&now);
         delay = now - lasttime_rt;
         if (delay <= 0 || delay > 4*STGRAN)
             delay = STGRAN;	/* likely clock reset */
-        lasttime_arp = now;
+        lasttime_rt = now;
         rttimer(delay);
 
 #ifdef OSPF
