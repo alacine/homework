@@ -17,20 +17,31 @@ class Grammar:
         return '--------------------------'
 
     def read(self):
-        self.vt = list(input('输入终结符集合(要求: 1.小写字母或数字或符号 2.不要有空格和|)\n'))
+        self.vt = list(input('输入终结符集合(要求: 1.小写字母 2.不要有空格和|)\n'))
         self.vn = list(input('输入非终结符集合, 第一个默认作为文法开始符(要求: 1.大写字母 2.不能有空格)\n'))
         self.s = self.vn[0]
-        print('输入产生式, 每行一个, 例如(S ET)表示S->ET')
+        print('输入产生式, 每行一个, 例如(S ET E)表示S->ET|E (左部右部均不允许重复)')
         while True:
-            in_xi = input().split()
+            in_xi = input()
             if not in_xi:
                 break
-            if in_xi[0] in self.xi:
-                self.xi[in_xi[0]] += (' ' + in_xi[1])
-            else:
-                self.xi[in_xi[0]] = in_xi[1]
+            self.xi[in_xi[0]] = in_xi[1:]
         for key in self.xi:
             self.xi[key] = self.xi[key].split()
+
+    def is_opg(self):
+        # Operator Precedence Grammar
+        # 判断是否为算符优先文法
+        for key in self.xi:
+            for exp in self.xi[key]:
+                for i in range(len(exp)-1):
+                    if exp[i].isupper() and exp[i+1].isupper():
+                        return False
+        return True
+
+    def make_table(self):
+        # 构造算符优先表
+        pass
 
     def demo(self, string):
         return True
@@ -38,9 +49,15 @@ class Grammar:
 def main():
     cal = Grammar('i', 'ETF', 'E', {'E':['E+T', 'T'], 'T':['T*F', 'F'], 'F':['(E)', 'i']})
     print(cal)
+    if cal.is_opg():
+        print('是算符优先文法')
+        cal.make_table()
+    else:
+        print('不是算符优先文法')
     cal.demo('i+i*i')
-    #g.read()
-    #print(g)
+    # g = Grammar()
+    # g.read()
+    # print(g)
 
 if __name__ == '__main__':
     main()
