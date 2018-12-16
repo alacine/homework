@@ -1,7 +1,6 @@
 def print_name(func):
     def wrapper(*args):
-        print(func.__name__)
-        print('\t', *args)
+        print(func.__name__, '\t', *args)
         return func(*args)
     return wrapper
 
@@ -16,39 +15,34 @@ class Rdp(object):
 
     def readexp_and_check(self, exp = ''):
         if not exp:
-            self.exp = input('请输入一个表达式, 包含+-*/(p)和小写字母, 每个字母都是一个终结符\n')
-            if not self.exp:
+            exp = input('请输入一个表达式, 包含+-*/(p)和小写字母, 每个字母都是一个终结符\n')
+            if not exp:
                 return False
-        else:
-            self.exp = exp
 
-        @print_name
+        self.exp = exp
+        exp += '#'
+
+        # @print_name
         def plus_minus(p):
             # 判断是不是+或-
-            flag = False
             (err, p) = multiply_divide(p)
             if exp[p] == '+' or exp[p] == '-':
-                flag = True
-            if flag:
                 p += 1
                 show(p)
                 (err, p) = plus_minus(p)
             return (err, p)
 
-        @print_name
+        # @print_name
         def multiply_divide(p):
             # 判断是否为*或/
-            flag = False
             (err, p) = brackets_letter(p)
             if exp[p] == '*' or exp[p] == '/':
-                flag = True
-            if flag:
                 p += 1
                 show(p)
-                p = multiply_divide(p)[1]
+                (err, p) = multiply_divide(p)
             return (err, p)
 
-        @print_name
+        # @print_name
         def brackets_letter(p):
             # 字母和括号的判断
             err = False
@@ -70,7 +64,7 @@ class Rdp(object):
 
             return (err, p)
 
-        @print_name
+        # @print_name
         def show(p):
             blank = ''
             for i in range(p):
@@ -79,11 +73,10 @@ class Rdp(object):
                 print(blank, end = '')
                 print(exp[p:])
 
+        print('开始匹配')
         p = 0
         err = False
-        for letter in exp:
-            if err:
-                break
+        while p < len(exp)-1 and not err:
             (err, p) = plus_minus(p) # 子程序判断表达式是否正确
         if err:
             return False
@@ -95,7 +88,7 @@ class Rdp(object):
 
 def main():
     a = Rdp()
-    if a.readexp_and_check('a+b-(c-d)/a*b'):
+    if a.readexp_and_check():
         print(a, '表达式正确')
     else:
         print('表达式错误')
