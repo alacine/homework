@@ -104,6 +104,7 @@ class Grammar:
     def make_table(self):
         # 构造算符优先表
         for vi in self.vn:
+            # 获取每一个非终结符的firstvt和lastvt
             self.get_firstvt(vi)
             self.get_lastvt(vi)
         for vn in self.xi:
@@ -112,16 +113,21 @@ class Grammar:
                 if l >= 2:
                     for i in range(l-1):
                         if rexp[i] in self.vt and rexp[i+1] in self.vt:
+                            # R->...ab..., 有a=b (规则1)
                             self.table[(rexp[i], rexp[i+1])] = '='
                         if l >= 3 and i < l-2:
+                            # R->...aQb..., 有a=b (规则1)
                             if rexp[i] in self.vt and rexp[i+1] in self.vn and rexp[i+2] in self.vt:
                                 self.table[(rexp[i], rexp[i+2])] = '='
                         if rexp[i] in self.vt and rexp[i+1] in self.vn:
+                            # R->...aP..., 有b属于firstvt(P), 则a<b (规则2)
                             for first in self.firstvt[rexp[i+1]]:
                                 self.table[(rexp[i], first)] = '<'
                         if rexp[i+1] in self.vt and rexp[i] in self.vn:
+                            # R->...Pb..., 有a属于lastvt(Q), 则a>b (规则3)
                             for last in self.lastvt[rexp[i]]:
                                 self.table[(last, rexp[i+1])] = '>'
+        # 由#E#得#=#, #<firstvt(E), lastvt(E)>#
         for first in self.firstvt[self.s]:
             self.table[('#', first)] = '<'
         for last in self.lastvt[self.s]:
@@ -129,18 +135,14 @@ class Grammar:
         self.table[('#', '#')] = '='
 
 def main():
-    # cal = Grammar('i', 'ETF', 'E', {'E':['E+T', 'T'], 'T':['T*F', 'F'], 'F':['(E)', 'i']})
-    cal = Grammar()
-    cal.read()
-    if cal.is_opg():
+    g = Grammar()
+    g.read()
+    if g.is_opg():
         print('是算符优先文法')
-        cal.make_table()
-        print(cal)
+        g.make_table()
+        print(g)
     else:
         print('不是算符优先文法')
-    # g = Grammar()
-    # g.read()
-    # print(g)
 
 if __name__ == '__main__':
     main()
