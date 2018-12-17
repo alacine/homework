@@ -24,9 +24,14 @@ class Grammar:
         for key in self.lastvt:
             print('\t', key, ':', self.lastvt[key])
         print('table: ')
-        for key in self.table:
-            print('\t', key, ':', self.table[key])
-        return '--------------------------'
+        for vti in self.vt:
+            print('\t' + vti, end = '')
+        for vti in self.vt:
+            print()
+            print(vti + '\t', end = '')
+            for vtj in self.vt:
+                print(self.table[(vti, vtj)] + '\t', end = '')
+        return '\n--------------------------'
 
     def read(self):
         self.vt = list(input('输入终结符集合(要求: 1.小写字母 2.不要有空格和|)\n'))
@@ -45,10 +50,9 @@ class Grammar:
             self.firstvt[vi] = []
         for vi in self.vn:
             self.lastvt[vi] = []
-        vt = self.vt
-        vt.append('#')
-        for vi in vt:
-            for vj in vt:
+        self.vt.append('#')
+        for vi in self.vt:
+            for vj in self.vt:
                 self.table[(vi, vj)] = ' '
 
     def is_opg(self):
@@ -102,6 +106,27 @@ class Grammar:
         for vi in self.vn:
             self.get_firstvt(vi)
             self.get_lastvt(vi)
+        for vn in self.xi:
+            for rexp in self.xi[vn]:
+                l = len(rexp)
+                if l >= 2:
+                    for i in range(l-1):
+                        if rexp[i] in self.vt and rexp[i+1] in self.vt:
+                            self.table[(rexp[i], rexp[i+1])] = '='
+                        if l >= 3 and i < l-2:
+                            if rexp[i] in self.vt and rexp[i+1] in self.vn and rexp[i+2] in self.vt:
+                                self.table[(rexp[i], rexp[i+2])] = '='
+                        if rexp[i] in self.vt and rexp[i+1] in self.vn:
+                            for first in self.firstvt[rexp[i+1]]:
+                                self.table[(rexp[i], first)] = '<'
+                        if rexp[i+1] in self.vt and rexp[i] in self.vn:
+                            for last in self.lastvt[rexp[i]]:
+                                self.table[(last, rexp[i+1])] = '>'
+        for first in self.firstvt[self.s]:
+            self.table[('#', first)] = '<'
+        for last in self.lastvt[self.s]:
+            self.table[(last, '#')] = '>'
+        self.table[('#', '#')] = '='
 
 def main():
     # cal = Grammar('i', 'ETF', 'E', {'E':['E+T', 'T'], 'T':['T*F', 'F'], 'F':['(E)', 'i']})
