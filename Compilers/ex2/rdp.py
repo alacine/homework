@@ -1,4 +1,5 @@
 def print_name(func):
+    # 打印函数名
     def wrapper(*args):
         print(func.__name__, '\t', *args)
         return func(*args)
@@ -13,7 +14,7 @@ class Rdp(object):
     def __str__(self):
         return self.exp
 
-    def readexp_and_check(self, exp = '', outputfile = 'ex.dot'):
+    def read(self, exp = ''):
         if not exp:
             exp = input('请输入一个表达式, 包含+-*/(p)和小写字母, 每个字母都是一个终结符\n')
             if not exp:
@@ -21,8 +22,9 @@ class Rdp(object):
 
         self.exp = exp
         exp += '#'
-        fe = open(outputfile, 'w')
-        fe.write('digraph dfa {\n')
+
+    def check(self):
+        exp = self.exp + '#'
 
         # @print_name
         def plus_minus(p):
@@ -72,7 +74,6 @@ class Rdp(object):
             for i in range(p):
                 blank += ' '
             if p < len(exp):
-                fe.write('--' + exp[p] + '\n')
                 print(blank, end = '')
                 print(exp[p:])
 
@@ -82,19 +83,15 @@ class Rdp(object):
         show(p)
         while p < len(exp)-1 and not err:
             (err, p) = plus_minus(p) # 子程序判断表达式是否正确
-        fe.write('}\n')
-        fe.close()
         if err:
             return False
         else:
             return True
 
-    def readf_and_check(self, f = ''):
-        pass
-
 def main():
     a = Rdp()
-    if a.readexp_and_check('a+b*(u+(u/l))', 'ex.dot'):
+    a.read()
+    if a.check():
         print(a, '表达式正确')
     else:
         print('表达式错误')
