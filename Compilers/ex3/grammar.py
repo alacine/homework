@@ -66,7 +66,7 @@ class Grammar:
         return True
 
     def get_firstvt(self, vt):
-        # 获取某个终结符的firstvt集
+        # 获取某个非终结符的firstvt集
         if not self.firstvt[vt]:
             for rexp in self.xi[vt]:
                 # rexp: 产生式右部的每一项
@@ -84,7 +84,7 @@ class Grammar:
                                 self.firstvt[vt].append(vi)
 
     def get_lastvt(self, vt):
-        # 获取某个终结符的firstvt集
+        # 获取某个非终结符的firstvt集
         if not self.lastvt[vt]:
             for rexp in self.xi[vt]:
                 # rexp: 产生式右部的每一项
