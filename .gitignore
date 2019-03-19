@@ -9,3 +9,4 @@ ex.*
 ~*
 *~
 .vscode
+__pycache__
