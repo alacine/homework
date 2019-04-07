@@ -10,7 +10,7 @@ def print_name(func):
     return wrapper
 
 
-class A51():
+class A51:
     def __init__(self, key_len = 0, x = [], y = [], z = []):
         """
         初始化
@@ -52,7 +52,7 @@ class A51():
         return new_text
 
 
-class Rc4():
+class Rc4:
     def __init__(self, key_len):
         """
         初始化;
