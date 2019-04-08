@@ -12,12 +12,11 @@ def print_name(func):
 
 class A51:
     def __init__(self, key_len = 0, x = [], y = [], z = []):
-        """
-        初始化
+        """初始化
+
         允许自定义x, y, z寄存器中的值(自定义时长度必须符合要求),
         否则随机生成
         """
-        self.x = x if len(x) == 19 else [random.randint(0, 1) for i in range(19)]
         self.y = y if len(y) == 19 else [random.randint(0, 1) for i in range(22)]
         self.z = z if len(z) == 19 else [random.randint(0, 1) for i in range(23)]
         self.key_len = key_len
@@ -54,8 +53,8 @@ class A51:
 
 class Rc4:
     def __init__(self, key_len):
-        """
-        初始化;
+        """初始化
+
         接收参数密钥的长度, 随机生成密钥(每一位均为 0~255)
         """
         self.key = [random.randint(0, 255) for i in range(key_len)]
@@ -89,22 +88,22 @@ class Rc4:
 
 @print_name
 def test_a51():
-    test_text = "Fire in the hole!" # 明文
+    test_text = "Fire in the hole!"  # 明文
     a51 = A51(len(test_text))
     print("明文:", test_text)
-    print("密钥流:", a51.key_stream) # 密钥流
-    print("密文:", a51.crypt(test_text)) # 加密
-    print("密文解密:", a51.crypt(a51.crypt(test_text))) # 解密
+    print("密钥流:", a51.key_stream)  # 密钥流
+    print("密文:", a51.crypt(test_text))  # 加密
+    print("密文解密:", a51.crypt(a51.crypt(test_text)))  # 解密
 
 
 @print_name
 def test_rc4():
-    test_text = "Fire in the hole!" # 明文
+    test_text = "Fire in the hole!"  # 明文
     rc4 = Rc4(len(test_text))
     print("明文:", test_text)
-    print("密文:", rc4.crypt(test_text)) # 加密
-    print("密钥流:", rc4.key_stream) # 密钥流
-    print("密文解密:", rc4.crypt(rc4.crypt(test_text))) # 解密
+    print("密文:", rc4.crypt(test_text))  # 加密
+    print("密钥流:", rc4.key_stream)  # 密钥流
+    print("密文解密:", rc4.crypt(rc4.crypt(test_text)))  # 解密
 
 
 def main():
