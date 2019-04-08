@@ -17,6 +17,7 @@ class A51:
         允许自定义x, y, z寄存器中的值(自定义时长度必须符合要求),
         否则随机生成
         """
+        self.x = x if len(y) == 19 else [random.randint(0, 1) for i in range(19)]
         self.y = y if len(y) == 19 else [random.randint(0, 1) for i in range(22)]
         self.z = z if len(z) == 19 else [random.randint(0, 1) for i in range(23)]
         self.key_len = key_len
