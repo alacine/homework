@@ -14,3 +14,4 @@
 | Mobile              | 移动终端编程作业            |
 | Network             | 网络协议编程                |
 | InformatinoSecurity | 信息安全作业题              |
+| Algorithm           | 算法分析与设计实验          |
