@@ -24,7 +24,7 @@ class A51:
         self.key_stream = self._get_key_stream()
 
     def _get_key_stream(self) -> str:
-        """生成密钥流"""
+        """生成密钥流, 每次只生成一个二进制位"""
         key_a51 = []
         for i in range(self.key_len):
             m = 1 if self.x[8] + self.y[10] + self.z[10] > 1 else 0
@@ -46,8 +46,8 @@ class A51:
     def crypt(self, text: str) -> str:
         """加密/解密"""
         tmp_text = []
-        for i in range(self.key_len):
-            tmp_text.append(int(self.key_stream[i]) ^ ord(text[i]))
+        for i, j  in zip(range(0, self.key_len, 8), range(len(text))):
+            tmp_text.append(int(self.key_stream[i:i+8], 2) ^ ord(text[j]))
         new_text = ''.join(map(chr, tmp_text))
         return new_text
 
@@ -68,7 +68,7 @@ class Rc4:
         self.key_stream = self._get_key_stream()
 
     def _get_key_stream(self) -> list:
-        """生成密钥流"""
+        """生成密钥流, 每次生成一个字节"""
         key_stream = []
         i = j = 0
         for i in range(len(self.key)):
@@ -90,7 +90,7 @@ class Rc4:
 @print_name
 def test_a51():
     test_text = "Fire in the hole!"  # 明文
-    a51 = A51(len(test_text))
+    a51 = A51(len(test_text)*8)
     print("明文:", test_text)
     print("密钥流:", a51.key_stream)  # 密钥流
     print("密文:", a51.crypt(test_text))  # 加密
