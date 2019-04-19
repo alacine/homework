@@ -21,7 +21,7 @@ def get_next(lp):
     i = 1
     while(i < lp):
         # print(p[i], p[j])
-        if ((j == -1) | (p[i] == p[j])):
+        if ((j == -1) or (p[i] == p[j])):
             i += 1
             j += 1
             nex[i] = j
