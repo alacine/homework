@@ -1,6 +1,7 @@
 *.exe
 ex.*
 *.o
+*.out
 *.lst
 *.obj
 ~*

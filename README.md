@@ -15,3 +15,4 @@
 | Network             | 网络协议编程                |
 | InformatinoSecurity | 信息安全作业题              |
 | Algorithm           | 算法分析与设计实验          |
+| AI                  | 人工智能实验                |
