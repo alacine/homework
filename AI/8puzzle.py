@@ -50,10 +50,10 @@ class Node:
 
 def bfs(target: Node) -> list:
     """搜索出所有从终态可以到达的状态"""
-    visit = [False for i in range(FAC[9] + 10)]
+    visit = set()
     path = [None for i in range(FAC[9] + 10)]
     mov = [[-1, 0], [1, 0], [0, -1], [0, 1]]  # u, d, l, r
-    dirction = "durl"  # 由于是反着搜索这里的方向和mov刚好相反
+    dirction = 'durl'  # 由于是反着搜索这里的方向和mov刚好相反
     cur = deepcopy(target)
     queue = []
     queue.append(cur)
@@ -72,12 +72,11 @@ def bfs(target: Node) -> list:
             nex.layout[cur.loc] = nex.layout[nex.loc]
             nex.layout[nex.loc] = 0
             nex.status = cantor_hash(nex.layout)
-            if not visit[nex.status]:
-                visit[nex.status] = True
+            if nex.status not in visit:
+                visit.add(nex.status)
                 nex.path.append(dirction[i])
                 queue.append(nex)
                 path[nex.status] = nex.path[::-1]
-            del nex
 
     return path
 
@@ -107,9 +106,7 @@ def travel(node: Node, path: List[str]) -> None:
 def test():
     """测试用例"""
     # test_list = list(map(int, input('输入0-8共九个数码\n').split()))
-    # start = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-
-    start = [2, 3, 4, 1, 5, 0, 7, 6, 8]
+    start = [2, 3, 6, 1, 5, 8, 4, 0, 7]
     target = [1, 2, 3, 4, 5, 6, 7, 8, 0]
     target_node = Node(target)
     start_node = Node(start)
