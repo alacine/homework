@@ -17,9 +17,9 @@ class A51:
         允许自定义x, y, z寄存器中的值(自定义时长度必须符合要求),
         否则随机生成
         """
-        self.x = x if len(y) == 19 else [random.randint(0, 1) for i in range(19)]
-        self.y = y if len(y) == 19 else [random.randint(0, 1) for i in range(22)]
-        self.z = z if len(z) == 19 else [random.randint(0, 1) for i in range(23)]
+        self.x = x if len(x) == 19 else [random.randint(0, 1) for i in range(19)]
+        self.y = y if len(y) == 22 else [random.randint(0, 1) for i in range(22)]
+        self.z = z if len(z) == 23 else [random.randint(0, 1) for i in range(23)]
         self.key_len = key_len
         self.key_stream = self._get_key_stream()
 
@@ -78,14 +78,14 @@ class Rc4:
             t = (self.s[i] + self.s[j]) % 256
             key_stream.append(self.s[t])
         return key_stream
-    
+
     def crypt(self, text: str) -> str:
         """加密/解密"""
         new_text = []
         for i in range(len(self.key)):
             new_text.append(self.key_stream[i] ^ ord(text[i]))
         return ''.join(map(chr, new_text))
-        
+
 
 @print_name
 def test_a51():
